@@ -390,7 +390,6 @@ exports.getItemsOfCollection = (req, res) => {
         })
 }
 
-
 exports.getItemsOfUserByCondition = (req, res) => {
     const userId = req.body.userId;
     var start = req.body.start;

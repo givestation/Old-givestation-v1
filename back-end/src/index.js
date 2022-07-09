@@ -1,19 +1,6 @@
-const server = require("./socket").server;
-const getBlockNumber = require("./socket").getBlockNumber;
-const getData = require("./socket").getData;
-const AuctionTimeout_monitor = require("./socket").AuctionTimeout_monitor;
+const app = require("./app");
+var server = require('http').createServer(app);
 
 const port = process.env.PORT || 5000;
 
-// app.listen(port, () => {
-//   console.log(`Listening: http://localhost:${port}`);
-// });
-
-getBlockNumber();
-
-getData();
-
-AuctionTimeout_monitor();
-
-// server.listen(port, () => console.log(`Listening on port ${port}..`));
 server.listen(80, () => console.log(`Listening on port ${port}..`));

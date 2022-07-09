@@ -5,12 +5,8 @@ mongoose.Promise = global.Promise;
 const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
-db.User = require("./users.model")(mongoose);
-db.Item = require("./items.model")(mongoose);
-db.Collection = require("./collections.model")(mongoose);
-db.Bid = require('./bids.model')(mongoose);
-db.Sale = require('./sales.model')(mongoose);
-db.Follow = require("./follow.model")(mongoose);
-db.Notify = require("./notify.model")(mongoose);
+db.Likes = require("./likes.model")(mongoose);
+db.Donation = require("./donations.model")(mongoose);
+db.Campaign = require("./campaigns.model")(mongoose);
 
 module.exports = db;

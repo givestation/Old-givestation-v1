@@ -485,7 +485,6 @@ exports.setFav = (req, res) => {
         return res.send({ code: 1, message: "not found" });
     })
 
-
 }
 
 exports.putSale = (req, res) => {

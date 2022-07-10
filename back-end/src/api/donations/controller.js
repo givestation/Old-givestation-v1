@@ -6,7 +6,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 exports.createDonation = (req, res) => {
     var campaign = req.body.campaign;
-    var amount = req.bod.amount;
+    var amount = req.body.amount;
     var donor = req.body.donor;
     var chainId = req.body.chainId;
 
@@ -49,14 +49,13 @@ exports.deleteOne = (req, res) => {
 exports.getDonationCountsOfUser = (req, res) => {
     var donor = req.body.user;
     var chainId = req.body.chainId;
-    
-    try{
-        var total = Donation.count({ donor, chainId});      
-        return res.send({ code: 0, data:total, message:"" });
-    }catch(err)
-    {
-        return res.send({ code:-1, data:{}, message: "Internal server Error" });
-    }
+
+    Donation.find({ donor, chainId}).count().then((data) => { 
+        console.log('[getDonationCountsOfUser] count = ', data);
+        return res.send({ code: 0, data, message:"" });
+    }).catch((err) => {
+        return res.send({ code:-1, data:0, message: "Internal server Error" });
+    });
 }
 
 exports.getTotalDonatedAmountsOfUser = (req, res) => {

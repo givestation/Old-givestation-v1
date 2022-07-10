@@ -11,6 +11,7 @@ module.exports = (mongoose) => {
         minimum: { type: Number, default: 0 },
         target: { type: Number, default: 0 },
         category: String,
+        address: String
       },
       { timestamps: true }
     )

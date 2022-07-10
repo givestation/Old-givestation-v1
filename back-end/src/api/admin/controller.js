@@ -50,11 +50,6 @@ exports.updateUserInfo = (req, res) => {
         });
 }
 
-
-
-
-
-
 exports.create = (req, res) => {
 
     const user = new Users({
@@ -120,7 +115,6 @@ exports.update = (req, res) => {
         });
     }
 
-
     const id = req.body.id;
     const username = req.body.username;
     const customURL = req.body.customURL;
@@ -128,7 +122,6 @@ exports.update = (req, res) => {
     const userBio = req.body.userBio;
     const websiteURL = req.body.websiteURL;
     const url = req.protocol + '://' + req.get('host');
-
 
     Users.findByIdAndUpdate(
         id,
@@ -177,7 +170,6 @@ exports.delete = (req, res) => {
             });
         });
 }
-
 
 exports.deleteAll = (req, res) => {
     Users.deleteMany({})

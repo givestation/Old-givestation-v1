@@ -1,9 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const donation = require("./controller");
+const campaign = require("./controller");
 
-router.post('/create', donation.createDonation);
-router.post('/all', donation.getAll);
-router.post('/delete', donation.deleteOne);
+router.post('/create', campaign.createCampaign);
+router.post('/all', campaign.getAll);
+router.post('/delete', campaign.deleteOne);
+router.post('/getCampaignCountsOfUser', campaign.getCampaignCountsOfUser);
+router.post('/getCampaignsOfUser', campaign.getCampaignsOfUser);
+router.post('/update', campaign.update);
 
 module.exports = router;

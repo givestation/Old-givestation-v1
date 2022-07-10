@@ -3,12 +3,10 @@ module.exports = (mongoose) => {
         "Donation",
         mongoose.Schema(
             {
-                campaign: {
-                   type: mongoose.Schema.Types.ObjectId,
-                   ref: "Campaign"
-                },
+                campaign: String,
                 donor: String,  //wallet address
                 amount: Number, 
+                chainId: String
             },
             { timestamps: true }
         )

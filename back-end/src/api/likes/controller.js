@@ -5,18 +5,20 @@ const Likes = db.Likes;
 var ObjectId = require('mongodb').ObjectID;
 
 exports.setLikes = (req, res) => {
-    var camapaignId = req.body.camapaignId;
+    var campaign = req.body.campaign;
     var user = req.bod.user;
     var value = req.body.value;
+    var chainId = req.body.chainId;
 
     var newLikes = new Likes({
-        campaign: ObjectId(camapaignId),
+        campaign,
         user,
-        value
+        value,
+        chainId
     });
 
     Likes.find({ 
-        campaign: ObjectId(camapaignId), user
+        campaign, user
     }).then(async (docs) =>{
         if(docs.length>0)
         {
@@ -53,7 +55,7 @@ exports.setLikes = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-        Likes.find({}, function (err, docs) {
+    Likes.find({}, function (err, docs) {
         if (err) {
             console.log("Likes doesn't exisit" + err.message);
             return res.send({ code: -1, data:{}, message: "Internal server Error" });
@@ -71,5 +73,20 @@ exports.deleteOne = (req, res) => {
             return res.send({ code:0, data:{}, message:"" });
         else
             return res.send({ code:-1, data:{}, message:"" });
+    });
+}
+
+exports.getAllLikedCampaigns = (req, res) => {
+    var user = req.body.user;
+    var chainId = req.body.chainId;
+
+    Likes.find({ user, chainId, value:true }, function (err, docs) {
+        if (err) {
+            console.log("Likes doesn't exisit" + err.message);
+            return res.send({ code: -1, data:{}, message: "Internal server Error" });
+        }
+        else {
+            return res.send({ code:0, data: docs, message: "" });
+        }
     });
 }

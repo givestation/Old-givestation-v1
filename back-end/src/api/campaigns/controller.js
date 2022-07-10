@@ -4,18 +4,22 @@ const Campaign = db.Campaign;
 
 var ObjectId = require('mongodb').ObjectID;
 
-exports.createDonation = (req, res) => {
-    var camapaignId = req.body.camapaignId;
-    var amount = req.bod.amount;
-    var donor = req.body.donor;
+exports.createCampaign = (req, res) => {
+    var name = req.body.name;
+    var description = req.body.description;
+    var imageURL = req.body.imageURL;
+    var minimum = req.body.minimum;
+    var target = req.body.target;
+    var creator = req.body.creator;
+    var category = req.body.category;
+    var address = req.body.address;
+    var chainId = req.body.chainId;
 
-    var newDonation = new Donation({
-        campaign: ObjectId(camapaignId),
-        amount,
-        donor
+    var newCampaign = new Campaign({
+        name, description, imageURL, minimum, target, creator, category, address, chainId
     });
 
-    newDonation.save().then((data) => {
+    newCampaign.save().then((data) => {
         return res.send({ code: 0, data, message:"" });
     }).catch((err) => {
         console.log("create donation error : ", err);
@@ -43,4 +47,61 @@ exports.deleteOne = (req, res) => {
         else
             return res.send({ code: -1, data:{}, message:"Internal Server Error" });
     });
+}
+
+exports.getCampaignCountsOfUser = (req, res) => {
+    var creator = req.body.user;
+    var chainId = req.body.chainId;
+    
+    try{
+        var total = Campaign.count({ creator, chainId});      
+        return res.send({ code: 0, data:total, message:"" });
+    }catch(err)
+    {
+        return res.send({ code:-1, data:{}, message: "Internal server Error" });
+    }
+}
+
+exports.getCampaignsOfUser = (req, res) => {
+    var creator = req.body.user;
+    var chainId = req.body.chainId;
+
+    Campaign.find({creator, chainId}, function (err, docs) {
+        if (err) {
+            console.log("Campaign doesn't exisit" + err.message);
+            return res.send({ code: -1, data:{}, message: "Internal server Error" });
+        }
+        else {
+            return res.send({ code:0, data: docs, message: "" });
+        }
+    });
+}
+
+exports.update = (req, res) => {    
+    var _id = req.body._id;
+    var incomeData = req.body;
+    delete incomeData._id;
+    Campaign.findByIdAndUpdate(
+        _id,
+        {
+            ...incomeData
+        },
+        { useFindAndModify: false }
+    )
+        .then((data) => {
+            if (!data) {
+                return res.send({
+                    code:0,
+                    data,
+                    message: `Cannot update Campaign with id = ${_id}. Maybe Campaign was not found.`,
+                });
+            } else return res.send({ message: "Campaign was updated successfully" });
+        })
+        .catch((err) => {
+            return res.send({
+                code:-1,
+                data:{},
+                message: "Error updating Campaign with id = " + _id,
+            });
+        });
 }

@@ -29,9 +29,6 @@ app.use(express.static('public/build'));
 app.use(cors());
 app.use(express.json());
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(public, "index.html"));
-});
 
 app.use("/api", api);
 module.exports = app;

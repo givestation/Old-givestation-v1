@@ -22,7 +22,6 @@ exports.createCampaign = (req, res) => {
     newCampaign.save().then((data) => {
         return res.send({ code: 0, data, message:"" });
     }).catch((err) => {
-        console.log("create donation error : ", err);
         return res.send({ code: -1, data, message: "" });
     });
 }
@@ -33,14 +32,14 @@ exports.getAll = (req, res) => {
         console.log("Campaign doesn't exisit" + err.message);
         return res.send({ code: -1, data:{}, message: "Internal server Error" });
     }
-    else {
+    else {        
+        // console.log('[GetAll] docs = ', docs);
         return res.send({ code:0, data: docs, message: "" });
     }
 });
 }
 
 exports.deleteOne = (req, res) => {
-    // console.log("Delete likes 0");
     Campaign.deleteOne({ _id: req.body.id }, function (err) {
         if (!err)
             return res.send({ code: 0, data:{}, message:"" });
@@ -53,13 +52,13 @@ exports.getCampaignCountsOfUser = (req, res) => {
     var creator = req.body.user;
     var chainId = req.body.chainId;
     
-    try{
-        var total = Campaign.count({ creator, chainId});      
-        return res.send({ code: 0, data:total, message:"" });
-    }catch(err)
-    {
+    Campaign.find({ creator, chainId}).count().then((data) => { 
+        console.log('[getCampaignCountsOfUser] count = ', data);
+        return res.send({ code: 0, data, message:"" });
+    }).catch((err) => {
         return res.send({ code:-1, data:{}, message: "Internal server Error" });
-    }
+    });
+    
 }
 
 exports.getCampaignsOfUser = (req, res) => {
@@ -91,11 +90,11 @@ exports.update = (req, res) => {
         .then((data) => {
             if (!data) {
                 return res.send({
-                    code:0,
+                    code:-1,
                     data,
                     message: `Cannot update Campaign with id = ${_id}. Maybe Campaign was not found.`,
                 });
-            } else return res.send({ message: "Campaign was updated successfully" });
+            } else return res.send({code:0, data, message: "Campaign was updated successfully" });
         })
         .catch((err) => {
             return res.send({

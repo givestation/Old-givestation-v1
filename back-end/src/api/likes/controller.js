@@ -6,7 +6,7 @@ var ObjectId = require('mongodb').ObjectID;
 
 exports.setLikes = (req, res) => {
     var campaign = req.body.campaign;
-    var user = req.bod.user;
+    var user = req.body.user;
     var value = req.body.value;
     var chainId = req.body.chainId;
 
@@ -18,13 +18,14 @@ exports.setLikes = (req, res) => {
     });
 
     Likes.find({ 
-        campaign, user
+        campaign, user, chainId
     }).then(async (docs) =>{
+        // console.log("[Updating likes] 00 docs = ", docs);
         if(docs.length>0)
         {
             try {
                 await Likes.updateOne(
-                    { _id: docs[0]._id },
+                    {_id: docs[0]._id},
                     {
                         $set: {
                             value
@@ -35,21 +36,19 @@ exports.setLikes = (req, res) => {
                     },
                     { upsert: true }
                 );
+                return res.send({ code: 0, data:{}, message: "" });
             } catch (err) {
-                console.log("Updating Likes : " + err.message);
                 return res.send({ code: -1, data:{}, message: "Internal server Error" });
             }
         }else{            
             newLikes.save().then((data) => {
                 return res.send({ code: 0, data, message:"" });
             }).catch((err) => {
-                console.log("create likes error : ", err);
-                return res.send({ code: -1, data, message: "Internal server Error" });
+                return res.send({ code: -1, data:{}, message: "Internal server Error" });
             });
         }
     }).catch((err) => {
-        console.log("searching likes error : ", err);
-        return res.send({ code: -1, data, message: "Internal server Error" });
+        return res.send({ code: -1, data:{}, message: "Internal server Error" });
     })
 
 }

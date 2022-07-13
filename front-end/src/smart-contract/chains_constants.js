@@ -19,85 +19,99 @@ export const chains = {
     [BSC_CHAIN_ID]:{
         rpcUrl:"https://bsc-dataseed1.binance.org/",
         nativeCurrency:"BNB",
-        factoryAddress:"0xF68A0C431598cA6Ca919cC655dF65D274133b94A",
+        factoryAddress:"0xc44627fE25371ddf51F7b7043eB2726ef1ac913B",
+        givePointAddress:"0x5d66952AaDe756c16CC1Dda5D014C99037607f31",
         blockScanUrl:"https://bscscan.com/"
     },
     [BSC_NETWORK_ID]:{
         rpcUrl:"https://bsc-dataseed1.binance.org/",
         nativeCurrency:"BNB",
-        factoryAddress:"0xF68A0C431598cA6Ca919cC655dF65D274133b94A",
+        factoryAddress:"0xc44627fE25371ddf51F7b7043eB2726ef1ac913B",
+        givePointAddress:"0x5d66952AaDe756c16CC1Dda5D014C99037607f31",
         blockScanUrl:"https://bscscan.com/"
     },
     [POLYGON_CHAIN_ID]:{
         rpcUrl:"https://rinkeby.infura.io/v3/08ac79d88b5d4aea961ca36af7ea6ee7",
         nativeCurrency:"MATIC",
         factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
+        givePointAddress:"",
         blockScanUrl:"https://polygonscan.com/"
     },
     [POLYGON_NETWORK_ID]:{
         rpcUrl:"https://rinkeby.infura.io/v3/08ac79d88b5d4aea961ca36af7ea6ee7",
         nativeCurrency:"MATIC",
         factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
+        givePointAddress:"",
         blockScanUrl:"https://polygonscan.com/"
     },
     [OPTIMISTIC_CHAIN_ID]:{
         rpcUrl:"https://mainnet.optimism.io/",
         nativeCurrency:"ETH",
         factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
+        givePointAddress:"",
         blockScanUrl:"https://optimistic.etherscan.io/"
     },
     [OPTIMISTIC_NETWORK_ID]:{
         rpcUrl:"https://mainnet.optimism.io/",
         nativeCurrency:"ETH",
         factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
+        givePointAddress:"",
         blockScanUrl:"https://optimistic.etherscan.io/"
     },
     [GNOSIS_CHAIN_ID]:{
         rpcUrl:"https://rpc.gnosischain.com/",
         nativeCurrency:"xDai",
         factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress:"",
         blockScanUrl:"https://blockscout.com/xdai/mainnet/"
     },
     [GNOSIS_NETWORK_ID]:{
         rpcUrl:"https://rpc.gnosischain.com/",
         nativeCurrency:"xDai",
         factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress:"",
         blockScanUrl:"https://blockscout.com/xdai/mainnet/"
     },
     [ARBITRUM_CHAIN_ID]:{
         rpcUrl:"https://arb1.arbitrum.io/rpc",
         nativeCurrency:"ETH",
         factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress:"",
         blockScanUrl:"https://arbiscan.io/"
     },
     [ARBITRUM_NETWORK_ID]:{
         rpcUrl:"https://arb1.arbitrum.io/rpc",
         nativeCurrency:"ETH",
         factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress:"",
         blockScanUrl:"https://arbiscan.io/"
     },
     [BSC_TEST_CHAIN_ID]:{
         rpcUrl:"https://data-seed-prebsc-1-s1.binance.org:8545/",
         nativeCurrency:"BNB",
         factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress:"",
         blockScanUrl:"https://testnet.bscscan.com/"
     },
     [BSC_TEST_NETWORK_ID]:{
         rpcUrl:"https://data-seed-prebsc-1-s1.binance.org:8545/",
         nativeCurrency:"BNB",
         factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        givePointAddress:"",
         blockScanUrl:"https://testnet.bscscan.com/"
     },
     [RINKEBY_CHAIN_ID]:{
         rpcUrl:"https://rinkeby.infura.io/v3/08ac79d88b5d4aea961ca36af7ea6ee7",
         nativeCurrency:"ETH",
         factoryAddress:"0xD68b0d4c976Bfe8ED96c275C25fA8c16420d9Aa2",
+        givePointAddress:"",
         blockScanUrl:"https://rinkeby.etherscan.io/"
     },
     [RINKEBY_NETWORK_ID]:{
         rpcUrl:"https://rinkeby.infura.io/v3/08ac79d88b5d4aea961ca36af7ea6ee7",
         nativeCurrency:"ETH",
         factoryAddress:"0xD68b0d4c976Bfe8ED96c275C25fA8c16420d9Aa2",
+        givePointAddress:"",
         blockScanUrl:"https://rinkeby.etherscan.io/"
     }
 }

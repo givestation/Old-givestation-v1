@@ -6,17 +6,37 @@ import {Provider} from "react-redux";
 
 function Index() {
   const [loading, setLoading] = useState(true);
+  var colorMode = null;
 
   useEffect(() => {
+    
+    // setColorMode(localStorage.getItem('color-theme'));  //null, 
+    // console.log("color mode : ", typeof localStorage.getItem('color-theme'));
+
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   }, []);
   
+  colorMode = localStorage.getItem('color-theme');
+  // console.log("color mode : ", colorMode);
+
+  // window.onload(() => {
+  //   console.log("color mode : ", colorMode);
+  //   document.getElementById("loading_icon_div").style.background("url('../GIF/loader-light.gif') 50% 50% no-repeat #000000");
+  // })
+
   return <>
   {
     loading ? 
-    <div className="loader"></div> 
+    <div className="loader" id="loading_icon_div"
+      // style={{ background: 
+      //   // (colorMode == null || colorMode == "light")? 
+      //   `url('../GIF/loader-light.gif') 50% 50% no-repeat #000000 `
+      //   // :
+      //   // `url("../GIF/loader-dark.gif") 50% 50% no-repeat #000000 `
+      // }}
+    ></div> 
     : 
     <Provider store={store}>
       <AppRoutes/>

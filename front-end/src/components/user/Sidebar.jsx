@@ -48,7 +48,7 @@ export default function Sidebar() {
             </svg>
           </button>
           <p className="md:hidden title font-semibold text-left text-white mr-0 inline-block whitespace-nowrap text-lg capitalize p-4">
-            Admin Dashboard
+            Dashboard
           </p>
           <div className="md:hidden lg:hidden items-center grow-0 shrink-0 relative cursor-pointer text-black flex p-0 lg:py-2 lg:px-3 lg:border-r border-gray-100 lg:dark:border-gray-800 dropdown">
             <button
@@ -241,7 +241,7 @@ export default function Sidebar() {
                   <div className="flex flex-col h-full bg-gray-800">
                     <div className="flex items-center justify-between py-6 px-6 bg-gray-900">
                       <p className="md:block title font-semibold text-left text-white mr-0 inline-block whitespace-nowrap text-lg capitalize">
-                        Admin Dashboard
+                        Dashboard
                       </p>
                       <button
                         className="text-white"

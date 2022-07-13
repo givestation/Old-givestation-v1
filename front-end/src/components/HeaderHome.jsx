@@ -212,13 +212,25 @@ export default function Header() {
                             <div className="w-2/12">
                                 <div className="flex items-center whitespace-nowrap" onClick={() => { navigate("/") }}>
                                     <img className="h-12" src="/images/logo.png" alt="logo" />
-                                    <h4 className=' ml-1 font-medium text-xl title text-slate-800 dark:text-gray-100 tracking-widest'>GiveStation</h4>
+                                    <h4 className=' ml-1 font-bold text-xl title text-gray-700 dark:text-gray-100 tracking-widest'>GiveStation</h4>
                                 </div>
                             </div>
                             <div className="xl:5/12 lg:w-6/12 w-6/12">
                                 <ul className="hidden xl:flex xl:justify-end">
-                                    <li className="mr-9"><div className={'text-gray-700  font-bold dark:text-gray-100' } onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
-                                    <li className="mr-9"><div className={'text-gray-700 font-bold dark:text-gray-100' } onClick={() => { navigate("/faq") }} >How it works</div></li>
+                                    <li className="mr-16">
+                                        <NavLink
+                                        className={(props) => {
+                                            return props.isActive
+                                            ? "font-normal dark:text-gray-100 tracking-widest"
+                                            : "text-gray-700 font-bold dark:text-gray-100 tracking-widest";
+                                        }}
+                                        to="/give-dad"
+                                        >
+                                        GiveDAO
+                                        </NavLink>
+                                    </li>
+                                    <li className="mr-16"><div className={'text-gray-700  font-bold dark:text-gray-100' } onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
+                                    <li className="mr-16"><div className={'text-gray-700 font-bold dark:text-gray-100' } onClick={() => { navigate("/faq") }} >How it works</div></li>
                                 </ul>
                             </div>
                             <div className="xl:w-5/12 lg:w-6/12 w-6/12">

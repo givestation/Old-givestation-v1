@@ -2,6 +2,7 @@ import React from "react";
 import SampleProject from "./assets/sampleProject.svg";
 import HeartIcon from "./assets/heart.svg";
 import { useParams } from "react-router";
+import UserFooter from "../../components/user/UserFooter";
 
 const MyProjects = () => {
   const {id} = useParams();
@@ -10,7 +11,7 @@ const MyProjects = () => {
     <div>
       <div className="py-20 px-10 wholeWrapper">
         <div className="flex items-center pageHead">
-          <h1 className="text-white font-bold overview">My Projects</h1>
+          <h1 className="text-slate-900 dark:text-white font-bold overview">My Projects</h1>
           <div className="accountNo ml-7" style={{textAlign:"center"}}>
             {id && <h2>{id.toString().substring(0, 6)+"..."+id.toString().substring(38, 42)}</h2>}
           </div>
@@ -71,9 +72,9 @@ const MyProjects = () => {
                       <path
                         d="M1.5 7.5L4.5 4.5L1.5 1.5"
                         stroke="black"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </button>
@@ -84,12 +85,7 @@ const MyProjects = () => {
         </div>
       </div>
 
-      <div className="footer flex justify-center items-center">
-        <img width={92} height={76} src="/images/logo.png" alt="logo" />
-        <h1 className="text-white font-bold text-xl ml-16">GiveDAO</h1>
-        <h1 className="text-white font-bold text-xl ml-12">About</h1>
-        <h1 className="text-white font-bold text-xl ml-12">How it works</h1>
-      </div>
+      <UserFooter />
     </div>
   );
 };

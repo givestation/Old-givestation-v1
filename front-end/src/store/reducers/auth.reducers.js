@@ -16,6 +16,7 @@ export function Auth(state = auth, action)
 {
     switch (action.type) {
         case UPDATE_REFERAL_ADDRESS:
+            console.log("[UPDATE_REFERAL_ADDRESS] action.payload = ", action.payload);
             return {
                 ...state, referralAddress: action.payload
             }

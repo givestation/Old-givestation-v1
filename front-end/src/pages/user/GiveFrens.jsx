@@ -37,7 +37,7 @@ const GiveFrens = () => {
             </h2>
 
             <div className="flex justify-center items-center gap-x-12 btnsWrap">
-              <CopyToClipboard text="GIVEEQW2" onCopy={onCopyText}>
+              <CopyToClipboard text={`${window.location.origin}/?ref=${id}`} onCopy={onCopyText}>
                 <button className="copyBtn flex">
                   <img src={copyIcon} alt="" style={{ marginRight: 5 }} />
                   {isCopied ? "Copied!" : "GIVEEQW2"}

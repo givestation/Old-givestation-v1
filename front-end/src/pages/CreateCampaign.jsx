@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import Footer from '../components/Footer'
 import Header from '../components/HeaderHome'
 import { chains } from '../smart-contract/chains_constants';
+import { backendURL } from '../config';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 
 export default function CreateCampaign() {
@@ -22,33 +24,49 @@ export default function CreateCampaign() {
     const onClickCreateCampaign = async () => {
         if(globalWeb3)
         {
-            try{
-                const factory = new globalWeb3.eth.Contract(
-                    CampaignFactory,
-                    chains[chainId?.toString()].factoryAddress
-                );
-                if(factory)
-                {
-                    await factory.methods.createCampaign(
-                        globalWeb3.utils.toWei(minimum.toString(), "ether"),
-                        name,
-                        description,
-                        imageURL,
-                        globalWeb3.utils.toWei(target.toString(), "ether")
-                        )
-                        .send({
-                            from: account, 
-                            gas: 3000000
-                        });
-                        navigate("/");
-                }else{
-                    console.log("creating new campaign : Invalid factoy instance.");                    
-                }
-            }
-            catch(e)
-            {
-                console.error(e);                                
-            }
+            let idOnDb = null;
+            axios.post(`${backendURL}/campaign/create`, {
+                name,
+                description,
+                imageURL,
+                minimum,
+                target,
+                creator:account,
+                category:"Defi",
+                address:"",
+                chainId
+            }, {}).then((res)=>{
+                console.log("res.data = ", res.data);
+            }).catch((err)=> {
+
+            });
+            // try{
+            //     const factory = new globalWeb3.eth.Contract(
+            //         CampaignFactory,
+            //         chains[chainId?.toString()].factoryAddress
+            //     );
+            //     if(factory)
+            //     {
+            //         const result = await factory.methods.createCampaign(
+            //             globalWeb3.utils.toWei(minimum.toString(), "ether"),
+            //             name,
+            //             description,
+            //             imageURL,
+            //             globalWeb3.utils.toWei(target.toString(), "ether")
+            //             )
+            //             .send({
+            //                 from: account, 
+            //                 gas: 3000000
+            //             });
+            //             navigate("/");
+            //     }else{
+            //         console.log("creating new campaign : Invalid factoy instance.");                    
+            //     }
+            // }
+            // catch(e)
+            // {
+            //     console.error(e);                                
+            // }
         }else{
             console.log("Invalid web3");
         }

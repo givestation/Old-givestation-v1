@@ -54,10 +54,10 @@ export default function Home() {
               }
             }
             if (!correct) {
-                dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
+                // dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
             }
         }else{
-            dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
+            // dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
         }
     }, [ref])
 

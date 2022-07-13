@@ -1,15 +1,17 @@
 import React from "react";
 import LikeCampImg from "./assets/likeCampImg.svg";
 import Kemono from "./assets/Kemono.svg";
+import { useParams } from "react-router";
 
 export default function Donations() {
+  const {id} = useParams();
   return (
     <div className="py-20 px-10 wholeWrapper">
       <div className="flex items-center pageHead">
         <h1 className="text-white font-bold overview">Donations</h1>
-        <div className="accountNo ml-7">
-          <h2>0xdeswqes35derihi87987gjhge</h2>
-        </div>
+          <div className="accountNo ml-7" style={{textAlign:"center"}}>
+            {id && <h2>{id.toString().substring(0, 6)+"..."+id.toString().substring(38, 42)}</h2>}
+          </div>
       </div>
 
       <div className="mt-14 flex justify-center items-center flex-col">

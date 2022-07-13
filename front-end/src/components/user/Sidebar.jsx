@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
   const navigate = useNavigate();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [navItem, setNavItem] = useState("Overview");
+
+  const chainId = useSelector(state => state.auth.currentChainId);
+  const account = useSelector(state => state.auth.currentWallet);
+  const globalWeb3 = useSelector(state => state.auth.globalWeb3);
 
   console.log(navItem);
 
@@ -88,7 +93,7 @@ export default function Sidebar() {
             <ul className="md:flex-col main-menu bg-sidebar min-h-screen md:min-w-full flex flex-col list-none pt-12">
               <li className="items-center">
                 <NavLink
-                  to="/user/overview"
+                  to={`/user/${account}/overview`}
                   className={(props) => {
                     return props.isActive
                       ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -108,7 +113,7 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <NavLink
-                  to="/user/my-projects"
+                  to={`/user/${account}/my-projects`}
                   className={(props) => {
                     return props.isActive
                       ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -128,7 +133,7 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <NavLink
-                  to="/user/donations"
+                  to={`/user/${account}/donations`}
                   className={(props) => {
                     return props.isActive
                       ? "capitalize inline-flex items-center pb-4 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -151,7 +156,7 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <NavLink
-                  to="/user/favourites"
+                  to={`/user/${account}/favourites`}
                   className={(props) => {
                     return props.isActive
                       ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -172,7 +177,7 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <NavLink
-                  to="/user/givepoints"
+                  to={`/user/${account}/givepoints`}
                   className={(props) => {
                     return props.isActive
                       ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -192,7 +197,7 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <NavLink
-                  to="/user/give-frens"
+                  to={`/user/${account}/give-frens`}
                   className={(props) => {
                     return props.isActive
                       ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -263,7 +268,7 @@ export default function Sidebar() {
                           className="items-center"
                         >
                           <NavLink
-                            to="/user/overview"
+                            to={`/user/${account}/overview`}
                             className={(props) => {
                               return props.isActive
                                 ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -295,7 +300,7 @@ export default function Sidebar() {
                           className="items-center"
                         >
                           <NavLink
-                            to="/user/my-projects"
+                            to={`/user/${account}/my-projects`}
                             className={(props) => {
                               return props.isActive
                                 ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -322,7 +327,7 @@ export default function Sidebar() {
                           className="items-center"
                         >
                           <NavLink
-                            to="/user/donations"
+                            to={`/user/${account}/donations`}
                             className={(props) => {
                               return props.isActive
                                 ? "capitalize inline-flex items-center pb-4 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -354,7 +359,7 @@ export default function Sidebar() {
                           className="items-center"
                         >
                           <NavLink
-                            to="/user/favourites"
+                            to={`/user/${account}/favourites`}
                             className={(props) => {
                               return props.isActive
                                 ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -381,7 +386,7 @@ export default function Sidebar() {
                           className="items-center"
                         >
                           <NavLink
-                            to="/user/givepoints"
+                            to={`/user/${account}/givepoints`}
                             className={(props) => {
                               return props.isActive
                                 ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"
@@ -408,7 +413,7 @@ export default function Sidebar() {
                           className="items-center"
                         >
                           <NavLink
-                            to="/user/give-frens"
+                            to={`/user/${account}/give-frens`}
                             className={(props) => {
                               return props.isActive
                                 ? "capitalize inline-flex items-center pb-8 pl-16 pr-10 text-white whitespace-nowrap active"

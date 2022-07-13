@@ -1,15 +1,12 @@
 import React, {  useEffect } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import Sidebar from '../../components/user/Sidebar';
-import HeaderUser from '../../components/user/HeaderUser';
+import HeaderUser from '../../components/HeaderHome';
 import '../../assets/css/user/style.scss'
 
 export default function UserLayout() {
 
-
-
   useEffect(() => {
-
     
   }, [])
 

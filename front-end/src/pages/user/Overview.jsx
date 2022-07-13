@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from 'react-redux';
+import { useParams } from "react-router";
 import overviewImage from "./assets/overviewImage.svg";
 
 export default function Overview() {
@@ -12,13 +14,15 @@ export default function Overview() {
     { id: 4, cardName: "GIVEPOINTS" },
   ];
 
+  const { id } = useParams();
+
   return (
     <div>
       <div className="py-20 px-10 wholeWrapper">
         <div className="flex items-center pageHead">
           <h1 className="text-white font-bold overview">Overview</h1>
-          <div className="accountNo ml-7">
-            <h2>0xdeswqes35derihi87987gjhge</h2>
+          <div className="accountNo ml-7" style={{textAlign:"center"}}>
+            {id && <h2>{id.toString().substring(0, 6)+"..."+id.toString().substring(38, 42)}</h2>}
           </div>
         </div>
 
@@ -61,7 +65,7 @@ export default function Overview() {
       </div>
 
       <div className="footer flex justify-center items-center">
-        <img width={92} height={76} src="/images/logo.svg" alt="logo" />
+        <img width={92} height={76} src="/images/logo.png" alt="logo" />
         <h1 className="text-white font-bold text-xl ml-16">GiveDAO</h1>
         <h1 className="text-white font-bold text-xl ml-12">About</h1>
         <h1 className="text-white font-bold text-xl ml-12">How it works</h1>

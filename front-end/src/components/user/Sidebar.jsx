@@ -6,6 +6,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [navItem, setNavItem] = useState("Overview");
+  const [donorOrCreator, setDonorOrCreator] = useState(true);   //true:donor, false:creator
 
   const chainId = useSelector(state => state.auth.currentChainId);
   const account = useSelector(state => state.auth.currentWallet);
@@ -17,6 +18,12 @@ export default function Sidebar() {
     localStorage.removeItem("token");
     navigate("/");
   };
+
+  const onCheckValueChanged = () =>
+  {
+    console.log("switch value : ", donorOrCreator);
+    setDonorOrCreator(!donorOrCreator);
+  }
 
   return (
     <div>
@@ -110,7 +117,7 @@ export default function Sidebar() {
                   <span className="title ml-5">Overview</span>
                 </NavLink>
               </li>
-
+              { donorOrCreator === false && 
               <li className="items-center">
                 <NavLink
                   to={`/user/${account}/my-projects`}
@@ -130,6 +137,7 @@ export default function Sidebar() {
                   <span className="title ml-5">my projects</span>
                 </NavLink>
               </li>
+              }
 
               <li className="items-center">
                 <NavLink
@@ -292,7 +300,7 @@ export default function Sidebar() {
                             <span className="title ml-5">Overview</span>
                           </NavLink>
                         </li>
-
+                        { donorOrCreator === false && 
                         <li
                           onClick={() => {
                             setMobileMenu(!mobileMenu);
@@ -319,6 +327,7 @@ export default function Sidebar() {
                             <span className="title ml-5">my projects</span>
                           </NavLink>
                         </li>
+                        }
 
                         <li
                           onClick={() => {
@@ -433,8 +442,8 @@ export default function Sidebar() {
                           </NavLink>
                         </li>
 
-                        <span className="switcher switcher-1">
-                          <input type="checkbox" id="switcher-1" />
+                        <span className="switcher switcher-1"  >
+                          <input type="checkbox" id="switcher-1"  onClick={() => {console.log("fdsfsdfsa"); onCheckValueChanged() }} />
                           <label for="switcher-1" />
                         </span>
                       </ul>

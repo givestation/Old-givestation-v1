@@ -1,9 +1,5 @@
 $blur: #5e5e5e;
 $sidebar: #0f172a;
-.bg-blur {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(58px);
-}
 .bg-sidebar {
   background-color: $sidebar;
 }
@@ -160,8 +156,8 @@ $sidebar: #0f172a;
     #444445 139%
   );
   border-radius: 25px;
-  width: 751px;
-  padding: 39px;
+  width: 600px;
+  padding: 19px;
   margin: 76px 0px;
 
   h3 {
@@ -172,7 +168,7 @@ $sidebar: #0f172a;
     line-height: 17px;
     text-transform: uppercase;
     color: #7e7e7e;
-    margin-top: 76px;
+    margin-top: 30px;
     margin-bottom: 14px;
   }
 

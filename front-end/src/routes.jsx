@@ -13,7 +13,13 @@ import FaqOne from './pages/FaqOne';
 import Alert from './pages/Alert';
 import NotFound from './pages/NotFound';
 import VerifyCampaigns from './pages/VerifyCampaigns';
-import UserInformation from "./pages/user/index";
+import UserLayout from "./pages/user/UserLayout";
+import Overview from "./pages/user/Overview";
+import Donations from "./pages/user/Donations";
+import MyProjects from "./pages/user/MyProjects";
+import LikedCampaigns from "./pages/user/LikedCampaigns";
+import GivePoints from "./pages/user/GivePoints";
+import GiveFrens from "./pages/user/GiveFrens";
 
 function AppRoutes() {
 
@@ -28,8 +34,15 @@ function AppRoutes() {
                     <Route path="/create-request/:id" element={<CreateRequest />}></Route>
                     <Route path="/faq" element={<FaqOne />}></Route>
                     <Route path="/alert" element={<Alert />}></Route>
-                    <Route path="/verify" element={<VerifyCampaigns />}></Route>       
-                    <Route path="/user/:id" element={<UserInformation/>}></Route>
+                    <Route path="/verify" element={<VerifyCampaigns />}></Route>                        
+                    <Route path="/user/:userId" element={<UserLayout />}>
+                        <Route path="overview" element={<Overview />}></Route>
+                        <Route path="my-projects" element={<MyProjects />}></Route>
+                        <Route path="donations" element={<Donations />}></Route>
+                        <Route path="favourites" element={<LikedCampaigns />}></Route>
+                        <Route path="givepoints" element={<GivePoints />}></Route>
+                        <Route path="give-frens" element={<GiveFrens />}></Route>
+                    </Route>
                     <Route path="*" element={<NotFound />}></Route>       
                 </Routes>
             </Router>

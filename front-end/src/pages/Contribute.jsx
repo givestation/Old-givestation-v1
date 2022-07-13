@@ -16,6 +16,7 @@ export default function Contribute() {
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
     const globalWeb3 = useSelector(state => state.auth.globalWeb3);
+    const refAddr = useSelector(state => state.auth.referralAddress);
 
     const {id} = useParams();
 
@@ -56,7 +57,7 @@ export default function Contribute() {
         if(donationAmount>0  && globalWeb3)
         {
             try{
-                await new globalWeb3.eth.Contract(Campaign, id).methods.contibute().send({
+                await new globalWeb3.eth.Contract(Campaign, id).methods.contribute(refAddr).send({
                     from: account,
                     gas: 3000000,
                     value: globalWeb3.utils.toWei(donationAmount, "ether"),

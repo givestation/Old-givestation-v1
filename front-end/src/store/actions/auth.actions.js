@@ -1,4 +1,4 @@
-import { AUTH_LOGOUT, AUTH_SUCCESS, SET_CHAIN_ID, UPDATE_WEB3, UPDATE_MINTED_NFT_COUNT, UPDATE_USER_BALANCE, UPDATE_WALLET_STATUS,  SET_AVAX_PRICE, SET_WALLET_ADDR, CURRENT_USER } from "./action.types"
+import { AUTH_LOGOUT, AUTH_SUCCESS, SET_CHAIN_ID, UPDATE_WEB3, UPDATE_MINTED_NFT_COUNT, UPDATE_USER_BALANCE, UPDATE_WALLET_STATUS,  SET_AVAX_PRICE, SET_WALLET_ADDR, CURRENT_USER, UPDATE_REFERAL_ADDRESS } from "./action.types"
 
 export const authSet = (payload) => dispatch => {
     dispatch({
@@ -75,5 +75,13 @@ export const updateGlobalWeb3 = (object) => dispatch => {
     dispatch({
         type: UPDATE_WEB3,
         payload: object
+    })
+}
+
+export const updateReferalAddress = (addr) => dispatch => {
+    console.log("[REFERRAL ADDRESS] addr = ", addr);
+    dispatch({
+        type: UPDATE_REFERAL_ADDRESS,
+        payload: addr
     })
 }

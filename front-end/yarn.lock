@@ -12299,6 +12299,11 @@ use-isomorphic-layout-effect@^1.1.1:
   resolved "https://registry.yarnpkg.com/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz#497cefb13d863d687b08477d9e5a164ad8c1a6fb"
   integrity sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==
 
+use-params-query@^0.1.11:
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/use-params-query/-/use-params-query-0.1.11.tgz#d72ec32eba1efada11f09b112b20fc0b8bd9ef15"
+  integrity sha512-85gsoynXRpApRNxNxA8Mg6q0vI4TzBrH1kFg66s+hxyaOkRaI0L9QliBed7fmDL5qs9qcm5fEWB0cbBm8BfFRg==
+
 use-sync-external-store@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"

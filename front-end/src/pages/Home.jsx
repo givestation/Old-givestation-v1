@@ -1,10 +1,12 @@
 
 import React, {useEffect, useState} from 'react'
 import Footer from '../components/Footer'
+import {useQueryParam} from "use-params-query";
 import HeaderHome from '../components/HeaderHome'
-import { NavLink, useNavigate } from 'react-router-dom';
-import {useSelector} from "react-redux";
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import {useDispatch, useSelector} from "react-redux";
 import { chains } from '../smart-contract/chains_constants';
+import { updateReferalAddress } from '../store/actions/auth.actions';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
 
@@ -33,6 +35,31 @@ export default function Home() {
     const account = useSelector(state => state.auth.currentWallet);
     const globalWeb3 = useSelector(state => state.auth.globalWeb3);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const regexForWallet = /^(0x[a-fA-F0-9]{40})$/gm;
+
+    const ref = useQueryParam("ref");
+
+    useEffect(() => {
+        if(ref !== undefined)
+        {
+            let m; let correct = false;
+            while ((m = regexForWallet.exec(ref)) !== null) {
+              if (m.index === regexForWallet.lastIndex) {
+                regexForWallet.lastIndex++;
+              }
+              if (m[0] === ref) {
+                correct = true;
+                dispatch(updateReferalAddress(ref));
+              }
+            }
+            if (!correct) {
+                dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
+            }
+        }else{
+            dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
+        }
+    }, [ref])
 
     useEffect(() => {
         if(account && chainId && globalWeb3)

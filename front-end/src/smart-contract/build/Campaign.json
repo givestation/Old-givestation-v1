@@ -226,7 +226,7 @@
 				"type": "address"
 			}
 		],
-		"name": "contibute",
+		"name": "contribute",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"

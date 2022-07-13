@@ -1,4 +1,4 @@
-import { AUTH_LOGOUT, AUTH_SUCCESS, GET_USER_DETAIL, UPDATE_WEB3, SET_WALLET_ADDR, UPDATE_MINTED_NFT_COUNT, UPDATE_WALLET_STATUS, SET_AVAX_PRICE, UPDATE_USER_BALANCE, SET_OTHER_USER_DETAIL, SET_CHAIN_ID, CURRENT_USER } from "../actions/action.types";
+import { AUTH_LOGOUT, AUTH_SUCCESS, GET_USER_DETAIL, UPDATE_REFERAL_ADDRESS, UPDATE_WEB3, SET_WALLET_ADDR, UPDATE_MINTED_NFT_COUNT, UPDATE_WALLET_STATUS, SET_AVAX_PRICE, UPDATE_USER_BALANCE, SET_OTHER_USER_DETAIL, SET_CHAIN_ID, CURRENT_USER } from "../actions/action.types";
 
 const auth = {
     user: {},
@@ -8,12 +8,17 @@ const auth = {
     balance: 0,
     walletStatus: false,
     mintedNFTCount: 0,
-    globalWeb3: {}
+    globalWeb3: {},
+    referralAddress: "0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"
 }
 
 export function Auth(state = auth, action) 
 {
     switch (action.type) {
+        case UPDATE_REFERAL_ADDRESS:
+            return {
+                ...state, referralAddress: action.payload
+            }
         case UPDATE_WEB3:
             console.log("[UPDATE_WEB3] action.payload = ", action.payload);
             return {

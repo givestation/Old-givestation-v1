@@ -12,21 +12,6 @@
 				"type": "address"
 			},
 			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "image",
-				"type": "string"
-			},
-			{
 				"internalType": "uint256",
 				"name": "target",
 				"type": "uint256"
@@ -35,6 +20,11 @@
 				"internalType": "address",
 				"name": "_factory",
 				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "campaignIdOnDB",
+				"type": "string"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -182,32 +172,6 @@
 	{
 		"stateMutability": "payable",
 		"type": "fallback"
-	},
-	{
-		"inputs": [],
-		"name": "CampaignDescription",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "CampaignName",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -396,6 +360,11 @@
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -403,7 +372,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "imageUrl",
+		"name": "idOnDB",
 		"outputs": [
 			{
 				"internalType": "string",

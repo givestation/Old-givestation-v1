@@ -76,29 +76,37 @@
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "value",
+				"type": "uint256"
+			}
+		],
+		"name": "GPStakeForReferral",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "uint256",
 				"name": "minimum",
 				"type": "uint256"
 			},
 			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "description",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "image",
-				"type": "string"
-			},
-			{
 				"internalType": "uint256",
 				"name": "target",
 				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "idOnDB",
+				"type": "string"
 			}
 		],
 		"name": "createCampaign",
@@ -167,6 +175,19 @@
 	{
 		"inputs": [],
 		"name": "getGPRatio",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getGPRatioForReferral",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -258,6 +279,19 @@
 			}
 		],
 		"name": "setGPRatio",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newRatio",
+				"type": "uint256"
+			}
+		],
+		"name": "setGPRatioForReferral",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

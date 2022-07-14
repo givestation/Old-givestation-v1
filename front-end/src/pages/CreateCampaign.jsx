@@ -86,7 +86,7 @@ export default function CreateCampaign() {
                         url: `${backendURL}/api/campaign/update`,
                         data: {                            
                             _id: idOnDb,
-                            address: campaigns[campaigns.length-1],                           
+                            address: createdCampaignAddress,                           
                         }
                     }).then((res)=>{
                         console.log(res.data);

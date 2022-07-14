@@ -1,8 +1,13 @@
-import React from "react";
-import { useSelector } from 'react-redux';
-import { useParams } from "react-router";
+import React, {useState} from "react";
+import { useEffect } from "react";
+import { useSelector ,  } from 'react-redux';
+import { useNavigate, useParams } from "react-router";
+import axios from "axios";
+import { backendURL } from "../../config";
 import UserFooter from "../../components/user/UserFooter";
 import overviewImage from "./assets/overviewImage.svg";
+import { chains } from "../../smart-contract/chains_constants";
+const ERC20Abi = require("../../smart-contract/build/ERC20.json");
 
 export default function Overview() {
   const overviewData = [
@@ -85,7 +90,92 @@ export default function Overview() {
     },
   ];
 
-  const { id } = useParams();
+  const chainId = useSelector(state => state.auth.currentChainId);
+  const account = useSelector(state => state.auth.currentWallet);
+  const globalWeb3 = useSelector(state => state.auth.globalWeb3);
+  const [ statistics, setStatistics ] = useState([0,0,0,0]);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    const getCountsInfo = async () => {
+      if(account && globalWeb3)
+      {      
+        await axios({
+          method: "post",
+          url: `${backendURL}/api/donation/getDonationCountsOfUser`,
+          data: {
+              user: account || "",
+              chainId:chainId || ""
+          }
+        }).then((res)=>{
+            console.log(res.data);
+            if(res.data && res.data.code === 0)
+            {
+              let temAry = statistics;
+              temAry[0] = res.data.data;
+              setStatistics(temAry);
+            }
+        }).catch((err)=> {
+            console.error(err);    
+        });
+      }
+      await axios({
+        method: "post",
+        url: `${backendURL}/api/donation/getTotalDonatedAmountsOfUser`,
+        data: {
+            user: account  || "",
+            chainId:chainId || ""
+        }
+      }).then((res)=>{
+          console.log(res.data);
+          if(res.data && res.data.code === 0)
+          {
+            let temAry = statistics;
+            temAry[1] = res.data.data;
+            setStatistics(temAry);
+          }
+      }).catch((err)=> {
+          console.error(err);    
+      });      
+      await axios({
+        method: "post",
+        url: `${backendURL}/api/campaign/getCampaignCountsOfUser`,
+        data: {
+            user: account || "",
+            chainId:chainId || ""
+        }
+      }).then((res)=>{
+          console.log(res.data);
+          if(res.data && res.data.code === 0)
+          {
+            let temAry = statistics;
+            temAry[2] = res.data.data;
+            setStatistics(temAry);
+          }
+      }).catch((err)=> {
+          console.error(err);    
+      });      
+      const givePoint = new globalWeb3.eth.Contract(
+        ERC20Abi,
+        chains[chainId?.toString()]?.givePointAddress
+      );
+      if(givePoint)
+      {
+        try{        
+          let gpBalance = await givePoint.methods.balanceOf(account).call() || 0;        
+          let temAry = statistics;
+          temAry[3] = globalWeb3.utils.fromWei(gpBalance.toString(), "ether");    
+          setStatistics(temAry);
+        }catch(err)
+        {
+          console.error(err);    
+        }
+      }else{
+        console.log("Invalid GivePoint");
+      }
+    }
+    getCountsInfo();
+  }, [account, globalWeb3])
 
   return (
     <div>
@@ -93,24 +183,36 @@ export default function Overview() {
         <div className="flex items-center pageHead">
           <h1 className="text-slate-900 dark:text-white font-bold overview">Overview</h1>
           <div className="accountNo ml-7" style={{textAlign:"center"}}>
-            {id && <h2>{id.toString().substring(0, 6)+"..."+id.toString().substring(38, 42)}</h2>}
+            {account && <h2>{account.toString().substring(0, 6)+"..."+account.toString().substring(38, 42)}</h2>}
           </div>
         </div>
 
         <div className="cardWrapper flex justify-between gap-x-4">
-          {overviewData.map((e) => {
+          {overviewData.map((e, index) => {
             return (
               <div className="oveviewCards w-full" key={e.id}>
                 <div className="flex justify-between items-center">
                   <h1 className="text-white font-bold text-lg">{e.cardName}</h1>
                   <div>{e.svg}</div>
                 </div>
-                <h1 className="count">60</h1>
+                <h1 className="count">{statistics[index]}</h1>
               </div>
             );
           })}
         </div>
-      </div>
+        <div className="flex gap-x-24 welcomeSect">
+            <img src={overviewImage} alt="" />
+
+            <div className="flex flex-col items-center justify-center w-2/5 overDesc">
+              <h1 className="giveHeading">Welcome to GiveStation</h1>
+              <p className="giveP text-slate-900 dark:text-white">
+                A layer 2 crowdfunding platform that reward you for donating.
+              </p>
+              <button className="exploreBtn" onClick={() => { navigate("/") }}>Explore Campaigns</button>
+            </div>
+          </div>
+      </div>      
+
       <UserFooter/>
     </div>
   );

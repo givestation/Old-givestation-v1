@@ -3,9 +3,13 @@ import SampleProject from "./assets/sampleProject.svg";
 import HeartIcon from "./assets/heart.svg";
 import { useParams } from "react-router";
 import UserFooter from "../../components/user/UserFooter";
+import { useSelector } from "react-redux";
 
 const MyProjects = () => {
-  const {id} = useParams();
+
+  const chainId = useSelector(state => state.auth.currentChainId);
+  const account = useSelector(state => state.auth.currentWallet);
+  const globalWeb3 = useSelector(state => state.auth.globalWeb3);
 
   return (
     <div>
@@ -13,7 +17,7 @@ const MyProjects = () => {
         <div className="flex items-center pageHead">
           <h1 className="text-slate-900 dark:text-white font-bold overview">My Projects</h1>
           <div className="accountNo ml-7" style={{textAlign:"center"}}>
-            {id && <h2>{id.toString().substring(0, 6)+"..."+id.toString().substring(38, 42)}</h2>}
+            {account && <h2>{account.toString().substring(0, 6)+"..."+account.toString().substring(38, 42)}</h2>}
           </div>
         </div>
 

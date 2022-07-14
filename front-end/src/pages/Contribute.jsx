@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {  useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import axios from 'axios';
+import { backendURL } from '../config';
 import Footer from '../components/Footer';
 import Header from '../components/HeaderHome';
 import { chains } from '../smart-contract/chains_constants';

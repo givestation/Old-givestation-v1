@@ -75,7 +75,7 @@ export default function Header() {
             if (accounts[0]) {
                 dispatch(setConnectedWalletAddress(accounts[0]));
                 setConnected(true);
-                navigate(`/user/${accounts[0]}/overview`)
+                navigate(`/user/overview`)
             }else{                
                 dispatch(setConnectedWalletAddress(null));
                 setConnected(false);

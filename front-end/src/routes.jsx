@@ -35,7 +35,7 @@ function AppRoutes() {
                     <Route path="/faq" element={<FaqOne />}></Route>
                     <Route path="/alert" element={<Alert />}></Route>
                     <Route path="/verify" element={<VerifyCampaigns />}></Route>                        
-                    <Route path="/user/:id" element={<UserLayout />}>
+                    <Route path="/user" element={<UserLayout />}>
                         <Route path="overview" element={<Overview />}></Route>
                         <Route path="my-projects" element={<MyProjects />}></Route>
                         <Route path="donations" element={<Donations />}></Route>

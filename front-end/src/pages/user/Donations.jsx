@@ -61,7 +61,7 @@ export default function Donations() {
 
                 <div className="likeCardDetail w-1/2">
                   <h6 className="flex">
-                    {item?.campaign? item.campaign.name : "SpinSamurai"}{" "}
+                    {item?.campaign? item.campaign.name : ""}{" "}
                     {/* <img src={Kemono} alt="" style={{ marginLeft: 5 }} /> */}
                   </h6>
                   <p>
@@ -69,7 +69,7 @@ export default function Donations() {
                     item?.campaign?
                     item.campaign.description
                     :
-                    "225% up to AU$ 5,000 jhgfjjhghjkkkhgj jhjkkkkhhkjhjkljhjklk hjkljhjlljkhklljklljklljk"
+                    ""
                   }
                   </p>
                 </div>

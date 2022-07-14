@@ -1,8 +1,9 @@
 import React from "react";
 import LikeCampImg from "./assets/likeCampImg.svg";
 import HeartIcon from "./assets/heart.svg";
+import HeartBlankIcon from "./assets/heart-blank.svg";
 import Kemono from "./assets/Kemono.svg";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import UserFooter from "../../components/user/UserFooter";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -17,30 +18,55 @@ const LikedCampaigns = () => {
   const [likesInfo, setLikesInfo] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    const getDonationInfo = async () => {
-      if(globalWeb3 && account)
-      {        
-        await axios({
-          method: "post",
-          url: `${backendURL}/api/likes/getAllLikedCampaigns`,
-          data: {
-              user: account || "",
-              chainId:chainId || ""
+  const getDonationInfo = async () => {
+    if(globalWeb3 && account)
+    {        
+      await axios({
+        method: "post",
+        url: `${backendURL}/api/likes/getAllLikedCampaigns`,
+        data: {
+            user: account || "",
+            chainId:chainId || ""
+        }
+      }).then((res)=>{
+          console.log(res.data);
+          if(res.data && res.data.code === 0)
+          {
+            setLikesInfo(res.data.data);
           }
-        }).then((res)=>{
-            console.log(res.data);
-            if(res.data && res.data.code === 0)
-            {
-              setLikesInfo(res.data.data);
-            }
-        }).catch((err)=> {
-            console.error(err);    
-        });
-      }
+      }).catch((err)=> {
+          console.error(err);    
+      });
     }
+  }
+
+  useEffect(()=>{
     getDonationInfo();
   }, [globalWeb3, account])
+
+  const onClickFavorites = async (address, val) => {
+    if(globalWeb3 && account)
+    {        
+      await axios({
+        method: "post",
+        url: `${backendURL}/api/likes/setLikes`,
+        data: {
+            campaign:address,
+            user: account || "",
+            value: val,
+            chainId:chainId || ""
+        }
+      }).then((res)=>{
+          console.log(res.data);
+          if(res.data && res.data.code === 0)
+          {
+            getDonationInfo();
+          }
+      }).catch((err)=> {
+          console.error(err);    
+      });
+    }
+  }
 
   return (
     <div className="py-20 px-10 wholeWrapper">
@@ -76,7 +102,12 @@ const LikedCampaigns = () => {
               </div>
 
               <div className="flex flex-col justify-center items-center w-1/4 likeBtns">
-                <img src={HeartIcon} alt="" />
+                {
+                  item.value===true && <img src={HeartIcon} alt="" onClick={()=>{ item?.campaign &&  onClickFavorites(item.campaign.address, false) }} />
+                }
+                {
+                  item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ item?.campaign &&  onClickFavorites(item.campaign.address, true) }} />
+                }
                 <h4 onClick={() => { item?.campaign &&  navigate(`/campaign/${item.campaign.address}`) }}>view campaign</h4>
               </div>
             </div>

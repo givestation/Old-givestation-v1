@@ -62,7 +62,24 @@ export default function Contribute() {
                     gas: 3000000,
                     value: globalWeb3.utils.toWei(donationAmount, "ether"),
                 })
-                setPopup(!popup);
+                await axios({
+                    method: "post",
+                    url: `${backendURL}/api/donation/create`,
+                    data: {
+                        campaign:id,
+                        amount:donationAmount,
+                        donor:account || "",
+                        chainId:chainId || ""
+                    }
+                }).then((res)=>{
+                    console.log(res.data);
+                    if(res.data && res.data.code === 0)
+                    {
+                        setPopup(!popup);
+                    }
+                }).catch((err)=> {
+                    console.error(err);    
+                });
             }catch(e)
             {
                 console.error(e);

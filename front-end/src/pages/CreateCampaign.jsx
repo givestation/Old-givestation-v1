@@ -69,7 +69,7 @@ export default function CreateCampaign() {
                                 gas: 3000000
                             });
                         let campaigns = await factory.methods.getDeployedCampaigns().call();
-                        console.log("campaigns[campaigns.length-1] = ", campaigns[campaigns.length-1]);  
+                        console.log(campaigns[campaigns.length-1]);  
                         createdCampaignAddress = campaigns[campaigns.length-1];    
                     }else{
                         console.log("creating new campaign : Invalid factoy instance.");          

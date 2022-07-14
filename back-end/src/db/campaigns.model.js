@@ -10,8 +10,11 @@ module.exports = (mongoose) => {
         chainId: String,
         minimum: { type: Number, default: 0 },
         target: { type: Number, default: 0 },
-        category: String,
-        address: String
+        category: { type: String, default: "" },
+        address: String,
+        verified: { type: Boolean, default: false },
+        raised: { type: Number, default: 0 },
+        likes: { type: Number, default: 0 }
       },
       { timestamps: true }
     )

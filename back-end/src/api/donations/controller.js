@@ -11,7 +11,7 @@ exports.createDonation = (req, res) => {
     var chainId = req.body.chainId;
 
     var newDonation = new Donation({
-        campaign,
+        campaign: new ObjectId(campaign),
         amount,
         donor,
         chainId

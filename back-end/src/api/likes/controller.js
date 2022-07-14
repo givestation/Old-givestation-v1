@@ -11,7 +11,7 @@ exports.setLikes = (req, res) => {
     var chainId = req.body.chainId;
 
     var newLikes = new Likes({
-        campaign,
+        campaign: new ObjectId(campaign),
         user,
         value,
         chainId

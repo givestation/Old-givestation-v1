@@ -11,9 +11,11 @@ const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 export default function CreateCampaign() {
     const [minimum, setMinimum] = useState(0.001);
     const [name, setName] = useState("");
+    const [category, setCategory] = useState("");
     const [description, setDescription] = useState("");
     const [imageURL, setImageURL] = useState("");
     const [target, setTarget] = useState(10);
+    const [dropdown, setDropdown] = useState(false);
 
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
@@ -35,7 +37,7 @@ export default function CreateCampaign() {
                     minimum,
                     target,
                     creator:account || "",
-                    category:"Defi",
+                    category:category,
                     address:"",
                     chainId:chainId || ""
                 }
@@ -116,13 +118,44 @@ export default function CreateCampaign() {
         else setTarget(Number(value));
     }
 
+    const Category = [
+        { name: 'Defi      ' },
+        { name: 'Education ' },
+        { name: 'Blockchain' },
+        { name: 'Fintech   ' },
+    ];
+
     return (
         <div>
             <Header />
             <section className="heading pt-16 pb-4">
                 <h1 className="text-center text-2xl font-bolder dark:text-gray-100">Create a new campaign</h1>
             </section>
-            <section className="form w-10/12 md:w-6/12 mx-auto py-6">
+            <section className="form w-10/12 md:w-6/12 mx-auto py-6">  
+            
+                    <div className="form-group mb-6 my-3" style={{ display:"flex", flexDirection:"row" }}>
+                        <div className="block mb-2 dark:text-gray-100">Category</div>              
+                        <div className="relative">
+                            <button className="sm:ml-3 ml-0 py-2 px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 flex items-center justify-between" type="button" 
+                                onClick={() => {setDropdown(!dropdown)}}
+                                style={{minWidth:"200px", textAlign:"center"}}
+                            > {category || "Select a category"}
+                            <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                            {
+                                dropdown?
+                                <div id="dropdown" className="absolute  top-12 z-10 bg-white divide-y divide-gray-100 rounded shadow w-60 dark:bg-gray-700">
+                                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+                                    {Category.map((i, index) => (
+                                        <li key={index} onClick={(e) => {setCategory(i?.name || "Defi"); setDropdown(!dropdown)}} value={category || ""}>
+                                            <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{i?.name}</span>
+                                        </li>
+                                    ))}
+                                    </ul>
+                                </div>
+                                : ''
+                            }
+                        </div>
+                    </div>
                     <div className="form-group mb-6 my-3">
                         <label className="block mb-2 dark:text-gray-100">Minimum Contribution Amount</label>
                         <div className="flex flex-wrap">
@@ -145,7 +178,7 @@ export default function CreateCampaign() {
                     <div className="form-group mb-6 my-3">
                         <label className="block mb-2 dark:text-gray-100">Campaign Description</label>
                         <div className="flex flex-wrap">
-                            <input type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary' 
+                            <textarea type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary' 
                                  onChange={(e)=>{setDescription(e.target.value)}} value={description || ""}
                             />
                         </div>

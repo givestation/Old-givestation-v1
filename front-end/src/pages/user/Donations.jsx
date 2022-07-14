@@ -76,7 +76,7 @@ export default function Donations() {
               </div>
 
               <div className="flex flex-col justify-center items-center w-1/4 likeBtns">
-                <div className="donationPrice">{item?.amount?item.amount:"0"}{chains[chainId.toString()]?.nativeCurrency}</div>
+                <div className="donationPrice">{item?.amount? globalWeb3.utils.fromWei(item.amount.toString(), "ether"):"0"}{chains[chainId.toString()]?.nativeCurrency}</div>
                 <h4 onClick={()=>{ item?.campaign && navigate(`/campaign/${item.campaign.address}`)  }}>view campaign</h4>
               </div>
             </div>

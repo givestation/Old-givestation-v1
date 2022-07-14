@@ -24,49 +24,81 @@ export default function CreateCampaign() {
     const onClickCreateCampaign = async () => {
         if(globalWeb3)
         {
-            let idOnDb = null;
-            axios.post(`${backendURL}/campaign/create`, {
-                name,
-                description,
-                imageURL,
-                minimum,
-                target,
-                creator:account,
-                category:"Defi",
-                address:"",
-                chainId
-            }, {}).then((res)=>{
-                console.log("res.data = ", res.data);
+            let idOnDb = null;        
+            await axios({
+                method: "post",
+                url: `${backendURL}/api/campaign/create`,
+                data: {
+                    name,
+                    description,
+                    imageURL,
+                    minimum,
+                    target,
+                    creator:account || "",
+                    category:"Defi",
+                    address:"",
+                    chainId:chainId || ""
+                }
+            }).then((res)=>{
+                console.log(res.data);
+                if(res.data && res.data.code === 0)
+                {
+                    idOnDb = res.data.data._id;
+                }
             }).catch((err)=> {
-
+                console.error(err);    
             });
-            // try{
-            //     const factory = new globalWeb3.eth.Contract(
-            //         CampaignFactory,
-            //         chains[chainId?.toString()].factoryAddress
-            //     );
-            //     if(factory)
-            //     {
-            //         const result = await factory.methods.createCampaign(
-            //             globalWeb3.utils.toWei(minimum.toString(), "ether"),
-            //             name,
-            //             description,
-            //             imageURL,
-            //             globalWeb3.utils.toWei(target.toString(), "ether")
-            //             )
-            //             .send({
-            //                 from: account, 
-            //                 gas: 3000000
-            //             });
-            //             navigate("/");
-            //     }else{
-            //         console.log("creating new campaign : Invalid factoy instance.");                    
-            //     }
-            // }
-            // catch(e)
-            // {
-            //     console.error(e);                                
-            // }
+            console.log("idOnDb = ", idOnDb);
+            let createdCampaignAddress = null;
+            if(idOnDb !== null)
+            {
+                try{
+                    const factory = new globalWeb3.eth.Contract(
+                        CampaignFactory,
+                        chains[chainId?.toString()].factoryAddress
+                    );
+                    if(factory)
+                    {
+                        await factory.methods.createCampaign(
+                            globalWeb3.utils.toWei(minimum.toString(), "ether"),                            
+                            globalWeb3.utils.toWei(target.toString(), "ether"),
+                            idOnDb
+                            )
+                            .send({
+                                from: account, 
+                                gas: 3000000
+                            });
+                        let campaigns = await factory.methods.getDeployedCampaigns().call();
+                        console.log("campaigns[campaigns.length-1] = ", campaigns[campaigns.length-1]);  
+                        createdCampaignAddress = campaigns[campaigns.length-1];    
+                    }else{
+                        console.log("creating new campaign : Invalid factoy instance.");          
+                    }
+                }
+                catch(e)
+                {
+                    console.error(e);                                
+                }
+                if(createdCampaignAddress !== null)
+                {
+                    await axios({
+                        method: "post",
+                        url: `${backendURL}/api/campaign/update`,
+                        data: {                            
+                            _id: idOnDb,
+                            address: campaigns[campaigns.length-1],                           
+                        }
+                    }).then((res)=>{
+                        console.log(res.data);
+                        if(res.data && res.data.code === 0)
+                        {                                              
+                            navigate("/");
+                        }
+                    }).catch((err)=> {
+                        console.error(err);    
+                    });
+                }
+            }            
         }else{
             console.log("Invalid web3");
         }

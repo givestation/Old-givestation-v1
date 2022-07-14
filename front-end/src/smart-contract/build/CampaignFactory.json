@@ -110,7 +110,13 @@
 			}
 		],
 		"name": "createCampaign",
-		"outputs": [],
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
@@ -154,6 +160,19 @@
 				"internalType": "address[]",
 				"name": "",
 				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getDevAccount",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -253,6 +272,19 @@
 			}
 		],
 		"name": "setContractStatus",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "setDevAccount",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"

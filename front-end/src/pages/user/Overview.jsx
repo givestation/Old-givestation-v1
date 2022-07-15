@@ -100,6 +100,7 @@ export default function Overview() {
     const getCountsInfo = async () => {
       if(account && globalWeb3)
       {      
+        let temAry = statistics;
         await axios({
           method: "post",
           url: `${backendURL}/api/donation/getDonationCountsOfUser`,
@@ -111,71 +112,71 @@ export default function Overview() {
             console.log(res.data);
             if(res.data && res.data.code === 0)
             {
-              let temAry = statistics;
               temAry[0] = res.data.data;
-              setStatistics(temAry);
             }
         }).catch((err)=> {
             console.error(err);    
         });
-      }
-      await axios({
-        method: "post",
-        url: `${backendURL}/api/donation/getTotalDonatedAmountsOfUser`,
-        data: {
-            user: account  || "",
-            chainId:chainId || ""
-        }
-      }).then((res)=>{
-          console.log(res.data);
-          if(res.data && res.data.code === 0)
-          {
-            let temAry = statistics;
-            temAry[1] = res.data.data;
-            setStatistics(temAry);
+        await axios({
+          method: "post",
+          url: `${backendURL}/api/donation/getTotalDonatedAmountsOfUser`,
+          data: {
+              user: account  || "",
+              chainId:chainId || ""
           }
-      }).catch((err)=> {
-          console.error(err);    
-      });      
-      await axios({
-        method: "post",
-        url: `${backendURL}/api/campaign/getCampaignCountsOfUser`,
-        data: {
-            user: account || "",
-            chainId:chainId || ""
-        }
-      }).then((res)=>{
-          console.log(res.data);
-          if(res.data && res.data.code === 0)
-          {
-            let temAry = statistics;
-            temAry[2] = res.data.data;
-            setStatistics(temAry);
+        }).then((res)=>{
+            console.log(res.data);
+            if(res.data && res.data.code === 0)
+            {
+              temAry[1] = res.data.data;
+            }
+        }).catch((err)=> {
+            console.error(err);    
+        });      
+        await axios({
+          method: "post",
+          url: `${backendURL}/api/campaign/getCampaignCountsOfUser`,
+          data: {
+              user: account || "",
+              chainId:chainId || ""
           }
-      }).catch((err)=> {
-          console.error(err);    
-      });      
-      const givePoint = new globalWeb3.eth.Contract(
-        ERC20Abi,
-        chains[chainId?.toString()]?.givePointAddress
-      );
-      if(givePoint)
-      {
-        try{        
-          let gpBalance = await givePoint.methods.balanceOf(account).call() || 0;        
-          let temAry = statistics;
-          temAry[3] = globalWeb3.utils.fromWei(gpBalance.toString(), "ether");    
-          setStatistics(temAry);
-        }catch(err)
+        }).then((res)=>{
+            console.log(res.data);
+            if(res.data && res.data.code === 0)
+            {
+              temAry[2] = res.data.data;
+            }
+        }).catch((err)=> {
+            console.error(err);    
+        });     
+        let givePoint = null;  
+        try{     
+          givePoint = new globalWeb3.eth.Contract(
+            ERC20Abi,
+            chains[chainId?.toString()]?.givePointAddress
+          );
+        }catch(err){
+          console.error(err);              
+        }
+        if(givePoint !== null)
         {
-          console.error(err);    
+          try{        
+            let gpBalance = await givePoint.methods.balanceOf(account).call() || 0;        
+            temAry[3] = globalWeb3.utils.fromWei(gpBalance.toString(), "ether");    
+            setStatistics(temAry);
+          }catch(err)
+          {
+            console.error(err);    
+          }
+        }else{
+          console.log("Invalid GivePoint");
         }
-      }else{
-        console.log("Invalid GivePoint");
+        setStatistics(temAry);      
       }
     }
     getCountsInfo();
   }, [account, globalWeb3])
+
 
   return (
     <div>

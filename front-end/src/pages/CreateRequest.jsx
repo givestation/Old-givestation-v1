@@ -49,7 +49,7 @@ export default function CreateRequest() {
                 {
                     await campaign.methods.createRequest(
                         description,
-                        globalWeb3.utils.toWei(amount, "ether"),
+                        globalWeb3.utils.toWei(amount.toString(), "ether"),
                         recipient
                     ).send({
                         from: account, 

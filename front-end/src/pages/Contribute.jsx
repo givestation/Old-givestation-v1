@@ -33,11 +33,44 @@ export default function Contribute() {
                         CampaignFactory,
                         chains[chainId?.toString()].factoryAddress
                     );
+                    let summa = null;
                     if(factory)
                     {
-                        let summary = await new globalWeb3.eth.Contract(Campaign, id).methods.getSummary().call();
-                        setSummary(summary);
+                        summa = await new globalWeb3.eth.Contract(Campaign, id).methods.getSummary().call();
+
+                        
+                        setSummary(summa);
                         console.log("[contribute.jsx] summary = ", summary);
+                    }
+                    if(summa !== null)
+                    {                        
+                        await axios({
+                        method: "post",
+                        url: `${backendURL}/api/campaign/getCampaignsOfUser`,
+                        data: {
+                            user: account || "",
+                            chainId:chainId || ""
+                        }
+                        }).then((res)=>{
+                            console.log(res.data);
+                            if(res.data && res.data.code === 0)
+                            {
+                                let summaryFromDB = res.data.data[0] || [];
+                                if(summaryFromDB !== undefined)
+                                {
+                                    summa[5] = summaryFromDB.name;
+                                    summa[6] = summaryFromDB.description;
+                                    summa[7] = summaryFromDB.imageURL;
+                                    summa[9] = summaryFromDB.verified;
+                                    summa[11] = summaryFromDB.category;
+                                    summa[12] = summaryFromDB.raised;
+                                }
+                                console.log("summary =", summa);
+                                setSummary(summa);
+                            }
+                        }).catch((err)=> {
+                            console.error(err);    
+                        });
                     }
                 }
                 catch(e)

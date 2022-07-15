@@ -27,7 +27,20 @@ exports.createCampaign = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    Campaign.find({}, function (err, docs) {
+    Campaign.find({...req.body}, function (err, docs) {
+    if (err) {
+        console.log("Campaign doesn't exisit" + err.message);
+        return res.send({ code: -1, data:{}, message: "Internal server Error" });
+    }
+    else {        
+        // console.log('[GetAll] docs = ', docs);
+        return res.send({ code:0, data: docs, message: "" });
+    }
+});
+}
+
+exports.getOne = (req, res) => {
+    Campaign.find({_id:req.body._id}, function (err, docs) {
     if (err) {
         console.log("Campaign doesn't exisit" + err.message);
         return res.send({ code: -1, data:{}, message: "Internal server Error" });

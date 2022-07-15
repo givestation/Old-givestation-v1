@@ -11,7 +11,7 @@ const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 export default function CreateCampaign() {
     const [minimum, setMinimum] = useState(0.001);
     const [name, setName] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("Defi");
     const [description, setDescription] = useState("");
     const [imageURL, setImageURL] = useState("");
     const [target, setTarget] = useState(10);

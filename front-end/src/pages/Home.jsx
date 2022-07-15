@@ -2,11 +2,13 @@
 import React, {useEffect, useState} from 'react'
 import Footer from '../components/Footer'
 import {useQueryParam} from "use-params-query";
+import axios from "axios";
 import HeaderHome from '../components/HeaderHome'
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
 import { chains } from '../smart-contract/chains_constants';
 import { updateReferalAddress } from '../store/actions/auth.actions';
+import { backendURL } from '../config';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
 
@@ -70,19 +72,54 @@ export default function Home() {
                         CampaignFactory,
                         chains[chainId?.toString()].factoryAddress
                     );
+                    let summary = [], campais = [];
                     if(factory)
                     {
-                        let campaigns = await factory.methods.getDeployedCampaigns().call();
-                        setCampaigns(campaigns);
-                        const summary = await Promise.all(
-                            campaigns.map((campaign, i) =>
-                                new globalWeb3.eth.Contract(Campaign, campaigns[i]).methods.getSummary().call()
+                        campais = await factory.methods.getDeployedCampaigns().call();
+                        setCampaigns(campais);
+                        summary = await Promise.all(
+                            campais.map((campaign, i) =>
+                                new globalWeb3.eth.Contract(Campaign, campais[i]).methods.getSummary().call()
                             )
                         );                        
-                        setViewRequests(summary);
 
-                        console.log("[Home.jsx] campaigns = ", campaigns);
-                        console.log("[Home.jsx] summary ", summary);
+                        console.log("[Home.jsx] campaigns = ", campais);
+                    }
+                    if(campais.length>0) 
+                    {
+                        await axios({
+                          method: "post",
+                          url: `${backendURL}/api/campaign/all`,
+                          data: {
+                            chainId:chainId
+                          }
+                        }).then((res)=>{
+                            console.log(res.data);
+                            if(res.data && res.data.code === 0)
+                            {
+                                let summaryFromDB = res.data.data || [];
+                                if(summaryFromDB.length>0)
+                                {
+                                    for(let idx = 0; idx<summary.length; idx++)
+                                    {
+                                        let found = summaryFromDB.find((item ) => item.address === campais[idx]) || undefined;
+                                        if(found)
+                                        {
+                                            summary[idx][5] = found.name;
+                                            summary[idx][6] = found.description;
+                                            summary[idx][7] = found.imageURL;
+                                            summary[idx][9] = found.verified;
+                                            summary[idx][11] = found.category;
+                                            summary[idx][1] = found.raised;
+                                        }
+                                    }
+                                }
+                                console.log("summary =", summary);
+                                setViewRequests(summary);
+                            }
+                        }).catch((err)=> {
+                            console.error(err);    
+                        });
                     }
                 }
                 catch(e)
@@ -91,6 +128,47 @@ export default function Home() {
                 }
             }
             getSummary();
+        }
+        else{
+            const getAllFromDB = async () => {                
+                await axios({
+                    method: "post",
+                    url: `${backendURL}/api/campaign/all`,
+                    data: {
+                    }
+                  }).then((res)=>{
+                    console.log(res.data);
+                    if(res.data && res.data.code === 0)
+                    {
+                        let summary = [{}], campais = [];
+                        let summaryFromDB = res.data.data || [];
+                        console.log("summaryFromDB = ", summaryFromDB);
+                        if(summaryFromDB.length>0)
+                        {
+                            for(let idx = 0; idx<summaryFromDB.length; idx++)
+                            {
+                                let found = summaryFromDB[idx] || undefined;
+                                if(found)
+                                {
+                                    summary[idx][5] = found.name;
+                                    summary[idx][6] = found.description;
+                                    summary[idx][7] = found.imageURL;
+                                    summary[idx][9] = found.verified;
+                                    summary[idx][11] = found.category;
+                                    summary[idx][1] = found.raised;
+                                    campais[idx] = found.address;
+                                }
+                            }
+                        }
+                        console.log("summary =", summary);
+                        setViewRequests(summary);
+                        setCampaigns(campais);
+                    }
+                }).catch((err)=> {
+                    console.error(err);    
+                });
+            }
+            getAllFromDB();
         }
     }, [account, chainId, globalWeb3])
 
@@ -139,7 +217,7 @@ export default function Home() {
                                     <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                                     {Category.map((i, index) => (
                                         <li key={index}>
-                                            <a href="/" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{i.name}</a>
+                                            <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{i.name}</span>
                                         </li>
                                     ))}
                                     </ul>
@@ -196,7 +274,7 @@ export default function Home() {
                                     </div>
                                     <p className='text-blue description mb-3'>{data[6]}</p>
                                     <p className='para'>{"Raised"}</p>
-                                    <h6 className='content mb-5 mt-1 text-sm'>{globalWeb3?.utils.fromWei(data[1], "ether") || 0}</h6>
+                                    <h6 className='content mb-5 mt-1 text-sm'>{globalWeb3?.utils.fromWei(data[1]?.toString(), "ether") || 0}</h6>
                                     <NavLink to={`/campaign/${campaigns[index]}`} className="py-2 donatebtn px-4 md:px-12 text-md leading-5 text-black bg-gradient-secondary font-bold">
                                         Donate
                                     </NavLink>     

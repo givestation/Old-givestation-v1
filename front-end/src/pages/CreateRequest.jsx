@@ -2,6 +2,7 @@ import React, { useEffect, useState} from 'react'
 import Header from '../components/HeaderHome'
 import {  NavLink, useNavigate, useParams } from 'react-router-dom';
 import {useSelector} from "react-redux";
+import {NotificationManager} from "react-notifications";
 import Footer from '../components/Footer';
 import { chains } from '../smart-contract/chains_constants';
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -63,6 +64,8 @@ export default function CreateRequest() {
             console.error(err);
             } finally {
             }
+        }else{
+            NotificationManager.warning("Please connnect your wallet.");
         }
     }
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {  useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import axios from 'axios';
+import {NotificationManager} from 'react-notifications';
 import { backendURL } from '../config';
 import Footer from '../components/Footer';
 import Header from '../components/HeaderHome';
@@ -24,7 +25,6 @@ export default function Contribute() {
 
     useEffect(() => {
         console.log("[contribute.jsx] chainId = ", chainId);
-        console.log("[contribute.jsx] id = ", id);
         if(account && chainId && globalWeb3 && id)
         {
             const getSummary = async () => {
@@ -36,19 +36,14 @@ export default function Contribute() {
                     let summa = null;
                     if(factory)
                     {
-                        summa = await new globalWeb3.eth.Contract(Campaign, id).methods.getSummary().call();
-
-                        
-                        setSummary(summa);
-                        console.log("[contribute.jsx] summary = ", summary);
+                        summa = await new globalWeb3.eth.Contract(Campaign, id).methods.getSummary().call();         
                     }
                     if(summa !== null)
                     {                        
                         await axios({
                         method: "post",
-                        url: `${backendURL}/api/campaign/getCampaignsOfUser`,
+                        url: `${backendURL}/api/campaign/all`,
                         data: {
-                            user: account || "",
                             chainId:chainId || ""
                         }
                         }).then((res)=>{
@@ -80,6 +75,38 @@ export default function Contribute() {
             }
             getSummary();
         }
+        else if(id){
+            const getSummaryFromDB = async () => {                 
+                await axios({
+                    method: "post",
+                    url: `${backendURL}/api/campaign/all`,
+                    data: {
+                        address:id
+                    }
+                    }).then((res)=>{
+                        console.log(res.data);
+                        if(res.data && res.data.code === 0)
+                        {   
+                            let summa = {};
+                            let summaryFromDB = res.data.data[0] || [];
+                            if(summaryFromDB !== undefined)
+                            {
+                                summa[5] = summaryFromDB.name;
+                                summa[6] = summaryFromDB.description;
+                                summa[7] = summaryFromDB.imageURL;
+                                summa[9] = summaryFromDB.verified;
+                                summa[11] = summaryFromDB.category;
+                                summa[12] = summaryFromDB.raised;
+                            }
+                            console.log("summary =", summa);
+                            setSummary(summa);
+                        }
+                    }).catch((err)=> {
+                        console.error(err);    
+                    });
+            }
+            getSummaryFromDB();
+        }
     }, [account, chainId, globalWeb3, id]);
 
     const onChangeDonationAmount = (value) => {
@@ -89,7 +116,7 @@ export default function Contribute() {
     }
 
     const onClickContribute = async () => {
-        if(donationAmount>0  && globalWeb3)
+        if(donationAmount>0  && globalWeb3 && account)
         {
             try{
                 await new globalWeb3.eth.Contract(Campaign, id).methods.contribute(refAddr).send({
@@ -119,6 +146,9 @@ export default function Contribute() {
             {
                 console.error(e);
             }
+        }
+        else{
+            NotificationManager.warning("Connect your wallet!");
         }
     }
 

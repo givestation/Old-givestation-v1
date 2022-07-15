@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import AppRoutes from './routes';
 import { store }  from "./store";
 import {Provider} from "react-redux";
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer} from 'react-notifications';
 
 function Index() {
   const [loading, setLoading] = useState(true);
@@ -40,6 +42,7 @@ function Index() {
     : 
     <Provider store={store}>
       <AppRoutes/>
+      <NotificationContainer/>
     </Provider>
   }
   </>;

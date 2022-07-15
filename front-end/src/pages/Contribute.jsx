@@ -15,6 +15,7 @@ export default function Contribute() {
     const [summary, setSummary]  = useState({});
     const [popup, setPopup] = useState(false);
     const [donationAmount, setDonationAmount] = useState(0);
+    const [campaignIdOnDB, setCampaignIdOnDB] = useState(null);
     
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
@@ -59,6 +60,7 @@ export default function Contribute() {
                                     summa[9] = summaryFromDB.verified;
                                     summa[11] = summaryFromDB.category;
                                     summa[12] = summaryFromDB.raised;
+                                    setCampaignIdOnDB(summaryFromDB._id);
                                 }
                                 console.log("summary =", summa);
                                 setSummary(summa);
@@ -97,6 +99,7 @@ export default function Contribute() {
                                 summa[9] = summaryFromDB.verified;
                                 summa[11] = summaryFromDB.category;
                                 summa[12] = summaryFromDB.raised;
+                                setCampaignIdOnDB(summaryFromDB._id);
                             }
                             console.log("summary =", summa);
                             setSummary(summa);
@@ -128,7 +131,7 @@ export default function Contribute() {
                     method: "post",
                     url: `${backendURL}/api/donation/create`,
                     data: {
-                        campaign:id,
+                        campaign: campaignIdOnDB || "",
                         amount:donationAmount,
                         donor:account || "",
                         chainId:chainId || ""

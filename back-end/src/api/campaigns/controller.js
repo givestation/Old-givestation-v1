@@ -53,7 +53,7 @@ exports.getOne = (req, res) => {
 }
 
 exports.deleteOne = (req, res) => {
-    Campaign.deleteOne({ _id: req.body.id }, function (err) {
+    Campaign.deleteOne({ _id: req.body._id }, function (err) {
         if (!err)
             return res.send({ code: 0, data:{}, message:"" });
         else

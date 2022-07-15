@@ -1,6 +1,7 @@
 const db = require("../../db");
 
 const Donation = db.Donation;
+const Campaign = db.Campaign;
 
 var ObjectId = require('mongodb').ObjectID;
 
@@ -18,10 +19,26 @@ exports.createDonation = (req, res) => {
     });
 
     newDonation.save().then((data) => {
-        return res.send({ code: 0, data, message:"" });
+        // return res.send({ code: 0, data, message:"" });
     }).catch((err) => {
         console.log("create donation error : ", err);
-        return res.send({ code: -1, data, message: "" });
+        // return res.send({ code: -1, data, message: "" });
+    });
+
+    Campaign.findById(new ObjectId(campaign)).then((data) => {
+        var raised = Number(data.raised);
+        raised += Number(amount);
+       
+        Campaign.findByIdAndUpdate(new ObjectId(campaign), { raised }).then((data) => {
+                return res.send({ code: 0, data: {}, message:"updating succeed" });
+            }).catch((err) => {
+                console.log("updating raised error : ", err);
+                return res.send({ code: -1, data: {}, message: "update error" });
+            })
+       
+    }).catch((error) => {
+        console.log("updating raised error : ", error);
+        return res.send({ code: -1, data: {}, message: "find error" });
     });
 }
 
@@ -38,7 +55,7 @@ exports.getAll = (req, res) => {
 }
 
 exports.deleteOne = (req, res) => {
-    Donation.deleteOne({ _id: req.body.id }, function (err) {
+    Donation.deleteOne({ _id: req.body._id }, function (err) {
         if (!err)
             return res.send({ code: 0, data:{}, message:"" });
         else

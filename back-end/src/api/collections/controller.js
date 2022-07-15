@@ -113,8 +113,8 @@ exports.create = async (req, res) => {
 }
 
 exports.getDetail = (req, res) => {
-    // console.log("req.body.id  : ", req.body.id);
-    Collection.findOne({ _id: new ObjectId(req.body.id) }).populate("owner")
+    // console.log("req.body._id  : ", req.body._id);
+    Collection.findOne({ _id: new ObjectId(req.body._id) }).populate("owner")
         .then((docs) => {
             if (docs !== null && docs !== undefined) {
                 // console.log("found a collection : ", docs);
@@ -477,7 +477,7 @@ exports.getCollectionNames = (req, res) => {
 
 
 exports.getCollectionMetadatas = (req, res) => {
-    var id = req.body.id;
+    var id = req.body._id;
     Collection.find({ _id: ObjectId(id) }, { metaData: 1 }).then((data) => {
         return res.send({ code: 0, data: data });
     }).catch(() => {

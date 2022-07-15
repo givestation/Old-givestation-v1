@@ -115,7 +115,7 @@ exports.update = (req, res) => {
         });
     }
 
-    const id = req.body.id;
+    const id = req.body._id;
     const username = req.body.username;
     const customURL = req.body.customURL;
     const profilePhoto = req.body.profilePhoto;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import {NotificationManager} from "react-notifications";
 import axios from "axios";
 import Footer from '../components/Footer'
 import Header from '../components/HeaderHome'
@@ -24,7 +25,7 @@ export default function CreateCampaign() {
     const navigate = useNavigate();
 
     const onClickCreateCampaign = async () => {
-        if(globalWeb3)
+        if(globalWeb3 && account && chainId)
         {
             let idOnDb = null;        
             await axios({
@@ -78,8 +79,23 @@ export default function CreateCampaign() {
                     }
                 }
                 catch(e)
-                {
-                    console.error(e);                                
+                {                      
+                    await axios({
+                        method: "post",
+                        url: `${backendURL}/api/campaign/delete`,
+                        data: {
+                            _id: idOnDb
+                        }
+                    }).then((res)=>{
+                        console.log(res.data);
+                        if(res.data && res.data.code === 0)
+                        {
+                        }
+                    }).catch((err)=> {
+                        console.error(err);    
+                    });       
+                    console.error(e);                 
+                    if(e.code && e.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");                          
                 }
                 if(createdCampaignAddress !== null)
                 {

@@ -2,13 +2,17 @@ import React, { useEffect, useState} from 'react'
 import Header from '../components/HeaderHome'
 import {  NavLink, useNavigate, useParams } from 'react-router-dom';
 import {useSelector} from "react-redux";
+import {NotificationManager} from "react-notifications";
 import Footer from '../components/Footer';
 import { chains } from '../smart-contract/chains_constants';
+import axios from 'axios';
+import { backendURL } from '../config';
 const Campaign = require("../smart-contract/build/Campaign.json");
 
 export default function ViewRequests() {
     const [requests, setRequests] = useState([]);
     const [summary, setSummary] = useState({});
+    const [campaignIdOnDB, setCampaignIdOnDB] = useState(null);
     
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
@@ -29,6 +33,27 @@ export default function ViewRequests() {
         );
         setRequests(requests);
         console.log("[ViewRequests.jsx] requests = ", requests);   
+        
+        await axios({
+            method: "post",
+            url: `${backendURL}/api/campaign/all`,
+            data: {
+                chainId:chainId || "",
+                address:id
+            }
+            }).then((res)=>{
+                console.log(res.data);
+                if(res.data && res.data.code === 0)
+                {
+                    let summaryFromDB = res.data.data[0] || [];
+                    if(summaryFromDB !== undefined)
+                    {
+                        setCampaignIdOnDB(summaryFromDB._id);
+                    }
+                }
+            }).catch((err)=> {
+                console.error(err);    
+            });
     }   
 
     useEffect(() => {
@@ -55,6 +80,7 @@ export default function ViewRequests() {
             }
         } catch (err) {
             console.error(err);
+            if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
         } finally {
 
         }
@@ -72,6 +98,23 @@ export default function ViewRequests() {
                     from: account, 
                     gas: 3000000
                 });
+                let reducedBalance = Number(summary[1]) - Number(globalWeb3.utils.toWei(requests[index].amount.toString() , "ether")); 
+                reducedBalance = reducedBalance>0? Number(globalWeb3.utils.fromWei(reducedBalance.toString(), "ether")) : 0;
+                await axios({
+                    method: "post",
+                    url: `${backendURL}/api/campaign/update`,
+                    data: {
+                        _id: campaignIdOnDB,
+                        raised: reducedBalance
+                    }
+                    }).then((res)=>{
+                        console.log(res.data);
+                        if(res.data && res.data.code === 0)
+                        {   
+                        }
+                    }).catch((err)=> {
+                        console.error(err);    
+                    });
                 getRequestsFromCampaign();
             }
             else{
@@ -79,6 +122,7 @@ export default function ViewRequests() {
             }
         } catch (err) {
             console.error(err);
+            if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
         } finally {
         }
     }
@@ -97,7 +141,7 @@ export default function ViewRequests() {
                 </div>
                 { requests.length>0 &&                     
                     <div className="flex my-6 justify-between flex-wrap px-8">
-                        <p className='flex items-center text-2xl font-bold'>Withdrawal Request for {summary[6] || ""}</p>
+                        <p className='flex items-center text-2xl font-bold dark:text-white'>Withdrawal Request for {summary[6] || ""}</p>
                         <button className='my-5 campaignbtn bg-gradient-primary text-white font-bold w-full sm:w-4/12 text-center rounded-lg py-3 px-4 flex justify-center items-center'
                             onClick={() => {navigate(`/create-request/${id}`)}}
                         >Create withdrawal request</button>

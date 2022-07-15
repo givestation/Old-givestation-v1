@@ -89,15 +89,15 @@ export const chains = {
     [BSC_TEST_CHAIN_ID]:{
         rpcUrl:"https://data-seed-prebsc-1-s1.binance.org:8545/",
         nativeCurrency:"BNB",
-        factoryAddress:"0xE94D4b4B35D36a2312D0849F19a15206c0a60BF7",
-        givePointAddress:"0x08D73147270B35D48d0c42Bf4e6a8920aE5d8168",
+        factoryAddress:"0x0a01339F5487FFEB4745104548Db561B7AE1dB4b",
+        givePointAddress:"0x9a13C8D8E52FaA62A5188CF47B747782b61417c2",
         blockScanUrl:"https://testnet.bscscan.com/"
     },
     [BSC_TEST_NETWORK_ID]:{
         rpcUrl:"https://data-seed-prebsc-1-s1.binance.org:8545/",
         nativeCurrency:"BNB",
-        factoryAddress:"0xE94D4b4B35D36a2312D0849F19a15206c0a60BF7",
-        givePointAddress:"0x08D73147270B35D48d0c42Bf4e6a8920aE5d8168",
+        factoryAddress:"0x0a01339F5487FFEB4745104548Db561B7AE1dB4b",
+        givePointAddress:"0x9a13C8D8E52FaA62A5188CF47B747782b61417c2",
         blockScanUrl:"https://testnet.bscscan.com/"
     },
     [RINKEBY_CHAIN_ID]:{

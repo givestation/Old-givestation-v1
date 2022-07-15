@@ -331,7 +331,7 @@ exports.getBannerList = (req, res) => {
 }
 
 exports.findOne = (req, res) => {
-    const id = req.body.id;
+    const id = req.body._id;
     Items.findById(id)
         .populate('bids.user_id')
         .populate({ path: "owner", select: "_id username avatar" })
@@ -360,7 +360,7 @@ exports.changeItemsOwner = async (itemId, ownerId) => {
 }
 
 exports.setPrice = (req, res) => {
-    var id = req.body.id;
+    var id = req.body._id;
     var price = req.body.price;
 
     Items.findByIdAndUpdate(id, { price: price }).then((data) => {

@@ -66,7 +66,7 @@ exports.getBannerList = (req, res) => {
 
 
 exports.findOne = (req, res) => {
-    const id = req.body.id;
+    const id = req.body._id;
     Assets.findOne({_id: id}).
     then((data) => {
         if (!data) {

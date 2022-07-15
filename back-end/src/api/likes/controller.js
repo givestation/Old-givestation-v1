@@ -67,7 +67,7 @@ exports.getAll = (req, res) => {
 
 exports.deleteOne = (req, res) => {
     // console.log("Delete likes 0");
-    Likes.deleteOne({ _id: req.body.id }, function (err) {
+    Likes.deleteOne({ _id: req.body._id }, function (err) {
         if (!err)
             return res.send({ code:0, data:{}, message:"" });
         else

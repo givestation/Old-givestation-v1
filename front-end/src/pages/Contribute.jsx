@@ -45,7 +45,8 @@ export default function Contribute() {
                         method: "post",
                         url: `${backendURL}/api/campaign/all`,
                         data: {
-                            chainId:chainId || ""
+                            chainId:chainId || "",
+                            address:id
                         }
                         }).then((res)=>{
                             console.log(res.data);
@@ -83,6 +84,7 @@ export default function Contribute() {
                     method: "post",
                     url: `${backendURL}/api/campaign/all`,
                     data: {
+                        chainId:chainId || "",
                         address:id
                     }
                     }).then((res)=>{
@@ -132,7 +134,7 @@ export default function Contribute() {
                     url: `${backendURL}/api/donation/create`,
                     data: {
                         campaign: campaignIdOnDB || "",
-                        amount:donationAmount,
+                        amount:Number(donationAmount)*0.98,
                         donor:account || "",
                         chainId:chainId || ""
                     }
@@ -145,9 +147,10 @@ export default function Contribute() {
                 }).catch((err)=> {
                     console.error(err);    
                 });
-            }catch(e)
+            }catch(err)
             {
-                console.error(e);
+                console.error(err);
+                if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
             }
         }
         else{

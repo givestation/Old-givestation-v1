@@ -274,7 +274,7 @@ export default function Home() {
                                     </div>
                                     <p className='text-blue description mb-3'>{data[6]}</p>
                                     <p className='para'>{"Raised"}</p>
-                                    <h6 className='content mb-5 mt-1 text-sm'>{globalWeb3?.utils?.fromWei(data[1]?.toString(), "ether") || 0}</h6>
+                                    <h6 className='content mb-5 mt-1 text-sm'>{data[1]?.toString() || "0"}</h6>
                                     <NavLink to={`/campaign/${campaigns[index]}`} className="py-2 donatebtn px-4 md:px-12 text-md leading-5 text-black bg-gradient-secondary font-bold">
                                         Donate
                                     </NavLink>     

@@ -9,7 +9,7 @@ import { changeNetwork } from "../smart-contract";
 import { INFURA_KEY } from '../config';
 import { setConnectedChainId, setConnectedWalletAddress, updateGlobalWeb3 } from '../store/actions/auth.actions';
 import {
-    OPTIMISTIC_CHAIN_ID, BSC_CHAIN_ID, ARBITRUM_CHAIN_ID, POLYGON_CHAIN_ID, GNOSIS_CHAIN_ID, BSC_NETWORK_ID, GNOSIS_NETWORK_ID, POLYGON_NETWORK_ID, ARBITRUM_NETWORK_ID, OPTIMISTIC_NETWORK_ID, 
+    OPTIMISTIC_CHAIN_ID, BSC_CHAIN_ID, ARBITRUM_CHAIN_ID, POLYGON_CHAIN_ID, GNOSIS_CHAIN_ID, BSC_NETWORK_ID, GNOSIS_NETWORK_ID, POLYGON_NETWORK_ID, ARBITRUM_NETWORK_ID, OPTIMISTIC_NETWORK_ID, BSC_TEST_CHAIN_ID, BSC_TEST_NETWORK_ID, 
 } from "../smart-contract/chains_constants";
 import Alert from '../pages/Alert';
 
@@ -174,6 +174,10 @@ export default function Header() {
             case GNOSIS_CHAIN_ID:
             case GNOSIS_NETWORK_ID:
                 setActive('Gnosis'); setActiveIcon('gnosis.png'); setPopup(false);
+                break;
+            case BSC_TEST_CHAIN_ID:
+            case BSC_TEST_NETWORK_ID:
+                setActive('BSC Testnet'); setActiveIcon('protocol.png'); setPopup(false);
                 break;
         }
     }
@@ -453,6 +457,25 @@ export default function Header() {
                                 <div className="popup-content pt-2 px-5">
                                     <div className='flex justify-between items-start py-2 md:py-4'>
                                         <h5 className='text-white pop-title font-bold text-lg cursor-pointer' onClick={() => { onClickChangeNetwork(BSC_CHAIN_ID); }}>Binance</h5>
+                                        <img src="/images/protocol.png" alt="close" className='ml-auto' />
+                                    </div>
+                                </div>
+                            }                            
+                            {chainId && (chainId.toString() === BSC_TEST_CHAIN_ID || chainId.toString() === BSC_TEST_NETWORK_ID)?                                    
+                                <div className='popup-body px-5 py-5 rounded-xl'>
+                                    <div className='flex justify-between items-start'>
+                                        <h5 className='text-white pop-title font-bold text-lg'>{active}</h5>
+                                        <div className="circle w-4 h-4 bg-lime-500 rounded-full ml-auto"></div>
+                                    </div>
+                                    <div className='flex justify-between items-start mt-2'>
+                                        <img src={'/images/' + activeIcon} alt={active} />
+                                        <p className='text-white' style={{cursor:"pointer", userSelect:"none"}} onClick={()=>{onClickDisconnect()}}>Disconnect</p>
+                                    </div>
+                                </div>
+                                :
+                                <div className="popup-content pt-2 px-5">
+                                    <div className='flex justify-between items-start py-2 md:py-4'>
+                                        <h5 className='text-white pop-title font-bold text-lg cursor-pointer' onClick={() => { onClickChangeNetwork(BSC_TEST_CHAIN_ID); }}>BSC Testnet</h5>
                                         <img src="/images/protocol.png" alt="close" className='ml-auto' />
                                     </div>
                                 </div>

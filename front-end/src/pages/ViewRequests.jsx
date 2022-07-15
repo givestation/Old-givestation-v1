@@ -98,7 +98,7 @@ export default function ViewRequests() {
                     from: account, 
                     gas: 3000000
                 });
-                let reducedBalance = Number(summary[1]) - Number(globalWeb3.utils.toWei(requests[index].amount.toString() , "ether")); 
+                let reducedBalance = Number(summary[1]) - Number(globalWeb3.utils.toWei(requests[index].value.toString() , "ether")); 
                 reducedBalance = reducedBalance>0? Number(globalWeb3.utils.fromWei(reducedBalance.toString(), "ether")) : 0;
                 await axios({
                     method: "post",

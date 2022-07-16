@@ -4,22 +4,25 @@ import Kemono from "./assets/Kemono.svg";
 import { useNavigate, useParams } from "react-router";
 import UserFooter from "../../components/user/UserFooter";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import { backendURL } from "../../config";
 import { chains } from "../../smart-contract/chains_constants";
+import { updateDonations } from "../../store/actions/auth.actions";
 
 export default function Donations() {
   const chainId = useSelector(state => state.auth.currentChainId);
   const account = useSelector(state => state.auth.currentWallet);
   const globalWeb3 = useSelector(state => state.auth.globalWeb3);
-  const [donations, setDonations] = useState([]);
+  const donations = useSelector(state => state.auth.donations);
+  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(()=>{
     const getDonationInfo = async () => {
-      if(globalWeb3 && account)
+      if(globalWeb3 && account && chainId)
       {        
         await axios({
           method: "post",
@@ -32,7 +35,7 @@ export default function Donations() {
             console.log(res.data);
             if(res.data && res.data.code === 0)
             {
-              setDonations(res.data.data);
+              dispatch(updateDonations(res.data.data));
             }
         }).catch((err)=> {
             console.error(err);    
@@ -40,7 +43,11 @@ export default function Donations() {
       }
     }
     getDonationInfo();
-  }, [globalWeb3, account])
+  }, [globalWeb3, account, chainId])
+
+  useEffect(() => {
+      setRefresh(!refresh);
+  }, [donations])
 
   return (
     <div className="py-20 px-10 wholeWrapper">
@@ -54,33 +61,34 @@ export default function Donations() {
       <div className="mt-14 flex justify-center items-center flex-col">
         {
           donations.length>0 &&   
-          donations.map((item, index) => {
-            <div className="flex likeCard">
+          donations.map((item, index) => (
+            <div className="flex likeCard" key={index} >
               <div className="flex w-3/4 likeDesc">
-                <img src={item?.campaign? item.campaign.imageURL : LikeCampImg} alt="" />
+                <img src={item.campaign.imageURL } alt="" />
 
                 <div className="likeCardDetail w-1/2">
                   <h6 className="flex">
-                    {item?.campaign? item.campaign.name : ""}{" "}
+                    {item.campaign.name}{" "}
                     {/* <img src={Kemono} alt="" style={{ marginLeft: 5 }} /> */}
                   </h6>
                   <p>
                   {
-                    item?.campaign?
                     item.campaign.description
-                    :
-                    ""
                   }
                   </p>
                 </div>
               </div>
 
               <div className="flex flex-col justify-center items-center w-1/4 likeBtns">
-                <div className="donationPrice">{item?.amount? globalWeb3.utils.fromWei(item.amount.toString(), "ether"):"0"}{chains[chainId.toString()]?.nativeCurrency}</div>
-                <h4 onClick={()=>{ item?.campaign && navigate(`/campaign/${item.campaign.address}`)  }}>view campaign</h4>
+                <div className="donationPrice" 
+                  style={{ userSelect:"none" }}
+                >{(item.amount) > 0 ? item.amount :"0"}{chains[chainId.toString()]?.nativeCurrency}</div>
+                <h4 onClick={()=>{ navigate(`/campaign/${item.campaign.address}`)  }}
+                  style={{ userSelect:"none", cursor:"pointer" }}
+                >view campaign</h4>
               </div>
             </div>
-          })
+          ))
         }        
       </div>
       <UserFooter/>

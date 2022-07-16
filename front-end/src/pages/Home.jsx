@@ -197,7 +197,7 @@ export default function Home() {
                 <div className="container">
                     <div className="left md:w-7/12 w-9/12 sm:pl-12 pl-6 pr-3">
                         <h1 className='text-white mb-3 md:mb-5 text-xl md:text-xl lg:text-4xl xl:text-4.5xl font-semibold'>A Layer 2 crowdfunding <br /> platform created by <br /> you, for everyone.</h1>
-                        <NavLink to='/create-campaign' className='createbtn sm:px-4 px-2 text-xs sm:text-xs md:text-lg py-2 pb-3'>Create Campaign</NavLink>
+                        <NavLink to='/create-campaign' className='createbtn sm:px-4 px-2 text-xs sm:text-xs md:text-lg py-2 pb-3 campaignCard'>Create Campaign</NavLink>
                     </div>
                 </div>
             </section>
@@ -235,7 +235,7 @@ export default function Home() {
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 ">
                         {ViewRequests && ViewRequests.length>0 && ViewRequests.map((data, index) => (
-                            <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8' key={index} >
+                            <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' key={index} >
                                 <div className="flex flex-wrap md:justify-between">
                                     <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8)+"..."}</h5>
                                     <div>

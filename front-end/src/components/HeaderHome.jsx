@@ -25,6 +25,7 @@ export const providerOptions = {
 const web3Modal = new Web3Modal({
     network: "mainnet",
     cachProvider: true,
+    theme: "dark",
     providerOptions
 });
 

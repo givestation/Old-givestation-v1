@@ -27,6 +27,12 @@ $green: #53a24c;
   background-size: 300px 300px;
 }
 
+.campaignCard{  
+  box-shadow: 1px 7px 6px #4b5657, 9px 4px 103px rgb(50 50 71 / 1%), 0px 4px 59px rgb(50 50 71 / 6%);
+  border-radius: 10px;
+  border: 1px solid;
+}
+
 @media only screen and (max-width: 450px) {
   .main-popup,
   .connect-popup {

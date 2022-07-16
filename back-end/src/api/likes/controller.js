@@ -19,7 +19,8 @@ exports.setLikes = (req, res) => {
 
     Likes.find({ 
         campaign, user, chainId
-    }).then(async (docs) =>{
+    }).populate("campaign")
+    .then(async (docs) =>{
         // console.log("[Updating likes] 00 docs = ", docs);
         if(docs.length>0)
         {
@@ -54,14 +55,12 @@ exports.setLikes = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    Likes.find({}, function (err, docs) {
-        if (err) {
-            console.log("Likes doesn't exisit" + err.message);
-            return res.send({ code: -1, data:{}, message: "Internal server Error" });
-        }
-        else {
+    Likes.find({}).populate("campaign")
+    .then((docs) => {
             return res.send({ code:0, data: docs, message: "" });
-        }
+    }).catch((err) => {        
+        console.log("Likes doesn't exisit" + err.message);
+        return res.send({ code: -1, data:{}, message: "Internal server Error" });   
     });
 }
 
@@ -79,13 +78,12 @@ exports.getAllLikedCampaigns = (req, res) => {
     var user = req.body.user;
     var chainId = req.body.chainId;
 
-    Likes.find({ user, chainId, value:true }, function (err, docs) {
-        if (err) {
-            console.log("Likes doesn't exisit" + err.message);
-            return res.send({ code: -1, data:{}, message: "Internal server Error" });
-        }
-        else {
+    Likes.find({ user, chainId, value:true }).populate("campaign")
+    .then((docs) => {
             return res.send({ code:0, data: docs, message: "" });
-        }
-    });
+    })
+    .catch((err) => {
+        console.log("Likes doesn't exisit" + err.message);
+        return res.send({ code: -1, data:{}, message: "Internal server Error" });
+    })
 }

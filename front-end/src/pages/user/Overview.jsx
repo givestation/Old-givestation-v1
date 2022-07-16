@@ -94,6 +94,7 @@ export default function Overview() {
   const account = useSelector(state => state.auth.currentWallet);
   const globalWeb3 = useSelector(state => state.auth.globalWeb3);
   const [ statistics, setStatistics ] = useState([0,0,0,0]);
+  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
 
   useEffect(()=>{
@@ -171,7 +172,9 @@ export default function Overview() {
         }else{
           console.log("Invalid GivePoint");
         }
-        setStatistics(temAry);      
+        setStatistics(temAry);
+        setRefresh(!refresh);
+      
       }
     }
     getCountsInfo();

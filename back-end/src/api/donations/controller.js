@@ -25,7 +25,8 @@ exports.createDonation = (req, res) => {
         // return res.send({ code: -1, data, message: "" });
     });
 
-    Campaign.findById(new ObjectId(campaign)).then((data) => {
+    Campaign.findById(new ObjectId(campaign))
+    .then((data) => {
         var raised = Number(data.raised);
         raised += Number(amount);
        
@@ -43,15 +44,14 @@ exports.createDonation = (req, res) => {
 }
 
 exports.getAll = (req, res) => {
-    Donation.find({}, function (err, docs) {
-        if (err) {
-            console.log("Donations doesn't exisit" + err.message);
-            return res.send({ code: -1, data:{}, message: "Internal server Error" });
-        }
-        else {
+    Donation.find({}).populate("campaign")
+    .then((docs) => {
             return res.send({ code:0, data: docs, message: "" });
-        }
-    });
+    })
+    .catch((err) => {        
+        console.log("Donations doesn't exisit" + err.message);
+        return res.send({ code: -1, data:{}, message: "Internal server Error" });
+    })
 }
 
 exports.deleteOne = (req, res) => {
@@ -105,12 +105,8 @@ exports.getDonationsOfUser = (req, res) => {
     var donor = req.body.user;
     var chainId = req.body.chainId;
 
-    Donation.find({donor, chainId}, function (err, docs) {
-        if (err) {
-            console.log("Donations doesn't exisit" + err.message);
-            return res.send({ code: -1, data:[], message: "Internal server Error" });
-        }
-        else {
+    Donation.find({donor, chainId}).populate("campaign")
+    .then((docs) => {
             if(docs.length >0)
             {
                 return res.send({ code:0, data: docs, message: "" });
@@ -118,6 +114,9 @@ exports.getDonationsOfUser = (req, res) => {
             else {
                 return res.send({ code:0, data: [], message: "" });
             }
-        }
-    });
+    })
+    .catch((err) => {        
+        console.log("Donations doesn't exisit" + err.message);
+        return res.send({ code: -1, data:[], message: "Internal server Error" });
+    })
 }

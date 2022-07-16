@@ -80,8 +80,8 @@ const LikedCampaigns = () => {
       <div className="mt-14 flex justify-center items-center flex-col">
       {
           likesInfo.length>0 && 
-          likesInfo.map((item, index) => {
-            <div className="flex likeCard">
+          likesInfo.map((item, index) => (
+            <div className="flex likeCard" key={index} >
               <div className="flex w-3/4 likeDesc">
                 <img src={item?.campaign? item.campaign.imageURL : LikeCampImg} alt="" />
 
@@ -92,10 +92,7 @@ const LikedCampaigns = () => {
                   </h6>
                   <p>
                   {
-                    item?.campaign?
                     item.campaign.description
-                    :
-                    ""
                   }
                   </p>
                 </div>
@@ -103,15 +100,17 @@ const LikedCampaigns = () => {
 
               <div className="flex flex-col justify-center items-center w-1/4 likeBtns">
                 {
-                  item.value===true && <img src={HeartIcon} alt="" onClick={()=>{ item?.campaign &&  onClickFavorites(item.campaign.address, false) }} />
+                  item.value===true && <img src={HeartIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign.address, false) }} />
                 }
                 {
-                  item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ item?.campaign &&  onClickFavorites(item.campaign.address, true) }} />
+                  item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign.address, true) }} />
                 }
-                <h4 onClick={() => { item?.campaign &&  navigate(`/campaign/${item.campaign.address}`) }}>view campaign</h4>
+                <h4 onClick={() => { navigate(`/campaign/${item.campaign.address}`) }}
+                  style={{ userSelect:"none", cursor:"pointer" }}
+                >view campaign</h4>
               </div>
             </div>
-          })
+          ))
         }
       </div>
       <UserFooter/>

@@ -16,6 +16,7 @@ const MyProjects = () => {
   const account = useSelector(state => state.auth.currentWallet);
   const globalWeb3 = useSelector(state => state.auth.globalWeb3);
   const [campaigns, setCampaigns] = useState([]);
+  const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
 
   const initProjectsInfo = async () => {
@@ -42,6 +43,7 @@ const MyProjects = () => {
 
   useEffect(() => {
     initProjectsInfo();
+    setRefresh(!refresh);
   }, [account, globalWeb3, chainId])
 
   const onClickUpdate = (campaignAddress) => {
@@ -61,8 +63,8 @@ const MyProjects = () => {
         <div className="mt-14 flex justify-center items-center flex-col">
           {
             campaigns.length>0 && 
-            campaigns.map((item, index) => {
-              <div className="flex projectCard">
+            campaigns.map((item, index) => (
+              <div className="flex projectCard" key={index} >
                 <img src={item?.imageURL || SampleProject} alt="" className="projectImg" />
                 <div className="flex justify-center items-start flex-col">
                   <div className="flex items-center">
@@ -125,7 +127,7 @@ const MyProjects = () => {
                   </div>
                 </div>
               </div>
-            })
+            ))
           }
         </div>
       </div>

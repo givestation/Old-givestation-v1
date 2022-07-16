@@ -2,8 +2,11 @@ import React, { useEffect, useState} from 'react'
 import Header from '../components/HeaderHome'
 import {  NavLink, useNavigate, useParams } from 'react-router-dom';
 import {useSelector} from "react-redux";
+import {NotificationManager} from "react-notifications";
 import Footer from '../components/Footer';
 import { chains } from '../smart-contract/chains_constants';
+import axios from 'axios';
+import { backendURL } from '../config';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
 
@@ -16,42 +19,45 @@ export default function VerifyCampaigns() {
     const globalWeb3 = useSelector(state => state.auth.globalWeb3);
     const navigate = useNavigate();
 
-    const getSummary = async () => {
-        try{
-            const factory = new globalWeb3.eth.Contract(
-                CampaignFactory,
-                chains[chainId?.toString()].factoryAddress
-            );
-            if(factory)
-            {
-                let campaigns = await factory.methods.getDeployedCampaigns().call();
-                setCampaigns(campaigns);
-                const summary = await Promise.all(
-                    campaigns.map((campaign, i) =>
-                        new globalWeb3.eth.Contract(Campaign, campaigns[i]).methods.getSummary().call()
-                    )
-                );                        
-                setSummary(summary);
-
-                console.log("[VerifyCampaigns.jsx] campaigns = ", campaigns);
-                console.log("[VerifyCampaigns.jsx] summary ", summary);
+    const getSummaryFromDB = async () => {
+        await axios({
+            method: "post",
+            url: `${backendURL}/api/campaign/all`,
+            data: {
             }
-        }
-        catch(e)
-        {
-            console.error(e);
-        }
+          }).then((res)=>{
+            console.log(res.data);
+            if(res.data && res.data.code === 0)
+            {
+                let summa = [], campais = [];
+                let summaryFromDB = res.data.data || [];
+                console.log("summaryFromDB = ", summaryFromDB);
+                if(summaryFromDB.length>0)
+                {
+                    for(let idx = 0; idx<summaryFromDB.length; idx++)
+                    {
+                        let found = summaryFromDB[idx] || undefined;
+                        if(found)
+                        {
+                            summa[idx] = found;
+                            campais[idx] = found.address;
+                        }
+                    }
+                }
+                console.log("summa =", summa);
+                setSummary(summa);
+                setCampaigns(campais);
+            }
+        }).catch((err)=> {
+            console.error(err);    
+        });
     }
 
     useEffect(() => {
-        if(account && chainId && globalWeb3)
-        {     
-            getSummary(); 
-        }
-    }, [chainId, account, globalWeb3]);
+            getSummaryFromDB();
+    }, []);
     
   const onClickVerify = async (index, flag) => {
-    console.log("[VerifyCampaigns] ", account, chainId, index, flag)
     if(account && chainId && globalWeb3)
     { 
         try {
@@ -68,16 +74,34 @@ export default function VerifyCampaigns() {
                         from: account,
                         gas: 3000000
                     });
-                    getSummary();
+                    await axios({
+                        method: "post",
+                        url: `${backendURL}/api/campaign/update`,
+                        data: {
+                            _id: summary[index]._id,
+                            verified: flag
+                        }
+                        }).then((res)=>{
+                            console.log(res.data);
+                            if(res.data && res.data.code === 0)
+                            {   
+                            }
+                        }).catch((err)=> {
+                            console.error(err);    
+                        });
+                    getSummaryFromDB();
                 }
             }else{
                 console.log("creating a approve request : Invalid campaign instance");
             }
         } catch (err) {
             console.error(err);
+            if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");            
         } finally {
 
         }
+    }else{
+        NotificationManager.warning("Please connect your wallet.");    
     }
   };
 
@@ -92,7 +116,7 @@ export default function VerifyCampaigns() {
                 </div>
                 { campaigns.length>0 &&                     
                     <div className="flex my-6 justify-between flex-wrap px-8">
-                        <p className='flex items-center text-2xl font-bold'>Number of deployed campaigns {campaigns && campaigns.length? campaigns.length : "0"}</p>
+                        <p className='flex items-center text-2xl font-bold  dark:text-white'>Number of deployed campaigns {campaigns && campaigns.length? campaigns.length : "0"}</p>
                     </div>
                 }
             </div>
@@ -121,9 +145,6 @@ export default function VerifyCampaigns() {
                                         Title
                                     </th>
                                     <th scope="col" className="px-6 py-6">
-                                        Description
-                                    </th>
-                                    <th scope="col" className="px-6 py-6">
                                         Creator
                                     </th>
                                     <th scope="col" className="px-6 py-6 text-center">
@@ -146,27 +167,24 @@ export default function VerifyCampaigns() {
                                             {campaigns[index] || ""}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {item[5] || ""}
+                                            {item.name || ""}
                                         </td>
                                         <td className="px-6 py-4">
-                                            {item[6] || ""}
-                                        </td>
-                                        <td className="px-6 py-4">
-                                            {item[4] || ""}
+                                            {item.creator || ""}
                                         </td>
                                         <td className="px-6 py-4 text-center">
-                                            { item[9] === false && 
+                                            { item.verified === false && 
                                                 <div className="font-bold px-3 py-1.5 rounded bg-green text-white" style={{userSelect: "none", cursor:"pointer"}} 
                                                     onClick={() =>{ onClickVerify(index, true)}}
                                                 >Verify</div>
                                             }
-                                            { item[9] === true &&                                                 
+                                            { item.verified === true &&                                                 
                                                 <div className="font-bold px-3 py-1.5 rounded bg-green text-white" style={{userSelect: "none", cursor:"pointer"}} 
                                                     onClick={() =>{onClickVerify(index, false)}}
                                                 >Unverify</div>
                                             }
                                             {
-                                                (item[9] === undefined ||  item[9] === null) && 
+                                                (item.verified === undefined ||  item[9] === null) && 
                                                 <div className="font-bold px-3 py-1.5 rounded bg-green text-white" style={{userSelect: "none", cursor:"pointer"}}                                                     
                                                 >No verifiction</div>
                                             }

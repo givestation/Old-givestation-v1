@@ -33,7 +33,6 @@ exports.getAll = (req, res) => {
         return res.send({ code: -1, data:{}, message: "Internal server Error" });
     }
     else {        
-        // console.log('[GetAll] docs = ', docs);
         return res.send({ code:0, data: docs, message: "" });
     }
 });
@@ -46,7 +45,6 @@ exports.getOne = (req, res) => {
         return res.send({ code: -1, data:{}, message: "Internal server Error" });
     }
     else {        
-        // console.log('[GetAll] docs = ', docs);
         return res.send({ code:0, data: docs, message: "" });
     }
 });

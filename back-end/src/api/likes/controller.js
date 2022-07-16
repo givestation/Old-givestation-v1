@@ -21,7 +21,6 @@ exports.setLikes = (req, res) => {
         campaign, user, chainId
     }).populate("campaign")
     .then(async (docs) =>{
-        // console.log("[Updating likes] 00 docs = ", docs);
         if(docs.length>0)
         {
             try {

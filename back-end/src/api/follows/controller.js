@@ -227,7 +227,6 @@ exports.isExists = (req, res) => {
     
     User.find({ _id: new ObjectId(target_id), follows: new ObjectId(user_id)})
         .then(async (docs) => {       
-            // console.log("docs = ", docs);
             if ( docs.length > 0 )
                 return res.status(200).send({
                     success: true, data: true, message: "Pair exists"

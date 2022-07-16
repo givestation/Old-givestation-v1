@@ -30,7 +30,6 @@ exports.create = (req, res) => {
     //avoid re - resistering     
     Users.find({ address: req.body.address })
         .then((docs) => {
-            console.log("[Create user] docs = ", docs);
             if (docs.length > 0) {
                 return res.send({ code: 1 });
             } else {

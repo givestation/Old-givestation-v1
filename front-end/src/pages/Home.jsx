@@ -239,8 +239,8 @@ export default function Home() {
                                 <div className="flex flex-wrap md:justify-between">
                                     <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8)+"..."}</h5>
                                     <div>
-                                        <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-3'>B2C</button>
-                                        <button className='bg-blue-light small-text font-normal text-xs py-1 px-2'>CPG</button>
+                                        <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-3'>{data[11]}</button>
+                                        {/* <button className='bg-blue-light small-text font-normal text-xs py-1 px-2'>CPG</button> */}
                                     </div>
                                 </div>
                                 <div className="image relative my-4">

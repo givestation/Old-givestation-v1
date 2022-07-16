@@ -76,7 +76,6 @@ export default function Header() {
             if (accounts[0]) {
                 dispatch(setConnectedWalletAddress(accounts[0]));
                 setConnected(true);
-                navigate(`/user/overview`)
             }else{                
                 dispatch(setConnectedWalletAddress(null));
                 setConnected(false);
@@ -221,9 +220,9 @@ export default function Header() {
                                     <h4 className=' ml-1 font-bold text-xl title text-gray-700 dark:text-gray-100 tracking-widest'>GiveStation</h4>
                                 </div>
                             </div>
-                            <div className="xl:5/12 lg:w-6/12 w-6/12">
+                            <div className="xl:5/12 lg:w-5/12 w-5/12">
                                 <ul className="hidden xl:flex xl:justify-end">
-                                    <li className="mr-16">
+                                    <li className="mr-10">
                                         <NavLink
                                         className={(props) => {
                                             return props.isActive
@@ -235,13 +234,12 @@ export default function Header() {
                                         GiveDAO
                                         </NavLink>
                                     </li>
-                                    <li className="mr-16"><div className={'text-gray-700  font-bold dark:text-gray-100' } onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
-                                    <li className="mr-16"><div className={'text-gray-700 font-bold dark:text-gray-100' } onClick={() => { navigate("/faq") }} >How it works</div></li>
+                                    <li className="mr-10"><div className={'text-gray-700  font-bold dark:text-gray-100' } onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
+                                    <li className="mr-10"><div className={'text-gray-700 font-bold dark:text-gray-100' } onClick={() => { navigate("/faq") }} >How it works</div></li>
                                 </ul>
                             </div>
                             <div className="xl:w-5/12 lg:w-6/12 w-6/12">
-                                <div className="hidden xl:flex items-center justify-end">
-                                    
+                                <div className="hidden xl:flex items-center justify-end">                                    
                                     {
                                         active === null?
                                         <button className="py-2 flex justify-center items-center px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 whitespace-nowrap" onClick={() => { setPopup(!popup) }}>                                            
@@ -256,6 +254,15 @@ export default function Header() {
                                     <button className="ml-6 py-2 px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 whitespace-nowrap" onClick={() => { onClickConnectWallet() /*setConnectPopup(!connectPopup)*/ }}>
                                         {connected ? compressedAccount : 'Connect Wallet'}
                                     </button>     
+                                    {
+                                        connected === true && 
+                                        <div style={{ marginLeft:"10px", display:"flex", flexDirection:"row", alignItems:"center", cursor:"pointer", userSelect:"none" }}
+                                            onClick={() => { navigate(`/user/overview`) }}
+                                        >
+                                            <img src="/images/avatar.png" alt=""></img>
+                                            <div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100'>DASHBOARD</div>
+                                        </div>
+                                    }
                                     <DarkLightMode />
                                 </div>
 
@@ -295,11 +302,34 @@ export default function Header() {
                                                     <NavLink to="/faq" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
                                                         How it works
                                                     </NavLink>
-                                                </li>
-                                            </ul>
-                                            <div className="flex flex-wrap px-8">
+                                                </li>                                    
+                                            </ul>                                                                
+                                            <div className="flex flex-wrap " style={{marginBottom: "10px"}}>     
+                                            <div className="w-full flex justify-center">   
+                                            {
+                                                active === null?
+                                                <button className="py-2 flex justify-center items-center px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 whitespace-nowrap" 
+                                                    onClick={() => { setPopup(!popup) }}
+                                                    style={{ minWidth:"200px" }}
+                                                >                                            
+                                                    Select a network
+                                                </button>       
+                                                :
+                                                <button className="py-2 flex justify-center items-center px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 whitespace-nowrap" 
+                                                    onClick={() => { setPopup(!popup) }}
+                                                    style={{ minWidth:"200px" }}
+                                                >
+                                                    <img src={'/images/' + activeIcon} alt="op" className='opimg mr-2' />
+                                                    {active}
+                                                </button>                                                                    
+                                            }   
+                                            </div>    
+                                            </div>      
+                                            <div className="flex">
                                                 <div className="w-full flex justify-center">
-                                                    <button onClick={() => { onClickConnectWallet(); /*setConnectPopup(!connectPopup)*/ }} className="py-2 px-4 text-sm leading-5 text-white bg-gradient-secondary font-bold rounded-full" to="/">
+                                                    <button onClick={() => { onClickConnectWallet(); /*setConnectPopup(!connectPopup)*/ }} className="py-2 px-4 text-sm leading-5 text-white bg-gradient-secondary font-bold rounded-full" 
+                                                        style={{ minWidth:"200px" }}
+                                                    >
                                                         {connected ? compressedAccount : 'Connect Wallet'}
                                                     </button>
                                                 </div>

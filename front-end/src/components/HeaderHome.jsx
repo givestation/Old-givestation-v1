@@ -239,6 +239,7 @@ export default function Header() {
 												{active}
 											</button>
 									}
+									<div className="relative">
 									{
 										connected === false && 
 										<button className="ml-6 py-2 px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 whitespace-nowrap" onClick={() => { onClickConnectWallet() }}>
@@ -253,14 +254,14 @@ export default function Header() {
 									}
 									{
 										showLogoutMenu === true &&
-										<div style={{ marginLeft: "10px", display: "flex", flexDirection: "column", alignItems: "start", cursor: "pointer", userSelect: "none" }}
-											
+										<div className="absolute top-12 right-0 " style={{zIndex:"2000", marginLeft: "10px", display: "flex", flexDirection: "column", alignItems: "start", cursor: "pointer", userSelect: "none" }}											
 										>
 											<div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100' onClick={() => { setShowLogoutMenu(!showLogoutMenu); navigate(`/user/overview`); }}>Dashboard</div>
 											<div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100' onClick={() => { setShowLogoutMenu(!showLogoutMenu); onClickDisconnect(); }}>Log out</div>
 											{/* <img src="/images/avatar.png" alt=""></img> */}
 										</div>
-									}
+									}					
+									</div>				
 									<DarkLightMode />
 								</div>
 

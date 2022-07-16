@@ -25,28 +25,29 @@ const GiveFrens = () => {
     }, 1000);
   };
 
-  useEffect(()=>{
-    const getGPInfo = async () =>{
-      if(account && chainId && globalWeb3)
-      {        
-        const factory = new globalWeb3.eth.Contract(
-          CampaignFactory,
-          chains[chainId?.toString()]?.factoryAddress
-        );
-        if(factory)
-        {
-          try{
-            let gpamount = await factory.methods.getStakedAmountWithRef(account).call() || 0;
-            gpamount = globalWeb3.utils.fromWei(gpamount.toString(), "ether");
-            setGpAmount(gpamount);
-            let refCounts = await factory.methods.getCountsOfRefCausedGpStaking(account).call() || 0;
-            setRefCounts(refCounts);
-          }catch(e){
-            console.error(e);
-          }
+  const getGPInfo = async () =>{
+    if(account && chainId && globalWeb3)
+    {        
+      const factory = new globalWeb3.eth.Contract(
+        CampaignFactory,
+        chains[chainId?.toString()]?.factoryAddress
+      );
+      if(factory)
+      {
+        try{
+          let gpamount = await factory.methods.getStakedAmountWithRef(account).call() || 0;
+          gpamount = globalWeb3.utils.fromWei(gpamount.toString(), "ether");
+          setGpAmount(gpamount);
+          let refCounts = await factory.methods.getCountsOfRefCausedGpStaking(account).call() || 0;
+          setRefCounts(refCounts);
+        }catch(e){
+          console.error(e);
         }
       }
     }
+  }
+
+  useEffect(()=>{
     getGPInfo();
   }, [account, globalWeb3, chainId])
 
@@ -64,6 +65,7 @@ const GiveFrens = () => {
             from: account,
             gas: 3000000
           });          
+          getGPInfo();
         }catch(err){
           console.error(err);
           if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again."); 

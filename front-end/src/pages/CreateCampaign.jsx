@@ -135,10 +135,39 @@ export default function CreateCampaign() {
     }
 
     const Category = [
-        { name: 'Defi      ' },
-        { name: 'Education ' },
-        { name: 'Blockchain' },
-        { name: 'Fintech   ' },
+       'Defi',
+        'Education ',
+        'Blockchain',
+        'Fintech   ',
+        'Research   ',
+        'Nutrition   ',
+        'Art-culture   ',
+        'Agriculture   ',
+        'Air   ',
+        'Biodiversity   ' ,
+        'Climate   ',
+        'Community',
+        'Food',
+        'Non-profit',
+        'Housing',
+        'Technology',
+        'Research',
+        "Nutrition",
+        'Employment',
+        'Energy',
+        "Finanace",
+        "Health",
+        "Infrastructure",
+        "Pollution",
+        "Real-estate",
+        "Waste",
+        "Water",
+        "Web3",
+        "Music",
+        "Nft",
+        "Event",
+        "Space",
+        "Other",
     ];
 
     return (
@@ -162,8 +191,8 @@ export default function CreateCampaign() {
                                 <div id="dropdown" className="absolute  top-12 z-10 bg-white divide-y divide-gray-100 rounded shadow w-60 dark:bg-gray-700">
                                     <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
                                     {Category.map((i, index) => (
-                                        <li key={index} onClick={(e) => {setCategory(i?.name || "Defi"); setDropdown(!dropdown)}} value={category || ""}>
-                                            <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{i?.name}</span>
+                                        <li key={index} onClick={(e) => {setCategory(i || "Defi"); setDropdown(!dropdown)}} value={category || ""}>
+                                            <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{i}</span>
                                         </li>
                                     ))}
                                     </ul>

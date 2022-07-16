@@ -334,6 +334,18 @@ export default function Header() {
                                                     </button>
                                                 </div>
                                             </div>
+                                            {
+                                                connected === true && 
+                                                
+                                                <div className="w-full flex justify-center" style={{ marginTop:"10px" }}>
+                                                <div style={{ marginLeft:"10px", display:"flex", flexDirection:"row", alignItems:"center", cursor:"pointer", userSelect:"none" }}
+                                                    onClick={() => { navigate(`/user/overview`) }}
+                                                >
+                                                    <img src="/images/avatar.png" alt=""></img>
+                                                    <div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100'>DASHBOARD</div>
+                                                </div>
+                                                </div>
+                                            }
                                         </div>
 
                                     </div>

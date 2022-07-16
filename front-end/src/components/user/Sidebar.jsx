@@ -7,7 +7,7 @@ export default function Sidebar() {
   const navigate = useNavigate();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [navItem, setNavItem] = useState("Overview");
-  const [donorOrCreator, setDonorOrCreator] = useState(true);   //true:donor, false:creator
+  const [donorOrCreator, setDonorOrCreator] = useState(false);   //true:donor, false:creator
 
   const chainId = useSelector(state => state.auth.currentChainId);
   const account = useSelector(state => state.auth.currentWallet);

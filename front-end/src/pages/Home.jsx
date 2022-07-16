@@ -15,28 +15,11 @@ import { backendURL } from '../config';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
 
-const  CopyIcon = (props) => {
-    const copyIconpath =  "M11.988 9.672c.015.249.276.418.487.285 1.315-.825 2.19-2.288 2.19-3.956a4.67 4.67 0 0 0-4.667-4.667c-1.667 0-3.131.875-3.956 2.19-.133.212.035.472.285.487 2.984.179 5.481 2.679 5.66 5.66zm-1.323.329a4.67 4.67 0 0 1-4.667 4.667 4.67 4.67 0 0 1-4.667-4.667 4.67 4.67 0 0 1 4.667-4.667 4.67 4.67 0 0 1 4.667 4.667z";
-    const size = props.size ? props.size : 16;
-    const fill = props.fill ? props.fill : "inherit";
-    return (
-        <svg
-            width={size}
-            height={size}
-            viewBox="0 0 16 16"
-            fill={"#f00"}
-        >
-        <path d={copyIconpath}></path>
-        </svg>
-    );
-}
-
 export default function Home() {
     const [dropdown, setDropdown] = useState(false);
     const [campaigns, setCampaigns] = useState([]);
     const [ViewRequests, setViewRequests] = useState([]);
     const [copied, setCopied] = useState(false);
-    const [totalLikesCount, setTotalLikesCount] = useState(0);
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
     const globalWeb3 = useSelector(state => state.auth.globalWeb3);
@@ -337,17 +320,10 @@ export default function Home() {
                                 <div className="flex flex-wrap md:justify-between lg:justify-between "   
                                     style={{ userSelect:"none" }}                            
                                 >
-                                    <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8)+"..."}</h5>                                    
-                                    {
-                                        data[13] === false ?  
-                                        <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(data[14], true) }}
-                                            style={{width:"20px", height:"20px", cursor:"pointer" }}
-                                        />
-                                        :
-                                        <img src={HeartIcon} alt="" onClick={()=>{ onClickFavorites(data[14], false) }}
-                                            style={{width:"20px", height:"20px", cursor:"pointer" }}
-                                        />
-                                    }
+                                    <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8)+"..."}</h5>                                           
+                                    <img src={data[13] === false ? HeartBlankIcon : HeartIcon} alt="" onClick={()=>{ onClickFavorites(data[14], !data[13] ) }}
+                                        style={{width:"20px", height:"20px", cursor:"pointer" }}
+                                    />
                                     <h4 className='value text-lg'>{data[12]}</h4>
                                     <div style={{display: "flex", flexWrap:"wrap", flexDirection:"row", 
                                             cursor:"pointer", 

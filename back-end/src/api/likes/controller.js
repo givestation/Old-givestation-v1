@@ -48,11 +48,8 @@ exports.setLikes = (req, res) => {
                 return res.send({ code: -1, data:{}, message: "Internal server Error" });
             });
         }        
-    }).catch((err) => {             
-            newLikes.save().then((data) => {
-            }).catch((err) => {
-                return res.send({ code: -1, data:{}, message: "Internal server Error" });
-            });
+    }).catch((err) => {    
+        return res.send({ code: -1, data:{}, message: "Internal server Error" });      
     })
     
     Campaign.findById(new ObjectId(campaign))

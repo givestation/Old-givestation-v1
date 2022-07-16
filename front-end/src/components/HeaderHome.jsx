@@ -221,8 +221,8 @@ export default function Header() {
                                 </div>
                             </div>
                             <div className="xl:5/12 lg:w-5/12 w-5/12">
-                                <ul className="hidden xl:flex xl:justify-end">
-                                    <li className="mr-10">
+                                <ul className="hidden xl:flex " style={{ justifyContent:"center"}}>
+                                    <li className="mr-3">
                                         <NavLink
                                         className={(props) => {
                                             return props.isActive
@@ -234,8 +234,8 @@ export default function Header() {
                                         GiveDAO
                                         </NavLink>
                                     </li>
-                                    <li className="mr-10"><div className={'text-gray-700  font-bold dark:text-gray-100' } onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
-                                    <li className="mr-10"><div className={'text-gray-700 font-bold dark:text-gray-100' } onClick={() => { navigate("/faq") }} >How it works</div></li>
+                                    <li className="mr-3"><div className={'text-gray-700  font-bold dark:text-gray-100' } onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
+                                    <li className="mr-3"><div className={'text-gray-700 font-bold dark:text-gray-100' } onClick={() => { navigate("/faq") }} >How it works</div></li>
                                 </ul>
                             </div>
                             <div className="xl:w-5/12 lg:w-6/12 w-6/12">

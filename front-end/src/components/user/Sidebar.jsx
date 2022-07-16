@@ -227,10 +227,10 @@ export default function Sidebar() {
                 </NavLink>
               </li>
 
-              <span className="switcher switcher-1">
-                <input type="checkbox" id="switcher-1" />
-                <label for="switcher-1" />
-              </span>
+              <span className="switcher switcher-1" onClick={save}>
+                          <input type="checkbox" id="switcher-1" ref={checkboxRef} />
+                          <label htmlFor="switcher-1" />
+                        </span>
             </ul>
           </div>
         </div>

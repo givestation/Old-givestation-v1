@@ -4,6 +4,7 @@ import HeartIcon from "./assets/heart.svg";
 import HeartBlankIcon from "./assets/heart-blank.svg";
 import Kemono from "./assets/Kemono.svg";
 import { useNavigate } from "react-router";
+import {NotificationManager} from "react-notifications";
 import UserFooter from "../../components/user/UserFooter";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -18,8 +19,8 @@ const LikedCampaigns = () => {
   const [likesInfo, setLikesInfo] = useState([]);
   const navigate = useNavigate();
 
-  const getDonationInfo = async () => {
-    if(globalWeb3 && account)
+  const getLikesInfo = async () => {
+    if(globalWeb3 && account && chainId)
     {        
       await axios({
         method: "post",
@@ -37,11 +38,13 @@ const LikedCampaigns = () => {
       }).catch((err)=> {
           console.error(err);    
       });
+    }else{
+      
     }
   }
 
   useEffect(()=>{
-    getDonationInfo();
+    getLikesInfo();
   }, [globalWeb3, account])
 
   const onClickFavorites = async (address, val) => {
@@ -49,7 +52,7 @@ const LikedCampaigns = () => {
     {        
       await axios({
         method: "post",
-        url: `${backendURL}/api/likes/setLikes`,
+        url: `${backendURL}/api/likes/set`,
         data: {
             campaign:address,
             user: account || "",
@@ -60,11 +63,14 @@ const LikedCampaigns = () => {
           console.log(res.data);
           if(res.data && res.data.code === 0)
           {
-            getDonationInfo();
+            getLikesInfo();
           }
       }).catch((err)=> {
           console.error(err);    
+          if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again."); 
       });
+    }else{
+      NotificationManager.warning("Please connect your wallet."); 
     }
   }
 
@@ -98,15 +104,14 @@ const LikedCampaigns = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-center items-center w-1/4 likeBtns">
+              <div className="flex flex-col justify-center items-center w-1/4 likeBtns" style={{ userSelect:"none", cursor:"pointer" }}>
                 {
-                  item.value===true && <img src={HeartIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign.address, false) }} />
+                  item.value===true && <img src={HeartIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign._id, false) }} />
                 }
                 {
-                  item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign.address, true) }} />
+                  item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign._id, true) }} />
                 }
                 <h4 onClick={() => { navigate(`/campaign/${item.campaign.address}`) }}
-                  style={{ userSelect:"none", cursor:"pointer" }}
                 >view campaign</h4>
               </div>
             </div>

@@ -23,8 +23,8 @@ export default function Sidebar() {
 
   const save = () =>
   { 
-    console.log(checkboxRef.current.checked);
     console.log("switch value : ", donorOrCreator);
+    console.log(checkboxRef.current.checked);
     setDonorOrCreator(checkboxRef.current.checked);
   }
 
@@ -444,11 +444,12 @@ export default function Sidebar() {
                             <span className="title ml-5">Give Frens</span>
                           </NavLink>
                         </li>
-
+                        
                         <span className="switcher switcher-1" onClick={save}>
                           <input type="checkbox" id="switcher-1" ref={checkboxRef} />
                           <label htmlFor="switcher-1" />
                         </span>
+
                       </ul>
                     </div>
                   </div>

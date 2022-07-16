@@ -3,6 +3,9 @@ import React, {useEffect, useState} from 'react'
 import Footer from '../components/Footer'
 import {useQueryParam} from "use-params-query";
 import axios from "axios";
+import {NotificationManager} from "react-notifications";
+import HeartIcon from "./user/assets/heart.svg";
+import HeartBlankIcon from "./user/assets/heart-blank.svg";
 import HeaderHome from '../components/HeaderHome'
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import {useDispatch, useSelector} from "react-redux";
@@ -33,6 +36,7 @@ export default function Home() {
     const [campaigns, setCampaigns] = useState([]);
     const [ViewRequests, setViewRequests] = useState([]);
     const [copied, setCopied] = useState(false);
+    const [totalLikesCount, setTotalLikesCount] = useState(0);
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
     const globalWeb3 = useSelector(state => state.auth.globalWeb3);
@@ -62,92 +66,43 @@ export default function Home() {
             // dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
         }
     }, [ref])
+    const getSummary = async () => {
+        try{
+            const factory = new globalWeb3.eth.Contract(
+                CampaignFactory,
+                chains[chainId?.toString()].factoryAddress
+            );
+            let summary = [], campais = [];
+            if(factory)
+            {
+                campais = await factory.methods.getDeployedCampaigns().call();
+                setCampaigns(campais);
+                summary = await Promise.all(
+                    campais.map((campaign, i) =>
+                        new globalWeb3.eth.Contract(Campaign, campais[i]).methods.getSummary().call()
+                    )
+                );                        
 
-    useEffect(() => {
-        if(account && chainId && globalWeb3)
-        {
-            const getSummary = async () => {
-                try{
-                    const factory = new globalWeb3.eth.Contract(
-                        CampaignFactory,
-                        chains[chainId?.toString()].factoryAddress
-                    );
-                    let summary = [], campais = [];
-                    if(factory)
-                    {
-                        campais = await factory.methods.getDeployedCampaigns().call();
-                        setCampaigns(campais);
-                        summary = await Promise.all(
-                            campais.map((campaign, i) =>
-                                new globalWeb3.eth.Contract(Campaign, campais[i]).methods.getSummary().call()
-                            )
-                        );                        
-
-                        console.log("[Home.jsx] campaigns = ", campais);
-                    }
-                    if(campais.length>0) 
-                    {
-                        await axios({
-                          method: "post",
-                          url: `${backendURL}/api/campaign/all`,
-                          data: {
-                            chainId:chainId
-                          }
-                        }).then((res)=>{
-                            console.log(res.data);
-                            if(res.data && res.data.code === 0)
-                            {
-                                let summaryFromDB = res.data.data || [];
-                                if(summaryFromDB.length>0)
-                                {
-                                    for(let idx = 0; idx<summary.length; idx++)
-                                    {
-                                        let found = summaryFromDB.find((item ) => item.address === campais[idx]) || undefined;
-                                        if(found)
-                                        {
-                                            summary[idx][5] = found.name;
-                                            summary[idx][6] = found.description;
-                                            summary[idx][7] = found.imageURL;
-                                            summary[idx][9] = found.verified;
-                                            summary[idx][11] = found.category;
-                                            summary[idx][1] = found.raised;
-                                        }
-                                    }
-                                }
-                                console.log("summary =", summary);
-                                setViewRequests(summary);
-                            }
-                        }).catch((err)=> {
-                            console.error(err);    
-                        });
-                    }
-                }
-                catch(e)
-                {
-                    console.error(e);
-                }
+                console.log("[Home.jsx] campaigns = ", campais);
             }
-            getSummary();
-        }
-        else{
-            const getAllFromDB = async () => {                
+            if(campais.length>0) 
+            {
                 await axios({
-                    method: "post",
-                    url: `${backendURL}/api/campaign/all`,
-                    data: {
-                    }
-                  }).then((res)=>{
+                  method: "post",
+                  url: `${backendURL}/api/campaign/all`,
+                  data: {
+                    chainId:chainId
+                  }
+                }).then((res)=>{
                     console.log(res.data);
                     if(res.data && res.data.code === 0)
                     {
-                        let summary = [{}], campais = [];
                         let summaryFromDB = res.data.data || [];
-                        console.log("summaryFromDB = ", summaryFromDB);
                         if(summaryFromDB.length>0)
                         {
-                            for(let idx = 0; idx<summaryFromDB.length; idx++)
+                            for(let idx = 0; idx<summary.length; idx++)
                             {
-                                let found = summaryFromDB[idx] || undefined;
+                                let found = summaryFromDB.find((item ) => item.address === campais[idx]) || undefined;
                                 if(found)
                                 {
                                     summary[idx][5] = found.name;
@@ -155,19 +110,133 @@ export default function Home() {
                                     summary[idx][7] = found.imageURL;
                                     summary[idx][9] = found.verified;
                                     summary[idx][11] = found.category;
+                                    summary[idx][12] = found.likes;
+                                    summary[idx][13] = false;
+                                    summary[idx][14] = found._id;
                                     summary[idx][1] = found.raised;
-                                    campais[idx] = found.address;
                                 }
                             }
                         }
                         console.log("summary =", summary);
                         setViewRequests(summary);
-                        setCampaigns(campais);
+                    }
+                }).catch((err)=> {
+                    console.error(err);    
+                });                        
+                await axios({
+                    method: "post",
+                    url: `${backendURL}/api/likes/getAllLikedCampaigns`,
+                    data: {
+                        user: account || "",
+                        chainId:chainId || ""
+                    }
+                }).then((res)=>{
+                    console.log(res.data);
+                    if(res.data && res.data.code === 0)
+                    {                                
+                        let summaryFromDB = res.data.data || [];
+                        if(summaryFromDB.length>0)
+                        {
+                            for(let idx = 0; idx<summary.length; idx++)
+                            {
+                                let found = summaryFromDB.find((item ) => item.campaign.address === campais[idx]) || undefined;
+                                if(found)
+                                {
+                                    summary[idx][13] = found.value;
+                                }
+                            }
+                        }
+                        console.log("summary =", summary);
+                        setViewRequests(summary);
                     }
                 }).catch((err)=> {
                     console.error(err);    
                 });
             }
+        }
+        catch(e)
+        {
+            console.error(e);
+        }
+    }
+    const getAllFromDB = async () => {    
+                
+        let summary = [{}], campais = [];            
+        await axios({
+            method: "post",
+            url: `${backendURL}/api/campaign/all`,
+            data: {
+            }
+          }).then((res)=>{
+            console.log(res.data);
+            if(res.data && res.data.code === 0)
+            {
+                let summaryFromDB = res.data.data || [];
+                console.log("summaryFromDB = ", summaryFromDB);
+                if(summaryFromDB.length>0)
+                {
+                    for(let idx = 0; idx<summaryFromDB.length; idx++)
+                    {
+                        let found = summaryFromDB[idx] || undefined;
+                        if(found)
+                        {
+                            summary[idx][5] = found.name;
+                            summary[idx][6] = found.description;
+                            summary[idx][7] = found.imageURL;
+                            summary[idx][9] = found.verified;
+                            summary[idx][11] = found.category;
+                            summary[idx][1] = found.raised;
+                            summary[idx][12] = found.likes;
+                            summary[idx][13] = false;
+                            summary[idx][14] = found._id;
+                            campais[idx] = found.address;
+                        }
+                    }
+                }
+                console.log("summary =", summary);
+                setViewRequests(summary);
+                setCampaigns(campais);
+            }
+        }).catch((err)=> {
+            console.error(err);    
+        });                        
+        await axios({
+            method: "post",
+            url: `${backendURL}/api/likes/getAllLikedCampaigns`,
+            data: {
+                user: account || "",
+                chainId:chainId || ""
+            }
+        }).then((res)=>{
+            console.log(res.data);
+            if(res.data && res.data.code === 0)
+            {                                
+                let summaryFromDB = res.data.data || [];
+                if(summaryFromDB.length>0)
+                {
+                    for(let idx = 0; idx<summary.length; idx++)
+                    {
+                        let found = summaryFromDB.find((item ) => item.campaign.address === campais[idx]) || undefined;
+                        if(found)
+                        {
+                            summary[idx][13] = found.value;
+                        }
+                    }
+                }
+                console.log("summary =", summary);
+                setViewRequests(summary);
+            }
+        }).catch((err)=> {
+            console.error(err);    
+        });
+    }
+
+    useEffect(() => {
+        if(account && chainId && globalWeb3)
+        {           
+            getSummary();
+        }
+        else{           
             getAllFromDB();
         }
     }, [account, chainId, globalWeb3])
@@ -189,6 +258,34 @@ export default function Home() {
         setCopied(false)
       }, 2000);
     }
+
+    const onClickFavorites = async (idonDB, val) => {
+        if(globalWeb3 && account && chainId)
+        {        
+          await axios({
+            method: "post",
+            url: `${backendURL}/api/likes/set`,
+            data: {
+                campaign: idonDB,
+                user: account || "",
+                value: val,
+                chainId:chainId || ""
+            }
+          }).then((res)=>{
+              console.log(res.data);
+              if(res.data && res.data.code === 0)
+              {
+                getSummary();
+              }
+          }).catch((err)=> {
+              console.error(err);    
+              if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again."); 
+          });
+        }else{
+            NotificationManager.warning("Please connect your wallet.");
+        }
+      }
+    
 
     return (
         <div>
@@ -236,9 +333,22 @@ export default function Home() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 ">
                         {ViewRequests && ViewRequests.length>0 && ViewRequests.map((data, index) => (
                             <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' key={index} >
-                                <div className="flex flex-wrap md:justify-between lg:justify-between "                               
+                                
+                                <div className="flex flex-wrap md:justify-between lg:justify-between "   
+                                    style={{ userSelect:"none" }}                            
                                 >
-                                    <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8)+"..."}</h5>
+                                    <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8)+"..."}</h5>                                    
+                                    {
+                                        data[13] === false ?  
+                                        <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(data[14], true) }}
+                                            style={{width:"20px", height:"20px", cursor:"pointer" }}
+                                        />
+                                        :
+                                        <img src={HeartIcon} alt="" onClick={()=>{ onClickFavorites(data[14], false) }}
+                                            style={{width:"20px", height:"20px", cursor:"pointer" }}
+                                        />
+                                    }
+                                    <h4 className='value text-lg'>{data[12]}</h4>
                                     <div style={{display: "flex", flexWrap:"wrap", flexDirection:"row", 
                                             cursor:"pointer", 
                                             userSelect:"none" }} onClick={() => onCopyAddress()} >
@@ -255,6 +365,7 @@ export default function Home() {
                                     <input type="text" id="hiddenAddressInput" 
                                         style={{ height:"0px", opacity:"0"}} 
                                         value={`${window.location.protocol}//${window.location.host}/campaign/${campaigns[index]}`} 
+                                        onChange={() => {}}
                                     />                
                                 </div>
                                 <div className="image relative my-4">

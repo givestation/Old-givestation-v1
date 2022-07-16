@@ -1,6 +1,7 @@
 const db = require("../../db");
 
 const Likes = db.Likes;
+const Campaign = db.Campaign;
 
 var ObjectId = require('mongodb').ObjectID;
 
@@ -18,7 +19,7 @@ exports.setLikes = (req, res) => {
     });
 
     Likes.find({ 
-        campaign, user, chainId
+        campaign:new ObjectId(campaign), user, chainId
     }).populate("campaign")
     .then(async (docs) =>{
         if(docs.length>0)
@@ -36,21 +37,41 @@ exports.setLikes = (req, res) => {
                     },
                     { upsert: true }
                 );
-                return res.send({ code: 0, data:{}, message: "" });
+               // return res.send({ code: 0, data:{}, message: "" });
             } catch (err) {
                 return res.send({ code: -1, data:{}, message: "Internal server Error" });
             }
         }else{            
             newLikes.save().then((data) => {
-                return res.send({ code: 0, data, message:"" });
+                //return res.send({ code: 0, data, message:"" });
             }).catch((err) => {
                 return res.send({ code: -1, data:{}, message: "Internal server Error" });
             });
-        }
-    }).catch((err) => {
-        return res.send({ code: -1, data:{}, message: "Internal server Error" });
+        }        
+    }).catch((err) => {             
+            newLikes.save().then((data) => {
+            }).catch((err) => {
+                return res.send({ code: -1, data:{}, message: "Internal server Error" });
+            });
     })
-
+    
+    Campaign.findById(new ObjectId(campaign))
+    .then((data) => {
+        var likes = Number(data.likes);
+        if(value === false) likes -= 1;
+        if(value === true) likes += 1;
+       
+        Campaign.findByIdAndUpdate(new ObjectId(campaign), { likes }).then((data) => {
+                return res.send({ code: 0, data: {}, message:"updating succeed" });
+            }).catch((err) => {
+                console.log("updating raised error : ", err);
+                return res.send({ code: -1, data: {}, message: "update error" });
+            })
+       
+    }).catch((error) => {
+        console.log("updating raised error : ", error);
+        return res.send({ code: -1, data: {}, message: "find error" });
+    });
 }
 
 exports.getAll = (req, res) => {

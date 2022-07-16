@@ -189,7 +189,9 @@ export default function CreateCampaign() {
                             {
                                 dropdown?
                                 <div id="dropdown" className="absolute  top-12 z-10 bg-white divide-y divide-gray-100 rounded shadow w-60 dark:bg-gray-700">
-                                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault">
+                                    <ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault"
+                                        style={{ overflowY:"scroll", maxHeight:"300px" }}
+                                    >
                                     {Category.map((i, index) => (
                                         <li key={index} onClick={(e) => {setCategory(i || "Defi"); setDropdown(!dropdown)}} value={category || ""}>
                                             <span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{i}</span>

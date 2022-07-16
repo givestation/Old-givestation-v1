@@ -223,16 +223,15 @@ export default function Header() {
                             <div className="xl:5/12 lg:w-5/12 w-5/12">
                                 <ul className="hidden xl:flex " style={{ justifyContent:"center"}}>
                                     <li className="mr-3">
-                                        <NavLink
+                                        <div
                                         className={(props) => {
                                             return props.isActive
                                             ? "font-normal dark:text-gray-100 tracking-widest"
                                             : "text-gray-700 font-bold dark:text-gray-100 tracking-widest";
                                         }}
-                                        to="/give-dad"
                                         >
                                         GiveDAO
-                                        </NavLink>
+                                        </div>
                                     </li>
                                     <li className="mr-3"><div className={'text-gray-700  font-bold dark:text-gray-100' } onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
                                     <li className="mr-3"><div className={'text-gray-700 font-bold dark:text-gray-100' } onClick={() => { navigate("/faq") }} >How it works</div></li>

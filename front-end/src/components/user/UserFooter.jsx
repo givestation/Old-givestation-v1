@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router";
 
 const UserFooter = () =>
 {
+    const navigate = useNavigate();
+    
     return (
         <div className="footer flex justify-center items-center" style={{ marginTop:"100px" }}>
             <img width={92} height={76} src="/images/logo.svg" alt="logo" />
@@ -11,7 +14,9 @@ const UserFooter = () =>
             <h1 className="text-slate-900 dark:text-white font-bold text-xl ml-12">
             About
             </h1>
-            <h1 className="text-slate-900 dark:text-white font-bold text-xl ml-12">
+            <h1 className="text-slate-900 dark:text-white font-bold text-xl ml-12"
+                onClick={() => { navigate("/faq") }}
+            >
             How it works
             </h1>
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 const UserFooter = () =>
 {
     return (
-        <div className="footer flex justify-center items-center">
+        <div className="footer flex justify-center items-center" style={{ marginTop:"100px" }}>
             <img width={92} height={76} src="/images/logo.svg" alt="logo" />
             <h1 className="text-slate-900 dark:text-white font-bold text-xl ml-16">
             GiveDAO

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import {NotificationManager} from "react-notifications";
 import UserFooter from "../../components/user/UserFooter";
 import { chains } from "../../smart-contract/chains_constants";
 const CampaignFactory = require("../../smart-contract/build/CampaignFactory.json");
@@ -54,10 +55,13 @@ const GivePoints = () => {
             gas: 3000000
           });          
           setClaimed(true);
-        }catch(e){
-          console.error(e);
+        }catch(err){
+          console.error(err);
+          if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again."); 
         }
       }
+    }else{
+      NotificationManager.warning("Please connect your wallet."); 
     }
   }
 

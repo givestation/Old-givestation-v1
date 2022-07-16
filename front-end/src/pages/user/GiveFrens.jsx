@@ -2,6 +2,7 @@ import React from "react";
 import copyIcon from "./assets/copy.svg";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useParams } from "react-router";
+import {NotificationManager} from "react-notifications";
 import UserFooter from "../../components/user/UserFooter";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -63,10 +64,13 @@ const GiveFrens = () => {
             from: account,
             gas: 3000000
           });          
-        }catch(e){
-          console.error(e);
+        }catch(err){
+          console.error(err);
+          if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again."); 
         }
       }
+    }else{
+      NotificationManager.warning("Please connect your wallet."); 
     }
   }
 

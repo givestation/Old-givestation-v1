@@ -236,12 +236,26 @@ export default function Home() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 ">
                         {ViewRequests && ViewRequests.length>0 && ViewRequests.map((data, index) => (
                             <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' key={index} >
-                                <div className="flex flex-wrap md:justify-between">
+                                <div className="flex flex-wrap md:justify-between lg:justify-between "                               
+                                >
                                     <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8)+"..."}</h5>
-                                    <div>
-                                        <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-3'>{data[11]}</button>
-                                        {/* <button className='bg-blue-light small-text font-normal text-xs py-1 px-2'>CPG</button> */}
-                                    </div>
+                                    <div style={{display: "flex", flexWrap:"wrap", flexDirection:"row", 
+                                            cursor:"pointer", 
+                                            userSelect:"none" }} onClick={() => onCopyAddress()} >
+                                    <img src="/images/share-button-svgrepo-com.svg"                                                 
+                                        style={{
+                                            width: "16px", 
+                                            height: "16px",  
+                                            marginTop: "2px"}} alt="tick" 
+                                    />      
+                                    {
+                                        copied ? <span className='text-blue' >Copied</span> : <span className='text-blue' >Share{" "}</span>
+                                    }    
+                                    </div>                             
+                                    <input type="text" id="hiddenAddressInput" 
+                                        style={{ height:"0px", opacity:"0"}} 
+                                        value={`${window.location.protocol}//${window.location.host}/campaign/${campaigns[index]}`} 
+                                    />                
                                 </div>
                                 <div className="image relative my-4">
                                     <img src={data[7]} alt="item" className="rounded-lg my-3 w-full" />
@@ -251,27 +265,12 @@ export default function Home() {
                                         :<></>
                                     }
                                 </div>
-                                <div className="body">
-                                    <div className="flex flex-wrap md:justify-between"  >
+                                <div className="body">                                   
+                                    <div className="flex flex-wrap md:justify-between">
                                         <h4 className='text-blue text-sm title mb-3 '>{data[5]}</h4>
-                                        <div style={{display: "flex", flexWrap:"wrap", flexDirection:"row", 
-                                                cursor:"pointer", 
-                                                userSelect:"none" }} onClick={() => onCopyAddress()} >
-                                        <img src="/images/share-button-svgrepo-com.svg"                                                 
-                                            style={{
-                                                width: "16px", 
-                                                height: "16px",  
-                                                marginTop: "2px"}} alt="tick" 
-                                        />      
-                                        {
-                                            copied ? <span className='text-blue' >Copied</span> : <span className='text-blue' >Share{" "}</span>
-                                        }    
-                                        </div>                             
-                                        <input type="text" id="hiddenAddressInput" 
-                                            style={{ height:"0px", opacity:"0"}} 
-                                            value={`${window.location.protocol}//${window.location.host}/campaign/${campaigns[index]}`} 
-                                        />                
-                                    </div>
+                                        <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-3'>{data[11]}</button>
+                                        {/* <button className='bg-blue-light small-text font-normal text-xs py-1 px-2'>CPG</button> */}
+                                    </div>   
                                     <p className='text-blue description mb-3'>{data[6]}</p>
                                     <p className='para'>{"Raised"}</p>
                                     <h6 className='content mb-5 mt-1 text-sm'>{data[1]?.toString() || "0"}</h6>

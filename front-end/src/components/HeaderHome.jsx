@@ -202,8 +202,8 @@ export default function Header() {
 	}
 
 	return (
-		<div className='header w-full dark:bg-slate-900'>
-			<section className="relative overflow-hidden">
+		<div className='header w-full dark:bg-slate-900' style={{zIndex:"100"  }}	>
+			<section className="relative ">
 				<div className="container bg-tarnsparent">
 					<nav className="flex justify-between py-6">
 						<div className="flex justify-between items-center w-full">
@@ -254,11 +254,16 @@ export default function Header() {
 									}
 									{
 										showLogoutMenu === true &&
-										<div className="absolute top-12 right-0 " style={{zIndex:"2000", marginLeft: "10px", display: "flex", flexDirection: "column", alignItems: "start", cursor: "pointer", userSelect: "none" }}											
-										>
-											<div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100' onClick={() => { setShowLogoutMenu(!showLogoutMenu); navigate(`/user/overview`); }}>Dashboard</div>
-											<div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100' onClick={() => { setShowLogoutMenu(!showLogoutMenu); onClickDisconnect(); }}>Log out</div>
-											{/* <img src="/images/avatar.png" alt=""></img> */}
+										<div className="absolute top-12 bottom-12 right-6 bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700" style={{ zIndex:"1500" }}>
+											<ul  className="py-1 " 								
+											>
+												<li onClick={() => { setShowLogoutMenu(!showLogoutMenu); navigate(`/user/overview`); }}>
+													<span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">Dashboard</span>
+												</li>
+												<li onClick={() => { setShowLogoutMenu(!showLogoutMenu); onClickDisconnect(); }}>
+													<span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white">Log out</span>
+												</li>										
+											</ul>
 										</div>
 									}					
 									</div>				
@@ -326,7 +331,7 @@ export default function Header() {
 											</div>
 											<div className="flex">
 												<div className="w-full flex justify-center">
-													<button onClick={() => { connected === false ? onClickConnectWallet() : setShowLogoutMenu(!showLogoutMenu) }} className="py-2 px-4 text-sm leading-5 text-white bg-gradient-secondary font-bold rounded-full"
+													<button onClick={() => { onClickConnectWallet() }} className="py-2 px-4 text-sm leading-5 text-white bg-gradient-secondary font-bold rounded-full"
 														style={{ minWidth: "200px" }}
 													>
 														{connected ? compressedAccount : 'Connect Wallet'}
@@ -334,15 +339,17 @@ export default function Header() {
 												</div>
 											</div>
 											{
-												showLogoutMenu === true &&
-
-												<div className="w-full flex justify-center" style={{ marginTop: "10px" }}>
-													<div style={{ marginLeft: "10px", display: "flex", flexDirection: "column", alignItems: "start", cursor: "pointer", userSelect: "none" }}														
+												connected === true &&
+												<div className="w-full flex justify-center" style={{ marginTop: "10px", userSelect:"none", cursor:"pointer" }}>
+													<ul  className="py-1 " 								
 													>
-														{/* <img src="/images/avatar.png" alt=""></img> */}														
-														<div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100' onClick={() => {setShowLogoutMenu(!showLogoutMenu); navigate(`/user/overview`) }}>Dashboard</div>
-														<div className='text-md leading-5 text-slate-800 font-bold dark:text-gray-100' onClick={() => {setShowLogoutMenu(!showLogoutMenu); onClickDisconnect() }}>Log out</div>
-													</div>
+														<li onClick={() => { setShowLogoutMenu(!showLogoutMenu); navigate(`/user/overview`); }}>
+															<span className="block px-4 py-2 text-white">Dashboard</span>
+														</li>
+														<li onClick={() => { setShowLogoutMenu(!showLogoutMenu); onClickDisconnect(); }}>
+															<span className="block px-4 py-2  text-white">Log out</span>
+														</li>										
+													</ul>
 												</div>
 											}
 										</div>

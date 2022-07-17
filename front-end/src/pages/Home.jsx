@@ -245,7 +245,7 @@ export default function Home() {
   return (
     <div>
       <HeaderHome />
-      <section className="banner py-0 md:py-4">
+      <section className="banner py-0 md:py-4" style={{zIndex:"10"}}>
         <div className="container">
           <div className="left md:w-7/12 w-9/12 sm:pl-12 pl-6 pr-3">
             <h1 className='text-white mb-3 md:mb-5 text-xl md:text-xl lg:text-4xl xl:text-4.5xl font-semibold'>A Layer 2 crowdfunding <br /> platform created by <br /> you, for everyone.</h1>

@@ -1,10 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.adb79dcd.css",
-    "main.js": "/static/js/main.b2db3f1b.js",
+    "main.css": "/static/css/main.8c905628.css",
+    "main.js": "/static/js/main.c07eb68c.js",
     "static/media/loader-light.gif": "/static/media/loader-light.f12f9b9fabb82035d9d5.gif",
     "static/media/banner.png": "/static/media/banner.8d06e345c13d414df2c4.png",
     "static/media/sampleProject.svg": "/static/media/sampleProject.7fb40743e08ee67f9a03c9b37359aa39.svg",
+    "static/media/bannerMob.png": "/static/media/bannerMob.10ee492438058dbf4686.png",
     "static/media/overviewImage.svg": "/static/media/overviewImage.7c22b614f3d5b6f812ae8b28bdf3f7f8.svg",
     "static/media/likeCampImg.svg": "/static/media/likeCampImg.09e6921d7d2b642f9b9364e3ceda34fd.svg",
     "static/media/Kemono.svg": "/static/media/Kemono.327f9358508a14faacd18895e731589e.svg",
@@ -16,11 +17,11 @@
     "index.html": "/index.html",
     "static/media/heart-blank.svg": "/static/media/heart-blank.11a9da9b8296129950440f19930a3c29.svg",
     "static/media/heart.svg": "/static/media/heart.7db6da4bca57351e72e6f56e2ec4b2a7.svg",
-    "main.adb79dcd.css.map": "/static/css/main.adb79dcd.css.map",
-    "main.b2db3f1b.js.map": "/static/js/main.b2db3f1b.js.map"
+    "main.8c905628.css.map": "/static/css/main.8c905628.css.map",
+    "main.c07eb68c.js.map": "/static/js/main.c07eb68c.js.map"
   },
   "entrypoints": [
-    "static/css/main.adb79dcd.css",
-    "static/js/main.b2db3f1b.js"
+    "static/css/main.8c905628.css",
+    "static/js/main.c07eb68c.js"
   ]
 }

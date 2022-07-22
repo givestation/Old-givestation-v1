@@ -1,19 +1,26 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 /Campaigns_real.sol
-/back-end
-/front-end/public
-/front-end/src
-/front-end/.env
-/front-end/.gitignore
-/front-end/.yarnrc
-/front-end/Capture1.PNG
-/front-end/Capture2.PNG
-/front-end/config-overrides.js
-/front-end/developer_log.txt
-/front-end/package.json
-/front-end/postcss.config.js
-/front-end/README.md
-/front-end/tailwind.config.js
-/front-end/webpack.config.js
-/front-end/yarn.lock
-/front-end/yarn-error.log
-/front-end/node_modules
+/Contracts
+/Contracts/Campaigns.sol

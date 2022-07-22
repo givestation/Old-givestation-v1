@@ -35,7 +35,7 @@ function Index() {
           :
           `url('/images/WHITE.gif') 30% 30% no-repeat #ffffff `
         :
-        isTabletOrMobile === ture ?
+        isTabletOrMobile === true ?
           `url('/images/loader-light.gif') 10% 10% no-repeat #ffffff `
           :
           `url("/images/BLACK.gif") 30% 30% no-repeat #000000 `

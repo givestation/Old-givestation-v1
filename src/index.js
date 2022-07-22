@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom';
 import AppRoutes from './routes';
 import { store }  from "./store";
 import {Provider} from "react-redux";
+import { useMediaQuery } from 'react-responsive';
 import 'react-notifications/lib/notifications.css';
+
 import {NotificationContainer} from 'react-notifications';
 
 function Index() {
   const [loading, setLoading] = useState(true);
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
   var colorMode = null;
 
   useEffect(() => {
@@ -34,7 +37,13 @@ function Index() {
     <div className="loader" id="loading_icon_div"
       style={{ background: 
         (colorMode == null || colorMode == "light")? 
+        isTabletOrMobile ? 
+        `url('/images/loader-light.gif') 30% 30% no-repeat #ffffff `
+        :
         `url('/images/loader-light.gif') 50% 50% no-repeat #ffffff `
+        :
+        isTabletOrMobile ?
+        `url('/images/loader-light.gif') 30% 30% no-repeat #ffffff `
         :
         `url("/images/loader-dark.gif") 50% 50% no-repeat #000000 `
       }}

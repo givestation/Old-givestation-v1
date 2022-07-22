@@ -10,14 +10,11 @@ import {NotificationContainer} from 'react-notifications';
 
 function Index() {
   const [loading, setLoading] = useState(true);
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
   var colorMode = null;
 
   useEffect(() => {
     
-    // setColorMode(localStorage.getItem('color-theme'));  //null, 
-    // console.log("color mode : ", typeof localStorage.getItem('color-theme'));
-
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -25,11 +22,6 @@ function Index() {
   
   colorMode = localStorage.getItem('color-theme');
   console.log("color mode : ", colorMode);
-
-  // window.onload(() => {
-  //   console.log("color mode : ", colorMode);
-  //   document.getElementById("loading_icon_div").style.background("url('../GIF/loader-light.gif') 50% 50% no-repeat #000000");
-  // })
 
   return <>
   {

@@ -40,12 +40,12 @@ function Index() {
         isTabletOrMobile ? 
         `url('/images/loader-light.gif') 30% 30% no-repeat #ffffff `
         :
-        `url('/images/loader-light.gif') 50% 50% no-repeat #ffffff `
+        `url('/images/WHITE.gif') 50% 50% no-repeat #ffffff `
         :
         isTabletOrMobile ?
         `url('/images/loader-light.gif') 30% 30% no-repeat #ffffff `
         :
-        `url("/images/loader-dark.gif") 50% 50% no-repeat #000000 `
+        `url("/images/BLACK.gif") 50% 50% no-repeat #000000 `
       }}
     ></div> 
     : 

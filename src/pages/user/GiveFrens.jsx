@@ -122,7 +122,7 @@ const GiveFrens = () => {
               </div>
             </div>
 
-            <div>
+            <div className="mt-10">
               <button onClick={() => {onClickClaim()}}>Claim</button>
             </div>
           </div>

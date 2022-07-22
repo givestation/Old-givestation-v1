@@ -86,7 +86,7 @@ const GivePoints = () => {
                 <span> campaigns</span>.
               </h1>
 
-              <div className="flex justify-center items-center w-1/2">
+              <div className="flex justify-center items-center w-1/2 mt-10">
                 {claimed === true ? (
                   <button className="claimedBtn">CLAIMED</button>
                 ) : (

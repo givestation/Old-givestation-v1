@@ -194,7 +194,7 @@ export default function Overview() {
         <div className="cardWrapper flex justify-between gap-x-4" style={{marginTop:"10px"}}>
           {overviewData.map((e, index) => {
             return (
-              <div className="oveviewCards w-full" key={e.id}>
+              <div className="oveviewCards w-full mt-10" key={e.id}>
                 <div className="flex justify-between items-center">
                   <h1 className="text-white font-bold text-lg">{e.cardName}</h1>
                   <div>{e.svg}</div>

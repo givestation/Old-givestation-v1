@@ -47,6 +47,9 @@ $green: #53a24c;
 }
 
 @media only screen and (max-width: 450px) {
+  .loader{
+    background-size: 100px 100px;
+  }
   .main-popup,
   .connect-popup {
     width: 300px !important;
@@ -82,12 +85,11 @@ $green: #53a24c;
       }
     }
   }
-
-  .loader {
-    background-size: 100px 100px;
-  }
 }
 @media only screen and (min-width: 450px) and (max-width: 768px) {
+  .loader{
+    background-size: 150px 150px;
+  }
   .banner {
     .container {
       background-size: cover !important;
@@ -110,6 +112,9 @@ $green: #53a24c;
   }
 }
 @media only screen and (min-width: 1280px) and (max-width: 1440px) {
+  .loader{
+    background-size: 200px 200px;
+  }
   .banner {
     .container {
       background-size: cover !important;

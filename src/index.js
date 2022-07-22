@@ -29,16 +29,10 @@ function Index() {
     loading ? 
     <div className="loader" id="loading_icon_div"
       style={{ background:         
-        isTabletOrMobile === true ? 
-        (colorMode == null || colorMode == "light")? 
-          `url('/images/loader-light.gif') 30% 30% no-repeat #ffffff `
-          :
-          `url('/images/loader-dark.gif') 30% 30% no-repeat #ffffff `
-        :
         (colorMode == null || colorMode == "light")? 
           `url('/images/loader-light.gif') 50% 50% no-repeat #ffffff `
           :
-          `url('/images/loader-dark.gif') 50% 50% no-repeat #000000 `
+          `url('/images/loader-dark.gif') 50% 50% no-repeat #ffffff `
       }}
     ></div> 
     : 

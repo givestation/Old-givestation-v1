@@ -228,7 +228,7 @@ export default function Home() {
 
   const getAllFromDB = async () => {
 
-    let summary = [{}], campais = [];
+    let summary = [], campais = [];
     await axios({
       method: "post",
       url: `${backendURL}/api/campaign/all`,

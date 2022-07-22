@@ -431,13 +431,7 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_addr",
-				"type": "address"
-			}
-		],
+		"inputs": [],
 		"name": "maintenance",
 		"outputs": [],
 		"stateMutability": "nonpayable",

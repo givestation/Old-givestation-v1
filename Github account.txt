@@ -1,0 +1,9 @@
+Github   account :
+
+	bloombetgaming@gmail.com   / Givegitteam01
+
+Mongodb Atlas account : 
+
+	bloombetgaming@gmail.com   / Givegit01
+
+https://data.mongodb-api.com/app/data-rfucc/endpoint/data/v1

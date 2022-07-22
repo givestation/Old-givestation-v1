@@ -24,3 +24,4 @@ yarn-error.log*
 /Campaigns_real.sol
 /Contracts
 /Contracts/Campaigns.sol
+/.env

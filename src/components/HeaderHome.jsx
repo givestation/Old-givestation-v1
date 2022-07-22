@@ -510,24 +510,25 @@ export default function Header() {
 									</div>
 								</div>
 							}
-							{chainId && (chainId.toString() === BSC_TEST_CHAIN_ID || chainId.toString() === BSC_TEST_NETWORK_ID) ?
-								<div className='popup-body px-5 py-5 rounded-xl'>
-									<div className='flex justify-between items-start'>
-										<h5 className='text-white pop-title font-bold text-lg'>{active}</h5>
-										<div className="circle w-4 h-4 bg-lime-500 rounded-full ml-auto"></div>
-									</div>
-									<div className='flex justify-between items-start mt-2'>
-										<img src={'/images/' + activeIcon} alt={active} />
-										{/* <p className='text-white' style={{ cursor: "pointer", userSelect: "none" }} onClick={() => { onClickDisconnect() }}>Disconnect</p> */}
-									</div>
-								</div>
-								:
-								<div className="popup-content pt-2 px-5">
-									<div className='flex justify-between items-start py-2 md:py-4'>
-										<h5 className='text-white pop-title font-bold text-lg cursor-pointer' onClick={() => { onClickChangeNetwork(BSC_TEST_CHAIN_ID); }}>BSC Testnet</h5>
-										<img src="/images/protocol.png" alt="close" className='ml-auto' />
-									</div>
-								</div>
+							{
+								// chainId && (chainId.toString() === BSC_TEST_CHAIN_ID || chainId.toString() === BSC_TEST_NETWORK_ID) ?
+								// <div className='popup-body px-5 py-5 rounded-xl'>
+								// 	<div className='flex justify-between items-start'>
+								// 		<h5 className='text-white pop-title font-bold text-lg'>{active}</h5>
+								// 		<div className="circle w-4 h-4 bg-lime-500 rounded-full ml-auto"></div>
+								// 	</div>
+								// 	<div className='flex justify-between items-start mt-2'>
+								// 		<img src={'/images/' + activeIcon} alt={active} />
+								// 		{/* <p className='text-white' style={{ cursor: "pointer", userSelect: "none" }} onClick={() => { onClickDisconnect() }}>Disconnect</p> */}
+								// 	</div>
+								// </div>
+								// :
+								// <div className="popup-content pt-2 px-5">
+								// 	<div className='flex justify-between items-start py-2 md:py-4'>
+								// 		<h5 className='text-white pop-title font-bold text-lg cursor-pointer' onClick={() => { onClickChangeNetwork(BSC_TEST_CHAIN_ID); }}>BSC Testnet</h5>
+								// 		<img src="/images/protocol.png" alt="close" className='ml-auto' />
+								// 	</div>
+								// </div>
 							}
 						</div>
 					</div>

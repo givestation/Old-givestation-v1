@@ -22,6 +22,7 @@ function Index() {
   
   colorMode = localStorage.getItem('color-theme');
   console.log("color mode : ", colorMode);
+  console.log("isTabletOrMobile : ", isTabletOrMobile);
 
   return <>
   {

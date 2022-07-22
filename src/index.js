@@ -26,7 +26,7 @@ function Index() {
 
   return <>
   {
-    loading ? 
+    // loading ? 
     <div style={{display:"flex", justifyContent:"center", alignItems:"center", height: "100vh", 
       background:
         (colorMode == null || colorMode == "light")? 
@@ -41,11 +41,11 @@ function Index() {
       }}
     ></div> 
     </div>
-    : 
-    <Provider store={store}>
-      <AppRoutes/>
-      <NotificationContainer/>
-    </Provider>
+    // : 
+    // <Provider store={store}>
+    //   <AppRoutes/>
+    //   <NotificationContainer/>
+    // </Provider>
   }
   </>;
 }

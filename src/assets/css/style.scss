@@ -22,14 +22,8 @@ $green: #53a24c;
 }
 
 .loader {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  height: 100%;
   z-index: 9999;
-  background: url("../GIF/loader-light.gif") 50% 50% no-repeat #fff;
-  background-size: 300px 300px;
+  background-size: "cover";
 }
 
 .campaignCard{  
@@ -48,7 +42,9 @@ $green: #53a24c;
 
 @media only screen and (max-width: 450px) {
   .loader{
-    background-size: 100px 100px;
+    background-size: cover;
+    width: 100px;
+    height: 100px;
   }
   .main-popup,
   .connect-popup {
@@ -87,9 +83,6 @@ $green: #53a24c;
   }
 }
 @media only screen and (min-width: 450px) and (max-width: 768px) {
-  .loader{
-    background-size: 150px 150px;
-  }
   .banner {
     .container {
       background-size: cover !important;
@@ -112,9 +105,6 @@ $green: #53a24c;
   }
 }
 @media only screen and (min-width: 1280px) and (max-width: 1440px) {
-  .loader{
-    background-size: 200px 200px;
-  }
   .banner {
     .container {
       background-size: cover !important;

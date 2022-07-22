@@ -27,14 +27,20 @@ function Index() {
   return <>
   {
     loading ? 
-    <div className="loader" id="loading_icon_div"
-      style={{ background:         
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center", height: "100vh", 
+      background:
         (colorMode == null || colorMode == "light")? 
-          `url('/images/loader-light.gif') 50% 50% no-repeat #ffffff `
+        "white" : "black"
+    }}>
+    <div className="loader"
+      style={{ backgroundImage:
+        (colorMode == null || colorMode == "light")? 
+          `url('/images/loader-light.gif')`
           :
-          `url('/images/loader-dark.gif') 50% 50% no-repeat #000000 `
+          `url('/images/loader-dark.gif')`
       }}
     ></div> 
+    </div>
     : 
     <Provider store={store}>
       <AppRoutes/>

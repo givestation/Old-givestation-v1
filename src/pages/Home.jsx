@@ -174,9 +174,12 @@ export default function Home() {
             {
               for (let idx = 0; idx < summary.length; idx++) 
               {
-                let found = summaryFromDB.find((item) => item.address === campais[idx]) || undefined;
+                let found = summaryFromDB.find((item) => item.address == campais[idx]) || undefined;
                 if (found) 
                 {
+                  console.log("found = ", found);
+                  summary[idx][1] = globalWeb3.utils.fromWei(summary[idx][1].toString(), "ether");
+                  console.log("summary[idx][1] = ", summary[idx][1]);
                   summary[idx][5] = found.name;
                   summary[idx][6] = found.description;
                   summary[idx][7] = found.imageURL;
@@ -186,7 +189,6 @@ export default function Home() {
                   summary[idx][13] = false;
                   summary[idx][14] = found._id;
                   summary[idx][15] = found.chainId;
-                  summary[idx][1] = globalWeb3.utils.fromWei(found.raised.toString(), "ether");
                 }
               }
             }
@@ -207,7 +209,7 @@ export default function Home() {
             let summaryFromDB = res.data.data || [];
             if (summaryFromDB.length > 0) {
               for (let idx = 0; idx < summary.length; idx++) {
-                let found = summaryFromDB.find((item) => item.campaign.address === campais[idx]) || undefined;
+                let found = summaryFromDB.find((item) => item.campaign.address == campais[idx]) || undefined;
                 if (found) {
                   summary[idx][13] = found.value;
                 }

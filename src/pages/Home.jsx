@@ -186,7 +186,7 @@ export default function Home() {
                   summary[idx][13] = false;
                   summary[idx][14] = found._id;
                   summary[idx][15] = found.chainId;
-                  summary[idx][1] = found.raised;
+                  summary[idx][1] = globalWeb3.utils.fromWei(found.raised.toString(), "ether");
                 }
               }
             }

@@ -30,7 +30,6 @@ const LikedCampaigns = () => {
             chainId:chainId || ""
         }
       }).then((res)=>{
-          console.log(res.data);
           if(res.data && res.data.code === 0)
           {
             setLikesInfo(res.data.data);
@@ -60,7 +59,6 @@ const LikedCampaigns = () => {
             chainId:chainId || ""
         }
       }).then((res)=>{
-          console.log(res.data);
           if(res.data && res.data.code === 0)
           {
             getLikesInfo();
@@ -89,18 +87,18 @@ const LikedCampaigns = () => {
           likesInfo.map((item, index) => (
             <div className="flex likeCard" key={index} >
               <div className="flex w-3/4 likeDesc">
-                <img src={item?.campaign? item.campaign.imageURL : LikeCampImg} 
+                <img src={item?.campaign? item.campaign?.imageURL : LikeCampImg} 
                   alt=""                   
                   style={{ width:"348px", height:"200px"}}
                 />
                 <div className="likeCardDetail w-1/2">
                   <h6 className="flex">
-                    {item?.campaign? item.campaign.name : ""}
+                    {item?.campaign? item.campaign?.name : ""}
                     {/* <img src={Kemono} alt="" style={{ marginLeft: 5 }} /> */}
                   </h6>
                   <p>
                   {
-                    item.campaign.description
+                    item.campaign?.description
                   }
                   </p>
                 </div>
@@ -108,12 +106,12 @@ const LikedCampaigns = () => {
 
               <div className="flex flex-col justify-center items-center w-1/4 likeBtns" style={{ userSelect:"none", cursor:"pointer" }}>
                 {
-                  item.value===true && <img src={HeartIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign._id, false) }} />
+                  item.value===true && <img src={HeartIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign?._id, false) }} />
                 }
                 {
-                  item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign._id, true) }} />
+                  item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign?._id, true) }} />
                 }
-                <h4 onClick={() => { navigate(`/campaign/${item.campaign.address}`) }}
+                <h4 onClick={() => { navigate(`/campaign/${item.campaign?.address}`) }}
                 >view grant</h4>
               </div>
             </div>

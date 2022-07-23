@@ -31,7 +31,6 @@ export default function Donations() {
               chainId:chainId || ""
           }
         }).then((res)=>{
-            console.log(res.data);
             if(res.data && res.data.code === 0)
             {
               dispatch(updateDonations(res.data.data));

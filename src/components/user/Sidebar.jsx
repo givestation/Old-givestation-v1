@@ -17,8 +17,6 @@ export default function Sidebar() {
 
   const save = () =>
   { 
-    console.log("switch value : ", donorOrCreator);
-    console.log(checkboxRef.current.checked);
     setDonorOrCreator(checkboxRef.current.checked);
   }
 

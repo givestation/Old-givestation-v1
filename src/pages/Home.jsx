@@ -77,7 +77,6 @@ export default function Home() {
           if(factory){
             let nativePri = await factory.methods.getNativePriceOnUSD("1000000000000000000").call();
             nativePri = nativePri? globalWeb3.utils.fromWei(nativePri.toString(), "ether") : 0;
-            console.log("1 Native currency = $", nativePri);
             dispatch(setNativePriceOnUSD(chainId, Number(nativePri)));
             await axios({
               method: "post",
@@ -102,7 +101,6 @@ export default function Home() {
             chainId: consideringChains[idx]
           }
         }).then((res) => {
-          console.log(res.data.data);
           if (res.data && res.data.code === 0) {
             let pricesFromDB = res.data.data[0] || {};
             if(pricesFromDB.chainId && pricesFromDB.chainId === consideringChains[idx])
@@ -156,7 +154,6 @@ export default function Home() {
           )
         );
 
-        console.log("[Home.jsx] campaigns = ", campais);
       }
       if (campais.length > 0) {
         await axios({
@@ -166,7 +163,6 @@ export default function Home() {
             chainId: chainId
           }
         }).then((res) => {
-          console.log(res.data);
           if (res.data && res.data.code === 0) 
           {
             let summaryFromDB = res.data.data || [];
@@ -177,9 +173,7 @@ export default function Home() {
                 let found = summaryFromDB.find((item) => item.address == campais[idx]) || undefined;
                 if (found) 
                 {
-                  // console.log("found = ", found);
                   summary[idx][1] = globalWeb3.utils.fromWei(summary[idx][1].toString(), "ether");
-                  // console.log("summary[idx][1] = ", summary[idx][1]);
                   summary[idx][5] = found.name;
                   summary[idx][6] = found.description;
                   summary[idx][7] = found.imageURL;
@@ -204,7 +198,6 @@ export default function Home() {
             chainId: chainId || ""
           }
         }).then((res) => {
-          console.log(res.data);
           if (res.data && res.data.code === 0) {
             let summaryFromDB = res.data.data || [];
             if (summaryFromDB.length > 0) {
@@ -215,7 +208,6 @@ export default function Home() {
                 }
               }
             }
-            console.log("summary =", summary);
             setSummariesOfCampaigns(summary);
             dispatch(updateCampaigns(summary));
           }
@@ -238,10 +230,8 @@ export default function Home() {
       data: {
       }
     }).then((res) => {
-      console.log(res.data);
       if (res.data && res.data.code === 0) {
         let summaryFromDB = res.data.data || [];
-        console.log("summaryFromDB = ", summaryFromDB);
         if (summaryFromDB.length > 0) {
           for (let idx = 0; idx < summaryFromDB.length; idx++) {
             let found = summaryFromDB[idx] || undefined;
@@ -276,7 +266,6 @@ export default function Home() {
         chainId: chainId || ""
       }
     }).then((res) => {
-      console.log(res.data);
       if (res.data && res.data.code === 0) {
         let summaryFromDB = res.data.data || [];
         if (summaryFromDB.length > 0) {
@@ -287,7 +276,6 @@ export default function Home() {
             }
           }
         }
-        console.log("summary =", summary);
         setSummariesOfCampaigns(summary);
         dispatch(updateCampaigns(summary));
       }
@@ -325,7 +313,6 @@ export default function Home() {
           chainId: chainId || ""
         }
       }).then((res) => {
-        console.log(res.data);
         if (res.data && res.data.code === 0) {
           getAllFromSmartContract();
         }

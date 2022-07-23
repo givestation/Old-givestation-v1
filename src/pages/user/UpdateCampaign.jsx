@@ -28,7 +28,6 @@ export default function UpdateCampaign() {
     const {id} = useParams();
 
     useEffect(() => {
-        console.log("[contribute.jsx] chainId = ", chainId);
         if(account && chainId && globalWeb3 && id)
         {
             const getSummary = async () => {
@@ -52,7 +51,6 @@ export default function UpdateCampaign() {
                             address:id
                         }
                         }).then((res)=>{
-                            console.log(res.data);
                             if(res.data && res.data.code === 0)
                             {
                                 let summaryFromDB = res.data.data[0] || [];
@@ -69,7 +67,6 @@ export default function UpdateCampaign() {
 									setDescription(summaryFromDB.description);
 									setImageURL(summaryFromDB.imageURL);
                                 }
-                                console.log("summary =", summa);
                                 setSummary(summa);
                             }
                         }).catch((err)=> {
@@ -94,7 +91,6 @@ export default function UpdateCampaign() {
                         address:id
                     }
                     }).then((res)=>{
-                        console.log(res.data);
                         if(res.data && res.data.code === 0)
                         {   
                             let summa = {};
@@ -112,7 +108,6 @@ export default function UpdateCampaign() {
 								setDescription(summaryFromDB.description);
 								setImageURL(summaryFromDB.imageURL);
                             }
-                            console.log("summary =", summa);
                             setSummary(summa);
                         }
                     }).catch((err)=> {
@@ -134,7 +129,6 @@ export default function UpdateCampaign() {
 				category: category,
 			}
 		}).then((res) => {
-			console.log(res.data);
 			if (res.data && res.data.code === 0) {
 				NotificationManager.success("Camapaign is updated!");
 				navigate(`/user/my-projects`);

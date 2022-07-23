@@ -22,7 +22,6 @@ export const getCurrentUser = () => dispatch => {
 }
 
 export const setConnectedWalletAddress = (address) => dispatch => {
-    console.log("[ACTION] address  = ", address);
     dispatch({
         type: SET_WALLET_ADDR,
         payload: address
@@ -30,7 +29,6 @@ export const setConnectedWalletAddress = (address) => dispatch => {
 }
 
 export const setConnectedChainId = (chainId) => dispatch => {
-    console.log("[ACTION] chainId  = ", chainId);
     dispatch({
         type: SET_CHAIN_ID,
         payload: chainId
@@ -73,7 +71,6 @@ export const updateMintedNFTCountAfterTrading =  (count) => dispatch =>
 }
 
 export const updateGlobalWeb3 = (object) => dispatch => {
-    console.log("[ACTION] web3  = ", object);
     dispatch({
         type: UPDATE_WEB3,
         payload: object
@@ -81,7 +78,6 @@ export const updateGlobalWeb3 = (object) => dispatch => {
 }
 
 export const updateReferalAddress = (addr) => dispatch => {
-    console.log("[REFERRAL ADDRESS] addr = ", addr);
     dispatch({
         type: UPDATE_REFERAL_ADDRESS,
         payload: addr

@@ -19,22 +19,18 @@ export function Auth(state = auth, action)
 {
     switch (action.type) {
         case UPDATE_CAMPAIGNS:
-            console.log("[UPDATE_CAMPAIGNS] action.payload = ", action.payload);
             return {
                 ...state, campaigns: action.payload
             }
         case UPDATE_DONATIONS:            
-            console.log("[UPDATE_DONATIONS] action.payload = ", action.payload);
             return {
                 ...state, donations: action.payload
             }
         case UPDATE_REFERAL_ADDRESS:
-            console.log("[UPDATE_REFERAL_ADDRESS] action.payload = ", action.payload);
             return {
                 ...state, referralAddress: action.payload
             }
         case UPDATE_WEB3:
-            console.log("[UPDATE_WEB3] action.payload = ", action.payload);
             return {
                 ...state, globalWeb3: action.payload
             }
@@ -43,13 +39,9 @@ export function Auth(state = auth, action)
                 ...state, mintedNFTCount: action.payload
             }
         case SET_NATIVE_PRICE:
-            // console.log("[SET_NATIVE_PRICE]", action.payload);
             let tempNativePriceObj = {...state.nativePrice, ...action.payload};
             return {...state, nativePrice: tempNativePriceObj};
         case AUTH_SUCCESS:
-
-            // console.log("[AUTH_SUCCESS reducer] payload = ", action.payload);
-
             return { ...state, user: action.payload };
         case AUTH_LOGOUT:
             // localStorage.removeItem("jwtToken");
@@ -59,17 +51,14 @@ export function Auth(state = auth, action)
                 ...state, detail: action.payload
             }
         case SET_WALLET_ADDR:
-            // console.log("[REDUCER] address  = ", action.payload);
             return {
                 ...state, currentWallet: action.payload
             }
         case SET_CHAIN_ID:
-            // console.log("[REDUCER] chainId  = ", action.payload);
             return {
                 ...state, currentChainId: action.payload
             }
         case SET_OTHER_USER_DETAIL:
-            // console.log("[REDUCER] SET_OTHER_USER_DETAIL  = ", action.payload);
             {
                 return { ...state, otherUser: action.payload }
             }
@@ -89,6 +78,5 @@ export function GetCurrentUser(state, action) {
 }
 
 export function getGlobalWeb3(state){
-    console.log("[getGlobalWeb3] state.auth.globalWeb3 = ", state.auth.globalWeb3);
     return state.auth.globalWeb3;
 }

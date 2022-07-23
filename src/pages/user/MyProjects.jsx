@@ -30,7 +30,6 @@ const MyProjects = () => {
             chainId:chainId || ""
         }
       }).then((res)=>{
-          console.log(res.data);
           if(res.data && res.data.code === 0)
           {
             setCampaigns(res.data.data);

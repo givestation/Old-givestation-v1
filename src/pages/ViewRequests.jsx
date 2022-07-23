@@ -31,8 +31,7 @@ export default function ViewRequests() {
                 return campaign.methods.requests(index).call();
             })
         );
-        setRequests(requests);
-        console.log("[ViewRequests.jsx] requests = ", requests);   
+        setRequests(requests); 
         
         await axios({
             method: "post",
@@ -42,7 +41,6 @@ export default function ViewRequests() {
                 address:id
             }
             }).then((res)=>{
-                console.log(res.data);
                 if(res.data && res.data.code === 0)
                 {
                     let summaryFromDB = res.data.data[0] || [];
@@ -108,7 +106,6 @@ export default function ViewRequests() {
                         raised: reducedBalance
                     }
                     }).then((res)=>{
-                        console.log(res.data);
                         if(res.data && res.data.code === 0)
                         {   
                         }

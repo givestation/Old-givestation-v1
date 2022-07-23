@@ -49,7 +49,6 @@ export default function CreateCampaign() {
                     chainId:chainId || ""
                 }
             }).then((res)=>{
-                console.log(res.data);
                 if(res.data && res.data.code === 0)
                 {
                     idOnDb = res.data.data._id;
@@ -57,7 +56,6 @@ export default function CreateCampaign() {
             }).catch((err)=> {
                 console.error(err);    
             });
-            console.log("idOnDb = ", idOnDb);
             let createdCampaignAddress = null;
             if(idOnDb !== null)
             {
@@ -78,7 +76,6 @@ export default function CreateCampaign() {
                                 gas: 3000000
                             });
                         let campaigns = await factory.methods.getDeployedCampaigns().call();
-                        console.log(campaigns[campaigns.length-1]);  
                         createdCampaignAddress = campaigns[campaigns.length-1];    
                     }else{
                         console.log("creating new campaign : Invalid factoy instance.");          
@@ -93,7 +90,6 @@ export default function CreateCampaign() {
                             _id: idOnDb
                         }
                     }).then((res)=>{
-                        console.log(res.data);
                         if(res.data && res.data.code === 0)
                         {
                         }
@@ -114,7 +110,6 @@ export default function CreateCampaign() {
                             address: createdCampaignAddress,                           
                         }
                     }).then((res)=>{
-                        console.log(res.data);
                         if(res.data && res.data.code === 0)
                         {                                     
                             showPopup(!popup);

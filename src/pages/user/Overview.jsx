@@ -110,7 +110,6 @@ export default function Overview() {
               chainId:chainId || ""
           }
         }).then((res)=>{
-            console.log(res.data);
             if(res.data && res.data.code === 0)
             {
               temAry[0] = res.data.data;
@@ -126,7 +125,6 @@ export default function Overview() {
               chainId:chainId || ""
           }
         }).then((res)=>{
-            console.log(res.data);
             if(res.data && res.data.code === 0)
             {
               temAry[1] = res.data.data;
@@ -142,7 +140,6 @@ export default function Overview() {
               chainId:chainId || ""
           }
         }).then((res)=>{
-            console.log(res.data);
             if(res.data && res.data.code === 0)
             {
               temAry[2] = res.data.data;

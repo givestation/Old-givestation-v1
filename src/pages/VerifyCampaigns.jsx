@@ -26,12 +26,10 @@ export default function VerifyCampaigns() {
             data: {
             }
           }).then((res)=>{
-            console.log(res.data);
             if(res.data && res.data.code === 0)
             {
                 let summa = [], campais = [];
                 let summaryFromDB = res.data.data || [];
-                console.log("summaryFromDB = ", summaryFromDB);
                 if(summaryFromDB.length>0)
                 {
                     for(let idx = 0; idx<summaryFromDB.length; idx++)
@@ -44,7 +42,6 @@ export default function VerifyCampaigns() {
                         }
                     }
                 }
-                console.log("summa =", summa);
                 setSummary(summa);
                 setCampaigns(campais);
             }
@@ -82,7 +79,6 @@ export default function VerifyCampaigns() {
                             verified: flag
                         }
                         }).then((res)=>{
-                            console.log(res.data);
                             if(res.data && res.data.code === 0)
                             {   
                             }

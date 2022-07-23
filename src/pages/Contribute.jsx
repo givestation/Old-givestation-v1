@@ -39,13 +39,9 @@ export default function Contribute() {
       }, 2000);
     };
     
-    colorMode = localStorage.getItem('color-theme');
-    console.log("color mode : ", colorMode);
-    console.log("isTabletOrMobile : ", isTabletOrMobile);
-  
+    colorMode = localStorage.getItem('color-theme');  
 
     useEffect(() => {
-        console.log("[contribute.jsx] chainId = ", chainId);
         if(account && chainId && globalWeb3 && id)
         {
             const getSummary = async () => {
@@ -69,11 +65,9 @@ export default function Contribute() {
                             address:id
                         }
                         }).then((res)=>{
-                            console.log(res.data);
                             if(res.data && res.data.code === 0)
                             {
                                 let summaryFromDB = res.data.data[0] || [];
-                                console.log("summaryFromDB =", summaryFromDB);
                                 if(summaryFromDB !== undefined)
                                 {
                                     summa[5] = summaryFromDB.name;
@@ -84,7 +78,6 @@ export default function Contribute() {
                                     summa[12] = summaryFromDB.raised;
                                 }
                                 setCampaignIdOnDB(summa[10]);
-                                console.log("summary =", summa);
                                 setSummary(summa);
                             }
                         }).catch((err)=> {
@@ -109,7 +102,6 @@ export default function Contribute() {
                         address:id
                     }
                     }).then((res)=>{
-                        console.log(res.data);
                         if(res.data && res.data.code === 0)
                         {   
                             let summa = {};
@@ -124,7 +116,6 @@ export default function Contribute() {
                                 summa[12] = summaryFromDB.raised;
                                 setCampaignIdOnDB(summaryFromDB._id);
                             }
-                            console.log("summary =", summa);
                             setSummary(summa);
                         }
                     }).catch((err)=> {
@@ -160,7 +151,6 @@ export default function Contribute() {
                         chainId:chainId || ""
                     }
                 }).then((res)=>{
-                    console.log(res.data);
                     if(res.data && res.data.code === 0)
                     {
                         setLoading(true);    

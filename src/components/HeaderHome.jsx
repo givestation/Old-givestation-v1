@@ -113,7 +113,6 @@ export default function Header() {
 	useEffect(() => {
 		if (provider?.on) {
 			const handleAccountsChanged = (accounts) => {
-				console.log("account changed : ", accounts[0]);
 				if (accounts[0]) {
 					dispatch(setConnectedWalletAddress(accounts[0]));
 					setConnected(true);
@@ -124,13 +123,11 @@ export default function Header() {
 			};
 
 			const handleChainChanged = (chainId) => {
-				console.log("chain changed : ", chainId);
 				dispatch(setConnectedChainId(chainId));
 				setActiveNetwork(chainId);
 			};
 
 			const handleDisconnect = () => {
-				console.log("discconnected");
 				onClickDisconnect();
 			};
 
@@ -186,7 +183,6 @@ export default function Header() {
 				setActiveNetwork(chainId);
 			}
 			else {
-				console.log("Please try adding the chain to Wallet first.");
 				// setAlertType("warning");
 				// setAlertContent("Please check your wallet. Try adding the chain to Wallet first.");
 				// setAlertTitle("Warning");

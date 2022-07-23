@@ -208,10 +208,10 @@ export default function Header() {
 					<nav className="flex justify-between py-6">
 						<div className="flex justify-between items-center w-full">
 							<div className="w-2/12">
-								<div className="flex items-center whitespace-nowrap" onClick={() => { navigate("/") }}>
+								<a className="handCursor flex items-center whitespace-nowrap" link="https://app.givestaion.org" target="_self" >
 									<img className="h-12 handCursor" src="/images/logo.png" alt="logo" />
 									<h4 className='handCursor ml-1 font-bold text-xl title text-gray-700 dark:text-gray-100 tracking-widest'>GiveStation</h4>
-								</div>
+								</a>
 							</div>
 							<div className="xl:5/12 lg:w-5/12 w-5/12">
 								<ul className="hidden xl:flex " style={{ justifyContent: "center" }}>

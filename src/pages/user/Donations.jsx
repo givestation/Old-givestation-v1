@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
+import { useMediaQuery } from 'react-responsive';
 import { backendURL } from "../../config";
 import { chains } from "../../smart-contract/chains_constants";
 import { updateDonations } from "../../store/actions/auth.actions";
@@ -19,6 +20,21 @@ export default function Donations() {
   const [refresh, setRefresh] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(true);
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+  var colorMode = null;
+
+  useEffect(() => {
+    
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+  
+  colorMode = localStorage.getItem('color-theme');
+  console.log("color mode : ", colorMode);
+  console.log("isTabletOrMobile : ", isTabletOrMobile);
 
   useEffect(()=>{
     const getDonationInfo = async () => {
@@ -49,7 +65,24 @@ export default function Donations() {
       setRefresh(!refresh);
   }, [donations])
 
-  return (
+  return (<>
+    {    
+    loading ? 
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center", height: "100vh", 
+      background:
+        (colorMode == null || colorMode == "light")? 
+        "white" : "black"
+    }}>
+    <div className="loader"
+      style={{ backgroundImage:
+        (colorMode == null || colorMode == "light")? 
+          `url('/images/loader-light.gif')`
+          :
+          `url('/images/loader-dark.gif')`
+      }}
+    ></div> 
+    </div>
+    : 
     <div className="py-20 px-10 wholeWrapper">
       <div className="flex items-center pageHead">
         <h1 className="text-slate-900 dark:text-white font-bold overview">Donations</h1>
@@ -64,19 +97,19 @@ export default function Donations() {
           donations.map((item, index) => (
             <div className="flex likeCard" key={index} >
               <div className="flex w-3/4 likeDesc">
-                <img src={item.campaign.imageURL } 
+                <img src={item.campaign?.imageURL } 
                     style={{ width:"348px", height:"200px"}}
                     alt="" 
                 />
 
                 <div className="likeCardDetail w-1/2">
                   <h6 className="flex">
-                    {item.campaign.name}{" "}
+                    {item.campaign?.name}{" "}
                     {/* <img src={Kemono} alt="" style={{ marginLeft: 5 }} /> */}
                   </h6>
                   <p>
                   {
-                    item.campaign.description
+                    item.campaign?.description
                   }
                   </p>
                 </div>
@@ -86,7 +119,7 @@ export default function Donations() {
                 <div className="donationPrice" 
                   style={{ userSelect:"none" }}
                 >{(item.amount) > 0 ? item.amount :"0"}{" "}{chains[chainId.toString()]?.nativeCurrency}</div>
-                <h4 onClick={()=>{ navigate(`/campaign/${item.campaign.address}`)  }}
+                <h4 onClick={()=>{ navigate(`/campaign/${item.campaign?.address}`)  }}
                   style={{ userSelect:"none", cursor:"pointer" }}
                 >view grant</h4>
               </div>
@@ -96,5 +129,6 @@ export default function Donations() {
       </div>
       <UserFooter/>
     </div>
-  );
+  }
+  </>)
 }

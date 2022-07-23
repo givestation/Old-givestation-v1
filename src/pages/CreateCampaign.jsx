@@ -233,7 +233,6 @@ export default function CreateCampaign() {
                         >Create grant <img src="/images/arrow-right.png" alt="arrow" className='ml-1 h-5' /></button>
                     </div>
             </section>
-
             
             {popup ? <>
                 {/* popup  */}
@@ -242,9 +241,9 @@ export default function CreateCampaign() {
                         <div className="container">
                             <div className="connect-popup mx-auto">
                                 <div className="popup-head py-6 px-6 flex justify-between items-center">
-                                    <div className="closebtn cursor-pointer" onClick={() => { showPopup(!popup); navigate("/"); }}>
+                                    <a className="handcursor closebtn" href="https://app.givestaion.org" target="_self" onClick={() => { showPopup(!popup); }}>
                                         <img src="/images/closebtn.png" alt="close" className='ml-auto' />
-                                    </div>
+                                    </a>
                                 </div>
                                 <div className="px-3 text-center">
                                     <div className='flex justify-center'>

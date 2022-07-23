@@ -177,9 +177,9 @@ export default function Home() {
                 let found = summaryFromDB.find((item) => item.address == campais[idx]) || undefined;
                 if (found) 
                 {
-                  console.log("found = ", found);
+                  // console.log("found = ", found);
                   summary[idx][1] = globalWeb3.utils.fromWei(summary[idx][1].toString(), "ether");
-                  console.log("summary[idx][1] = ", summary[idx][1]);
+                  // console.log("summary[idx][1] = ", summary[idx][1]);
                   summary[idx][5] = found.name;
                   summary[idx][6] = found.description;
                   summary[idx][7] = found.imageURL;

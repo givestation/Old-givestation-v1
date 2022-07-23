@@ -8,6 +8,7 @@ import Header from '../components/HeaderHome'
 import { chains } from '../smart-contract/chains_constants';
 import { backendURL } from '../config';
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Confetti from "react-confetti";
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Category = require("../config").Category;
 
@@ -269,7 +270,9 @@ export default function CreateCampaign() {
             </> : ''}
 
             <UserFooter />
-
+            {
+                popup && <Confetti />
+            }
         </div>
     )
 }

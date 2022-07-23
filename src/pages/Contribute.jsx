@@ -290,6 +290,9 @@ export default function Contribute() {
             </> : ''}
 
             <UserFooter />
+            {
+                popup && <Confetti />
+            }
         </div>
     )
 }

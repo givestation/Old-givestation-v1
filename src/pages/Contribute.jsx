@@ -55,6 +55,7 @@ export default function Contribute() {
                             if(res.data && res.data.code === 0)
                             {
                                 let summaryFromDB = res.data.data[0] || [];
+                                console.log("summaryFromDB =", summaryFromDB);
                                 if(summaryFromDB !== undefined)
                                 {
                                     summa[5] = summaryFromDB.name;
@@ -63,8 +64,8 @@ export default function Contribute() {
                                     summa[9] = summaryFromDB.verified;
                                     summa[11] = summaryFromDB.category;
                                     summa[12] = summaryFromDB.raised;
-                                    setCampaignIdOnDB(summa[10]);
                                 }
+                                setCampaignIdOnDB(summa[10]);
                                 console.log("summary =", summa);
                                 setSummary(summa);
                             }

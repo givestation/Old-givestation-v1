@@ -6,6 +6,7 @@ import {NotificationManager} from 'react-notifications';
 import { backendURL } from '../config';
 import UserFooter from '../components/user/UserFooter';
 import Header from '../components/HeaderHome';
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { chains } from '../smart-contract/chains_constants';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -16,6 +17,7 @@ export default function Contribute() {
     const [popup, setPopup] = useState(false);
     const [donationAmount, setDonationAmount] = useState(0);
     const [campaignIdOnDB, setCampaignIdOnDB] = useState(null);
+    const [copied, setCopied] = useState(false);
     
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
@@ -158,6 +160,13 @@ export default function Contribute() {
         }
     }
 
+    const onCopyAddress = () => {
+        setCopied(true);
+        setTimeout(() => {
+          setCopied(false)
+        }, 1000);
+      } 
+
     return (
         <div>
             <Header />
@@ -263,10 +272,14 @@ export default function Contribute() {
                                     <h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>Thank you for contributing to this campaign!</h6>
                                     <p className='text-xs md:text-lg mb-5 text-white'>You successfully donated {donationAmount>=0? donationAmount : "0"} {chains[chainId?.toString()]?.nativeCurrency} </p>
                                     <div className="flex w-11/12 md:w-8/12 mx-auto input-group">
-                                        <input type="text" id="website-admin" className="rounded-none rounded-l-xl bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-xs border-gray-300 py-3 px-5 placeholder-gray-800" placeholder="Share your success on Twitter" />
-                                        <button className="inline-flex items-center text-sm text-white bg-light-blue rounded-r-xl border-0 border-r-0 px-4 md:px-9 py-3 font-medium">
-                                            Share
-                                        </button>
+                                        <input type="text" disabled id="website-admin" className="rounded-none rounded-l-xl bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-xs border-gray-300 py-3 px-5 placeholder-gray-800" placeholder="Share your success on Twitter" />
+                                         <CopyToClipboard text={`${window.location.origin}/campaign/${id}`} onCopy={onCopyAddress}>    
+                                            <button className="inline-flex items-center text-sm text-white bg-light-blue rounded-r-xl border-0 border-r-0 px-4 md:px-9 py-3 font-medium">
+                                            {
+                                                copied ? "Copied": "Share"
+                                            }
+                                            </button>
+                                        </CopyToClipboard>
                                     </div>
                                 </div>
                             </div>

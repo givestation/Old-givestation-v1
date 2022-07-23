@@ -8,6 +8,7 @@ import UserFooter from '../components/user/UserFooter';
 import Header from '../components/HeaderHome';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Confetti from "react-confetti";
+import { useMediaQuery } from 'react-responsive';
 import { chains } from '../smart-contract/chains_constants';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
@@ -26,6 +27,22 @@ export default function Contribute() {
     const refAddr = useSelector(state => state.auth.referralAddress);
 
     const {id} = useParams();
+    const [loading, setLoading] = useState(false);
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+    var colorMode = null;
+  
+    const showLoader = () => {
+      
+      setTimeout(() => {
+        setLoading(false);
+        setPopup(!popup);
+      }, 2000);
+    };
+    
+    colorMode = localStorage.getItem('color-theme');
+    console.log("color mode : ", colorMode);
+    console.log("isTabletOrMobile : ", isTabletOrMobile);
+  
 
     useEffect(() => {
         console.log("[contribute.jsx] chainId = ", chainId);
@@ -146,7 +163,11 @@ export default function Contribute() {
                     console.log(res.data);
                     if(res.data && res.data.code === 0)
                     {
-                        setPopup(!popup);
+                        setLoading(true);    
+                        setTimeout(()=>
+                        {          
+                            showLoader();
+                        }, 2000);          
                     }
                 }).catch((err)=> {
                     console.error(err);    
@@ -169,7 +190,24 @@ export default function Contribute() {
         }, 1000);
       } 
 
-    return (
+    return (<>
+        {
+          loading ? 
+          <div style={{display:"flex", justifyContent:"center", alignItems:"center", height: "100vh", 
+            background:
+              (colorMode == null || colorMode == "light")? 
+              "white" : "black"
+          }}>
+          <div className="loader"
+            style={{ backgroundImage:
+              (colorMode == null || colorMode == "light")? 
+                `url('/images/loader-light.gif')`
+                :
+                `url('/images/loader-dark.gif')`
+            }}
+          ></div> 
+          </div>
+          : 
         <div>
             <Header />
 
@@ -295,5 +333,6 @@ export default function Contribute() {
                 popup && <Confetti />
             }
         </div>
-    )
+  }
+  </>)
 }

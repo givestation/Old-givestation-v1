@@ -7,6 +7,7 @@ import { backendURL } from "../../config";
 import UserFooter from "../../components/user/UserFooter";
 import overviewImage from "./assets/overviewImage.svg";
 import { chains } from "../../smart-contract/chains_constants";
+import { NavLink } from "react-router-dom";
 const ERC20Abi = require("../../smart-contract/build/ERC20.json");
 
 export default function Overview() {
@@ -209,9 +210,9 @@ export default function Overview() {
               <p className="giveP text-slate-900 dark:text-white">
                 A layer 2 crowdfunding platform that reward you for donating.
               </p>
-              <a href="https://app.givestation.org" target="_blank" >
+              <NavLink to="/" >
                <button className="exploreBtn" >Explore Grants</button>
-              </a>
+              </NavLink>
             </div>
           </div>
       </div>      

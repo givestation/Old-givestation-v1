@@ -297,11 +297,10 @@ export default function Header() {
 										<div className="bg-gray-800">
 											<ul className="md:flex-col md:min-w-full flex flex-col list-none pb-8" onClick={() => { setMenu(!menu) }}>
 												<li className="items-center hover:bg-primary">
-													<a link="https://app.givestaion.org" 
-														target="_self" 
+													<NavLink to="/"
 														className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
 														Grants
-													</a>
+													</NavLink>
 												</li>
 												<li className="items-center hover:bg-primary">
 													<NavLink to="/create-campaign" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {NotificationManager} from "react-notifications";
 import axios from "axios";
 import UserFooter from '../components/user/UserFooter';
@@ -236,9 +236,9 @@ export default function CreateCampaign() {
                         <div className="container">
                             <div className="connect-popup mx-auto">
                                 <div className="popup-head py-6 px-6 flex justify-between items-center">
-                                    <a className="handcursor closebtn" href="https://app.givestaion.org" target="_self" onClick={() => { showPopup(!popup); }}>
+                                    <NavLink className="handcursor closebtn" to="/"  onClick={() => { showPopup(!popup); }}>
                                         <img src="/images/closebtn.png" alt="close" className='ml-auto' />
-                                    </a>
+                                    </NavLink>
                                 </div>
                                 <div className="px-3 text-center">
                                     <div className='flex justify-center'>

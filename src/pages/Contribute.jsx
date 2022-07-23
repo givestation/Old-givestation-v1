@@ -7,6 +7,7 @@ import { backendURL } from '../config';
 import UserFooter from '../components/user/UserFooter';
 import Header from '../components/HeaderHome';
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Confetti from "react-confetti";
 import { chains } from '../smart-contract/chains_constants';
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");

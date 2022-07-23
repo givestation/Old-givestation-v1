@@ -63,7 +63,7 @@ export default function Contribute() {
                                     summa[9] = summaryFromDB.verified;
                                     summa[11] = summaryFromDB.category;
                                     summa[12] = summaryFromDB.raised;
-                                    setCampaignIdOnDB(summaryFromDB._id);
+                                    setCampaignIdOnDB(summa[10]);
                                 }
                                 console.log("summary =", summa);
                                 setSummary(summa);

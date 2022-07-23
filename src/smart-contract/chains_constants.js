@@ -19,15 +19,15 @@ export const chains = {
     [BSC_CHAIN_ID]:{
         rpcUrl:"https://bsc-dataseed1.binance.org/",
         nativeCurrency:"BNB",
-        factoryAddress:"0x5c755740D47c662878fCD56d6576Fdbf739C78Ff",
-        givePointAddress:"0x085B7276052DB6dDfae16424c70960B10fF2aA61",
+        factoryAddress:"0x3Fa06e4703B9c053AF142328f8654Cb117FE7FD9",
+        givePointAddress:"0xDD3A45a81eb884cd2EE773DE4921F76E8b5B712c",
         blockScanUrl:"https://bscscan.com/"
     },
     [BSC_NETWORK_ID]:{
         rpcUrl:"https://bsc-dataseed1.binance.org/",
         nativeCurrency:"BNB",
-        factoryAddress:"0x5c755740D47c662878fCD56d6576Fdbf739C78Ff",
-        givePointAddress:"0x085B7276052DB6dDfae16424c70960B10fF2aA61",
+        factoryAddress:"0x3Fa06e4703B9c053AF142328f8654Cb117FE7FD9",
+        givePointAddress:"0xDD3A45a81eb884cd2EE773DE4921F76E8b5B712c",
         blockScanUrl:"https://bscscan.com/"
     },
     [POLYGON_CHAIN_ID]:{

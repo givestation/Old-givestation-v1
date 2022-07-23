@@ -1,13 +1,10 @@
 import React from "react";
-import LikeCampImg from "./assets/likeCampImg.svg";
-import Kemono from "./assets/Kemono.svg";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import UserFooter from "../../components/user/UserFooter";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
-import { useMediaQuery } from 'react-responsive';
 import { backendURL } from "../../config";
 import { chains } from "../../smart-contract/chains_constants";
 import { updateDonations } from "../../store/actions/auth.actions";
@@ -21,20 +18,6 @@ export default function Donations() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(true);
-  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
-  var colorMode = null;
-
-  useEffect(() => {
-    
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-  }, []);
-  
-  colorMode = localStorage.getItem('color-theme');
-  console.log("color mode : ", colorMode);
-  console.log("isTabletOrMobile : ", isTabletOrMobile);
 
   useEffect(()=>{
     const getDonationInfo = async () => {
@@ -65,24 +48,7 @@ export default function Donations() {
       setRefresh(!refresh);
   }, [donations])
 
-  return (<>
-    {    
-    loading ? 
-    <div style={{display:"flex", justifyContent:"center", alignItems:"center", height: "100vh", 
-      background:
-        (colorMode == null || colorMode == "light")? 
-        "white" : "black"
-    }}>
-    <div className="loader"
-      style={{ backgroundImage:
-        (colorMode == null || colorMode == "light")? 
-          `url('/images/loader-light.gif')`
-          :
-          `url('/images/loader-dark.gif')`
-      }}
-    ></div> 
-    </div>
-    : 
+  return (
     <div className="py-20 px-10 wholeWrapper">
       <div className="flex items-center pageHead">
         <h1 className="text-slate-900 dark:text-white font-bold overview">Donations</h1>
@@ -129,6 +95,5 @@ export default function Donations() {
       </div>
       <UserFooter/>
     </div>
-  }
-  </>)
+    )
 }

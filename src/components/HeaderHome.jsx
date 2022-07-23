@@ -208,17 +208,17 @@ export default function Header() {
 					<nav className="flex justify-between py-6">
 						<div className="flex justify-between items-center w-full">
 							<div className="w-2/12">
-								<a className="handCursor flex items-center whitespace-nowrap" link="https://app.givestaion.org" target="_self" >
+								<div className="flex items-center whitespace-nowrap" onClick={() => { navigate("/") }}>
 									<img className="h-12 handCursor" src="/images/logo.png" alt="logo" />
 									<h4 className='handCursor ml-1 font-bold text-xl title text-gray-700 dark:text-gray-100 tracking-widest'>GiveStation</h4>
-								</a>
+								</div>
 							</div>
 							<div className="xl:5/12 lg:w-5/12 w-5/12">
 								<ul className="hidden xl:flex " style={{ justifyContent: "center" }}>
 									<li className="mr-3">
-										<a className="handCursor text-gray-700  font-bold dark:text-gray-100" href="https://app.givestation.org" target="_self"	>
+										<NavLink className="handCursor text-gray-700  font-bold dark:text-gray-100"	to="/">
 											Grants
-										</a>
+										</NavLink>
 									</li>									
 									<li className="mr-3"><div className={'handCursor text-gray-700  font-bold dark:text-gray-100'} onClick={() => { navigate("/create-campaign") }}>Create a grant</div></li>
 									<li className="mr-3">
@@ -226,7 +226,7 @@ export default function Header() {
 											Givestation DAO
 										</a>
 									</li>
-									<li className="mr-3"><div className={'handCursor text-gray-700 font-bold dark:text-gray-100'} onClick={() => { navigate("/faq") }} >About</div></li>									
+									<li className="mr-3"><div className={'handCursor text-gray-700 font-bold dark:text-gray-100'} onClick={() => { navigate("/") }} >About</div></li>									
 								</ul>
 							</div>
 							<div className="xl:w-5/12 lg:w-6/12 w-6/12">
@@ -320,7 +320,7 @@ export default function Header() {
 													</a>
 												</li>
 												<li className="items-center hover:bg-primary">
-													<NavLink to="/faq" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
+													<NavLink to="/" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
 														About
 													</NavLink>
 												</li>

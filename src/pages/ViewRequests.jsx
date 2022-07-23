@@ -240,14 +240,14 @@ export default function ViewRequests() {
         </>:<>
             <section className="main py-24 text-center">
                 <div className="container">
-                    <h1 className='dark-text my-4 text-xl font-bold dark:text-gray-100'>No request for this campaign</h1>
+                    <h1 className='dark-text my-4 text-xl font-bold dark:text-gray-100'>No request for this grant</h1>
                     <p className='dark-text mb-4 text-lg dark:text-gray-100'>Kindly create a withdrawal request to withdraw funds from this campaign.</p>
                     <button className='my-5 campaignbtn bg-gradient-primary text-white  font-bold w-full sm:w-5/12 text-center rounded-lg py-3 px-4 flex justify-center items-center mx-auto'
                         onClick={() => {navigate(`/create-request/${id}`)}}
                     >Create withdrawal request</button>
                     <button className='my-5 campaignbtn bg-gray-gradient text-white font-bold w-full sm:w-5/12 text-center rounded-lg py-3 px-4 flex justify-center items-center mx-auto' 
                         onClick={() => {navigate(`/campaign/${id}`)}}
-                    >Back to campaign</button>
+                    >Back to grant</button>
                 </div>
             </section>
 

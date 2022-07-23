@@ -140,7 +140,7 @@ export default function CreateCampaign() {
         <div>
             <Header />
             <section className="heading pt-16 pb-4">
-                <h1 className="text-center text-2xl font-bolder dark:text-gray-100">Create a new campaign</h1>
+                <h1 className="text-center text-2xl font-bolder dark:text-gray-100">Create a new grant</h1>
             </section>
             <section className="form w-10/12 md:w-6/12 mx-auto py-6">  
             
@@ -218,7 +218,7 @@ export default function CreateCampaign() {
                     <div className="form-group mb-6 my-3 mt-12">
                         <button className='campaignbtn bg-gradient-primary text-white font-bold sm:w-11/12 w-full text-center rounded-lg py-3 px-4 flex justify-center items-center shadow-primary' 
                             onClick={() => { onClickCreateCampaign() }} 
-                        >Create campaign <img src="/images/arrow-right.png" alt="arrow" className='ml-1 h-5' /></button>
+                        >Create grant <img src="/images/arrow-right.png" alt="arrow" className='ml-1 h-5' /></button>
                     </div>
             </section>
 
@@ -238,14 +238,14 @@ export default function CreateCampaign() {
                                     <div className='flex justify-center'>
                                         <img src="/images/creation complete.png" alt="casual" className='mx-auto' />
                                     </div>
-                                    {/* <h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>Thank you for contributing to this campaign!</h6>
-                                    <p className='text-xs md:text-lg mb-5 text-white'>You successfully donated {donationAmount>=0? donationAmount : "0"} {chains[chainId?.toString()]?.nativeCurrency} </p>
+                                    <h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>you have successfully created a new grant!</h6>
+                                    <p className='text-xs md:text-lg mb-5 text-white'>Wishing you the very best</p>
                                     <div className="flex w-11/12 md:w-8/12 mx-auto input-group">
-                                        <input type="text" id="website-admin" className="rounded-none rounded-l-xl bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-xs border-gray-300 py-3 px-5 placeholder-gray-800" placeholder="Share your success on Twitter" />
+                                        <input type="text" id="website-admin" className="rounded-none rounded-l-xl bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-xs border-gray-300 py-3 px-5 placeholder-gray-800" placeholder="Share your grant on Twitter" />
                                         <button className="inline-flex items-center text-sm text-white bg-light-blue rounded-r-xl border-0 border-r-0 px-4 md:px-9 py-3 font-medium">
                                             Share
                                         </button>
-                                    </div> */}
+                                    </div>
                                 </div>
                             </div>
                         </div>

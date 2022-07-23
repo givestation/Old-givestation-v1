@@ -54,7 +54,7 @@ const MyProjects = () => {
     <div>
       <div className="py-20 px-10 wholeWrapper">
         <div className="flex items-center pageHead">
-          <h1 className="text-slate-900 dark:text-white font-bold overview">My Projects</h1>
+          <h1 className="text-slate-900 dark:text-white font-bold overview">My Grants</h1>
           <div className="accountNo ml-7" style={{textAlign:"center"}}>
             {account && <h2>{account.toString().substring(0, 6)+"..."+account.toString().substring(38, 42)}</h2>}
           </div>

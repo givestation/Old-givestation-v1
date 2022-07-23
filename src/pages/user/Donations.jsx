@@ -88,7 +88,7 @@ export default function Donations() {
                 >{(item.amount) > 0 ? item.amount :"0"}{" "}{chains[chainId.toString()]?.nativeCurrency}</div>
                 <h4 onClick={()=>{ navigate(`/campaign/${item.campaign.address}`)  }}
                   style={{ userSelect:"none", cursor:"pointer" }}
-                >view campaign</h4>
+                >view grant</h4>
               </div>
             </div>
           ))

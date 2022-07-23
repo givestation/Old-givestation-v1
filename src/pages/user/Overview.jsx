@@ -54,7 +54,7 @@ export default function Overview() {
     },
     {
       id: 3,
-      cardName: "CAMPAIGNS",
+      cardName: "GRANTS",
       svg: (
         <svg
           width="24"
@@ -212,7 +212,9 @@ export default function Overview() {
               <p className="giveP text-slate-900 dark:text-white">
                 A layer 2 crowdfunding platform that reward you for donating.
               </p>
-              <button className="exploreBtn" onClick={() => { navigate("/") }}>Explore Campaigns</button>
+              <a href="https://app.givestation.org" target="_blank" >
+               <button className="exploreBtn" >Explore Grants</button>
+              </a>
             </div>
           </div>
       </div>      

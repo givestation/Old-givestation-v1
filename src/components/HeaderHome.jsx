@@ -298,13 +298,27 @@ export default function Header() {
 										<div className="bg-gray-800">
 											<ul className="md:flex-col md:min-w-full flex flex-col list-none pb-8" onClick={() => { setMenu(!menu) }}>
 												<li className="items-center hover:bg-primary">
-													<NavLink to="/create-campaign" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
-														<h5 className='text-white'>Create Campaign</h5>
+													<a href="https://app.givestaion.org" 
+														target="_blank" 
+														className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
+														Grants
+													</a>
+												</li>
+												<li className="items-center hover:bg-primary">
+													<a link="ipfs://bafybeigoqsn4s5hnr32olfj7tqrqwz2lejmby4y5to75gnzpvdlm23g76a/#/givestation.eth" 
+														target="_blank" 
+														className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
+														<h5 className='text-white'>Create a grant</h5>
+													</a>
+												</li>
+												<li className="items-center hover:bg-primary">
+													<NavLink to="/" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
+														<h5 className='text-white'>Civestation DAO</h5>
 													</NavLink>
 												</li>
 												<li className="items-center hover:bg-primary">
-													<NavLink to="/faq" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
-														How it works
+													<NavLink to="/" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
+														About
 													</NavLink>
 												</li>
 											</ul>

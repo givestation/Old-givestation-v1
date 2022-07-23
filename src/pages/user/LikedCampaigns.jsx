@@ -114,7 +114,7 @@ const LikedCampaigns = () => {
                   item.value===false && <img src={HeartBlankIcon} alt="" onClick={()=>{ onClickFavorites(item.campaign._id, true) }} />
                 }
                 <h4 onClick={() => { navigate(`/campaign/${item.campaign.address}`) }}
-                >view campaign</h4>
+                >view grant</h4>
               </div>
             </div>
           ))

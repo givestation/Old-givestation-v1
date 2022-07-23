@@ -131,7 +131,7 @@ export default function Sidebar() {
                   ) : (
                     <img src="/images/user/note.svg" alt="note" />
                   )}
-                  <span className="title ml-5">my projects</span>
+                  <span className="title ml-5">my grants</span>
                 </NavLink>
               </li>
               }
@@ -321,7 +321,7 @@ export default function Sidebar() {
                             ) : (
                               <img src="/images/user/note.svg" alt="note" />
                             )}
-                            <span className="title ml-5">my projects</span>
+                            <span className="title ml-5">my grants</span>
                           </NavLink>
                         </li>
                         }

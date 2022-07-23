@@ -222,7 +222,6 @@ export default function Header() {
 											Givestation DAO
 										</a>
 									</li>
-									<li className="mr-3"><div className={'handCursor text-gray-700 font-bold dark:text-gray-100'} onClick={() => { navigate("/") }} >About</div></li>									
 								</ul>
 							</div>
 							<div className="xl:w-5/12 lg:w-6/12 w-6/12">
@@ -308,15 +307,9 @@ export default function Header() {
 													</NavLink>
 												</li>
 												<li className="items-center hover:bg-primary">
-													<a link="ipfs://bafybeigoqsn4s5hnr32olfj7tqrqwz2lejmby4y5to75gnzpvdlm23g76a/#/givestation.eth" 
-														target="_blank" 
+													<NavLink to="ipfs://bafybeigoqsn4s5hnr32olfj7tqrqwz2lejmby4y5to75gnzpvdlm23g76a/#/givestation.eth" 
 														className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
 														<h5 className='text-white'>Givestaion DAO</h5>
-													</a>
-												</li>
-												<li className="items-center hover:bg-primary">
-													<NavLink to="/" className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
-														About
 													</NavLink>
 												</li>
 											</ul>

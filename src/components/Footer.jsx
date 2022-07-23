@@ -21,7 +21,6 @@ export default function Footer() {
                                     <li className="mr-9"><NavLink className='text-gray-700  dark:text-gray-100 font-bold' to="/page-two">Github</NavLink></li>
                                     <li className="mr-9"><NavLink className='text-gray-700  dark:text-gray-100 font-bold' to="/page-three">Telegram</NavLink></li>
                                     <li className="mr-9"><NavLink className='text-gray-700  dark:text-gray-100 font-bold' to="/page-three">Twitter</NavLink></li>
-                                    <li className=""><button className='text-gray-700  dark:text-gray-100 font-bold' onClick={() => { navigate("/faq") }}>FAQ</button></li>
                                 </ul>
                             </div>
                         </div>

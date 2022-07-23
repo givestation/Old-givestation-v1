@@ -23,11 +23,6 @@ const UserFooter = () =>
                 About
                 </h1>
             }
-            <h1 className="handCursor text-slate-900 dark:text-white font-bold text-xl ml-12"
-                onClick={() => { navigate("/faq") }}
-            >
-            FAQ
-            </h1>
         </div>
     )
 }

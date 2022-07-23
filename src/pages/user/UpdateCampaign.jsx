@@ -189,7 +189,7 @@ export default function UpdateCampaign() {
 					</div> */}
 				</div>
 				<div className="form-group mb-6 my-3">
-					<label className="block mb-2 dark:text-gray-100">Campaign Description</label>
+					<label className="block mb-2 dark:text-gray-100">Grant Description</label>
 					<div className="flex flex-wrap">
 						<textarea type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary'
 							onChange={(e) => { setDescription(e.target.value) }} value={description || ""}

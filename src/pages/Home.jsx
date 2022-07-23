@@ -359,7 +359,7 @@ export default function Home() {
               to="/create-campaign"
               className="createbtn sm:px-4 px-2 text-xs sm:text-xs md:text-lg py-2 pb-3"
             >
-              Create Campaign
+              Create a grant
             </NavLink>
           </div>
         </div>
@@ -368,7 +368,7 @@ export default function Home() {
       <section className="main-home py-5 pb-12">
         <div className="container">
           <div className="flex justify-between items-center mb-6">
-            <h2 className='text-xl font-bold dark:text-gray-100'>Open Campaigns</h2>
+            <h2 className='text-xl font-bold dark:text-gray-100'>Explore Grants</h2>
             <div className='hidden md:flex flex-wrap items-start'>
               <div class="relative  text-gray-600 focus-within:text-gray-400">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-2">

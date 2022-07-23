@@ -213,7 +213,7 @@ export default function Contribute() {
                             </div>
                         </div>
                         <div className="right pl-0 md:pl-12">
-                            <h4 className='font-bold my-6 text-lg value dark:text-gray-100'>Campaign Balance</h4>
+                            <h4 className='font-bold my-6 text-lg value dark:text-gray-100'>Grant Balance</h4>
                             <div className="range my-1">
                                 <input type="range" name="range" id='range' min="0" max={summary[8]>=0? globalWeb3?.utils.fromWei(summary[8].toString(), "ether").toString() : "0"} className='w-full h-2 bg-primary rounded-lg appearance-none cursor-pointer' 
                                     value={summary[1]>=0? globalWeb3?.utils.fromWei(summary[1], "ether").toString() : "0"}

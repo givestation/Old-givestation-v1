@@ -137,7 +137,7 @@ export default function ViewRequests() {
             <div className="container">
                 <div className="flex justify-between flex-wrap">
                     <NavLink to={`/campaign/${id}`} className='flex items-center text-lg font-bold dark:text-gray-100'><span className=''><img className='w-2/3 mt-1' src="/images/arrow-left.png" alt="blue arrow" /></span>Back</NavLink>
-                    <h4 className='font-bold my-6 text-lg dark:text-gray-100'>Campaign Balance :<span className='text-dark-blue number'> {summary[1]>=0? globalWeb3?.utils.fromWei(summary[1], "ether") : "0"} {chains[chainId?.toString()]?.nativeCurrency} </span> </h4>
+                    <h4 className='font-bold my-6 text-lg dark:text-gray-100'>Grant Balance :<span className='text-dark-blue number'> {summary[1]>=0? globalWeb3?.utils.fromWei(summary[1], "ether") : "0"} {chains[chainId?.toString()]?.nativeCurrency} </span> </h4>
                 </div>
                 { requests.length>0 &&                     
                     <div className="flex my-6 justify-between flex-wrap px-8">

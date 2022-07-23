@@ -222,7 +222,7 @@ export default function Header() {
 											GiveDAO
 										</div>
 									</li>
-									<li className="mr-3"><div className={'handCursor text-gray-700  font-bold dark:text-gray-100'} onClick={() => { navigate("/create-campaign") }}>Create Campaign</div></li>
+									<li className="mr-3"><div className={'handCursor text-gray-700  font-bold dark:text-gray-100'} onClick={() => { navigate("/create-campaign") }}>Create a grant</div></li>
 									<li className="mr-3"><div className={'handCursor text-gray-700 font-bold dark:text-gray-100'} onClick={() => { navigate("/faq") }} >How it works</div></li>
 								</ul>
 							</div>

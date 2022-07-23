@@ -202,7 +202,7 @@ export default function Home() {
             let summaryFromDB = res.data.data || [];
             if (summaryFromDB.length > 0) {
               for (let idx = 0; idx < summary.length; idx++) {
-                let found = summaryFromDB.find((item) => item.campaign.address == campais[idx]) || undefined;
+                let found = summaryFromDB.find((item) => item.campaign?.address == campais[idx]) || undefined;
                 if (found) {
                   summary[idx][13] = found.value;
                 }

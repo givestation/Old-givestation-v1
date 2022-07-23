@@ -171,7 +171,7 @@ export default function CreateCampaign() {
                     <div className="form-group mb-6 my-3">
                         <label className="block mb-2 dark:text-gray-100">Minimum Contribution Amount</label>
                         <div className="flex flex-wrap">
-                            <input type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-9/12 md:w-9/12 lg:w-9/12' 
+                            <input type="number" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-9/12 md:w-9/12 lg:w-9/12' 
                                 onChange={(e) => {onChangeMinimum(e.target.value)}} value={minimum}
                             ></input>
                             <div className='w-full sm:w-2/12 md:w-2/12 lg:w-2/12 sm:mt-0 mt-4'>
@@ -206,7 +206,7 @@ export default function CreateCampaign() {
                     <div className="form-group mb-6 my-3">
                         <label className="block mb-2 dark:text-gray-100">Target Amount</label>
                         <div className="flex flex-wrap">
-                            <input type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-19/12 md:w-9/12 lg:w-9/12'
+                            <input type="number" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-19/12 md:w-9/12 lg:w-9/12'
                                 onChange={(e) => {onChangeTarget(e.target.value)}} value={target}
                             ></input>
                             <div className='w-full sm:w-2/12 md:w-2/12 lg:w-2/12 sm:mt-0 mt-4'>

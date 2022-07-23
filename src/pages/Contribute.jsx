@@ -225,7 +225,7 @@ export default function Contribute() {
                                 <h4 className='my-6 text-lg value dark:text-gray-100'>Target of {summary[8]>=0? globalWeb3?.utils.fromWei(summary[8], "ether") : "0"} {chains[chainId?.toString()]?.nativeCurrency}</h4>
                             </div>
                             <div className="form mt-5">
-                                <input type="text" className='bg-white mb-7 px-6 py-6 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary' placeholder='Enter amount' 
+                                <input type="number" className='bg-white mb-7 px-6 py-6 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary' placeholder='Enter amount' 
                                     onChange={(e) => {onChangeDonationAmount(e.target.value)}}
                                 />
                                 <button className='campaignbtn bg-gradient-primary text-white font-bold w-full text-center rounded-lg py-4 px-4 flex justify-center items-center shadow-primary' 

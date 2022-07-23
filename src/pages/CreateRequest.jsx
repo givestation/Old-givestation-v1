@@ -91,7 +91,7 @@ export default function CreateRequest() {
                 ></input>
                 </div>
                 <div className="mt-4 ">
-                <input type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-5/12 md:w-5/12 lg:w-5/12'
+                <input type="number" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 w-full border-0 shadow-secondary sm:w-5/12 md:w-5/12 lg:w-5/12'
                     placeholder='Amount in ETH'  
                     onChange={(e) => {onChangeAmount(e.target.value)}} value={amount}
                 ></input>

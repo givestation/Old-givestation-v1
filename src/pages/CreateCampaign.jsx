@@ -18,6 +18,7 @@ export default function CreateCampaign() {
     const [imageURL, setImageURL] = useState("");
     const [target, setTarget] = useState(10);
     const [dropdown, setDropdown] = useState(false);
+    const [popup, showPopup] = useState(false);
 
     const chainId = useSelector(state => state.auth.currentChainId);
     const account = useSelector(state => state.auth.currentWallet);
@@ -110,8 +111,8 @@ export default function CreateCampaign() {
                     }).then((res)=>{
                         console.log(res.data);
                         if(res.data && res.data.code === 0)
-                        {                                              
-                            navigate("/");
+                        {                                     
+                            showPopup(!popup);
                         }
                     }).catch((err)=> {
                         console.error(err);    
@@ -220,6 +221,38 @@ export default function CreateCampaign() {
                         >Create campaign <img src="/images/arrow-right.png" alt="arrow" className='ml-1 h-5' /></button>
                     </div>
             </section>
+
+            
+            {popup ? <>
+                {/* popup  */}
+                <section className="popup fixed w-full top-0 left-0 z-50 min-h-screen flex items-center justify-center">
+                    <div className="popup-other">
+                        <div className="container">
+                            <div className="connect-popup mx-auto">
+                                <div className="popup-head py-6 px-6 flex justify-between items-center">
+                                    <div className="closebtn cursor-pointer" onClick={() => { showPopup(!popup); navigate("/"); }}>
+                                        <img src="/images/closebtn.png" alt="close" className='ml-auto' />
+                                    </div>
+                                </div>
+                                <div className="px-3 text-center">
+                                    <div className='flex justify-center'>
+                                        <img src="/images/creation complete.png" alt="casual" className='mx-auto' />
+                                    </div>
+                                    {/* <h6 className='text-sm md:text-2xl mt-3 mb-1 text-white font-bold'>Thank you for contributing to this campaign!</h6>
+                                    <p className='text-xs md:text-lg mb-5 text-white'>You successfully donated {donationAmount>=0? donationAmount : "0"} {chains[chainId?.toString()]?.nativeCurrency} </p>
+                                    <div className="flex w-11/12 md:w-8/12 mx-auto input-group">
+                                        <input type="text" id="website-admin" className="rounded-none rounded-l-xl bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-xs border-gray-300 py-3 px-5 placeholder-gray-800" placeholder="Share your success on Twitter" />
+                                        <button className="inline-flex items-center text-sm text-white bg-light-blue rounded-r-xl border-0 border-r-0 px-4 md:px-9 py-3 font-medium">
+                                            Share
+                                        </button>
+                                    </div> */}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </> : ''}
+
             <UserFooter />
 
         </div>

@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ARBITRUM_NETWORK_ID, BSC_NETWORK_ID, chains, GNOSIS_NETWORK_ID, OPTIMISTIC_NETWORK_ID, POLYGON_NETWORK_ID } from '../smart-contract/chains_constants';
 import { setNativePriceOnUSD, updateCampaigns, updateReferalAddress } from '../store/actions/auth.actions';
 import { backendURL } from '../config';
+import isEmpty from "../utilities/isEmpty";
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
 const Campaign = require("../smart-contract/build/Campaign.json");
 const Category = require("../config").Category;
@@ -243,16 +244,19 @@ export default function Home() {
           for (let idx = 0; idx < summaryFromDB.length; idx++) {
             let found = summaryFromDB[idx] || undefined;
             if (found) {
-              summary[idx][5] = found.name;
-              summary[idx][6] = found.description;
-              summary[idx][7] = found.imageURL;
-              summary[idx][9] = found.verified;
-              summary[idx][11] = found.category;
-              summary[idx][1] = found.raised;
-              summary[idx][12] = found.likes;
-              summary[idx][13] = false;
-              summary[idx][14] = found._id;
-              summary[idx][15] = found.chainId;
+              let newObj = {
+                5: found.name,
+                6: found.description,
+                7: found.imageURL,
+                9: found.verified,
+                11: found.category,
+                1: found.raised,
+                12: found.likes,
+                13: false,
+                14: found._id,
+                15: found.chainId,                
+              };
+              summary[idx] = newObj;
               campais[idx] = found.address;
             }
           }
@@ -348,7 +352,7 @@ export default function Home() {
         <div className="container">
           <div className="left md:w-7/12 sm:w-9/12 w-full sm:pl-12 pl-6 pr-3">
             <h1 className="text-white mb-3 md:mb-5 text-lg sm:text-xl md:text-xl lg:text-4xl xl:text-4.5xl font-semibold">
-              A Layer 2 crowdfunding <br /> platform created by <br /> you, for
+              A layer 2 Give-To-Earn <br /> grant protocol created by <br /> you, for
               everyone.
             </h1>
             <NavLink
@@ -468,70 +472,72 @@ export default function Home() {
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 ">
-            {SummariesOfCampaigns && SummariesOfCampaigns.length > 0 && SummariesOfCampaigns.map((data, index) => (
-              <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' style={{maxWidth:"400px"}} key={index} >
-                <div className="flex flex-wrap md:justify-between lg:justify-between align-items-center"
-                  style={{ userSelect: "none", display:"flex", justifyContent:"space-between" }}
-                >
-                  <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8) + "..."}</h5>
-                  <div className='flex flex-row justify-between gap-3 align-items-center' style={{ marginRight:"3px" }}>
-                    <div className='relative handcursor' style={{textAlign:"center"}} onClick={() => { onClickFavorites(data[14], !data[13]) }} >
-                      <img src={data[13] === false ? HeartBlankIcon : HeartIcon} alt="" className='handcursor'                      
-                        style={{ width: "28px", height: "28px", cursor: "pointer" }}
-                      />
-                      <span className={` absolute value text-md ${data[13] === false ? "handcursor text-slate-800":"handcursor text-gray-100"}`} style={{ top:"0rem", left:"0.5rem" }}>{data[12]}</span>
-                    </div>
-                    <CopyToClipboard text={`${window.location.origin}/campaign/${campaigns[index]}`} onCopy={onCopyAddress}>
-                      <div style={{
-                        display: "flex", flexWrap: "wrap", flexDirection: "row",
-                        cursor: "pointer",
-                        userSelect: "none"
-                      }} >
-                        <img src="/images/share-button-svgrepo-com.svg"
-                          style={{
-                            width: "16px",
-                            height: "16px",
-                            marginTop: "2px"
-                          }} alt="tick"
+            {SummariesOfCampaigns && SummariesOfCampaigns.length > 0 && SummariesOfCampaigns.map((data, index) => 
+            (
+                <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' style={{maxWidth:"400px"}} key={index} >
+                  <div className="flex flex-wrap md:justify-between lg:justify-between align-items-center"
+                    style={{ userSelect: "none", display:"flex", justifyContent:"space-between" }}
+                  >
+                    <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8) + "..."}</h5>
+                    <div className='flex flex-row justify-between gap-3 align-items-center' style={{ marginRight:"3px" }}>
+                      <div className='relative handcursor' style={{textAlign:"center"}} onClick={() => { onClickFavorites(data[14], !data[13]) }} >
+                        <img src={data[13] === false ? HeartBlankIcon : HeartIcon} alt="" className='handcursor'                      
+                          style={{ width: "28px", height: "28px", cursor: "pointer" }}
                         />
-                        {
-                          copied ? <span className='text-blue' >Copied</span> : <span className='text-blue' >{" "}</span>
-                        }
+                        <span className={` absolute value text-md ${data[13] === false ? "handcursor text-slate-800":"handcursor text-gray-100"}`} style={{ top:"0rem", left:"0.5rem" }}>{data[12]}</span>
                       </div>
-                    </CopyToClipboard>
+                      <CopyToClipboard text={`${window.location.origin}/campaign/${campaigns[index]}`} onCopy={onCopyAddress}>
+                        <div style={{
+                          display: "flex", flexWrap: "wrap", flexDirection: "row",
+                          cursor: "pointer",
+                          userSelect: "none"
+                        }} >
+                          <img src="/images/share-button-svgrepo-com.svg"
+                            style={{
+                              width: "16px",
+                              height: "16px",
+                              marginTop: "2px"
+                            }} alt="tick"
+                          />
+                          {
+                            copied ? <span className='text-blue' >Copied</span> : <span className='text-blue' >{" "}</span>
+                          }
+                        </div>
+                      </CopyToClipboard>
+                    </div>
                   </div>
-                </div>
-                <div className="image relative my-4 flex justify-center">
-                  <img src={data[7]} alt="item" className="rounded-lg my-3 w-full" 
-                    style={{ width:"348px", height:"200px"}}
-                  />
-                  {
-                    data[9] === true ?
-                      <img src="/images/tick.png" alt="tick" className='absolute right-5 top-5' />
-                      : <></>
-                  }
-                </div>
-                <div className="body">
-                  <div className="flex flex-wrap justify-between">
-                    <h4 className='text-blue text-sm title mb-3 '>{data[5]}</h4>
-                    <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-1'>{data[11]}</button>
-                  </div>
-                  <p className='text-blue description mb-3'>{data[6]}</p>
-                  <p className='para'>{"Raised"}</p>
-                  <h6 className='content mb-5 mt-1 text-sm'>
-                    {Number(data[1]?.toString() || "0").toFixed(3)}{" "}{chains[data[15]]?.nativeCurrency}
+                  <div className="image relative my-4 flex justify-center">
+                    <img src={data[7]} alt="item" className="rounded-lg my-3 w-full" 
+                      style={{ width:"348px", height:"200px"}}
+                    />
                     {
-                      Number(nativePrices[data[15]])>0?
-                      " ($"+(Number(nativePrices[data[15]]) * Number(data[1])).toFixed(3)+")"
-                      :
-                      ""
+                      data[9] === true ?
+                        <img src="/images/tick.png" alt="tick" className='absolute right-5 top-5' />
+                        : <></>
                     }
-                  </h6>
-                  <div onClick={() => {onClickDonate(campaigns[index])}} className="handCursor py-2 donatebtn px-4 md:px-12 text-md leading-5 text-black bg-gradient-secondary font-bold">
-                    Donate
+                  </div>
+                  <div className="body">
+                    <div className="flex flex-wrap justify-between">
+                      <h4 className='text-blue text-sm title mb-3 '>{data[5]}</h4>
+                      <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-1'>{data[11]}</button>
+                    </div>
+                    <p className='text-blue description mb-3'>{data[6]}</p>
+                    <p className='para'>{"Raised"}</p>
+                    <h6 className='content mb-5 mt-1 text-sm'>
+                      {Number(data[1]?.toString() || "0").toFixed(3)}{" "}{chains[data[15]]?.nativeCurrency}
+                      {
+                        Number(nativePrices[data[15]])>0?
+                        " ($"+(Number(nativePrices[data[15]]) * Number(data[1])).toFixed(3)+")"
+                        :
+                        ""
+                      }
+                    </h6>
+                    <div onClick={() => {onClickDonate(campaigns[index])}} className="handCursor py-2 donatebtn px-4 md:px-12 text-md leading-5 text-black bg-gradient-secondary font-bold">
+                      Donate
+                    </div>
                   </div>
                 </div>
-              </div>
+              
             ))}
           </div>
         </div>

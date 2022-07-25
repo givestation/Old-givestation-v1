@@ -47,28 +47,28 @@ export const chains = {
     [OPTIMISTIC_CHAIN_ID]:{
         rpcUrl:"https://mainnet.optimism.io/",
         nativeCurrency:"ETH",
-        factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
-        givePointAddress:"",
+        factoryAddress:"0x02313d5c2Aeb3B0bdF5C6725a2a1b0400BfCD83b",
+        givePointAddress:"0x06241DC412EfDfc4cBfe773fDAd4bBfFb32D6f37",
         blockScanUrl:"https://optimistic.etherscan.io/"
     },
     [OPTIMISTIC_NETWORK_ID]:{
         rpcUrl:"https://mainnet.optimism.io/",
         nativeCurrency:"ETH",
-        factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
-        givePointAddress:"",
+        factoryAddress:"0x02313d5c2Aeb3B0bdF5C6725a2a1b0400BfCD83b",
+        givePointAddress:"0x06241DC412EfDfc4cBfe773fDAd4bBfFb32D6f37",
         blockScanUrl:"https://optimistic.etherscan.io/"
     },
     [GNOSIS_CHAIN_ID]:{
         rpcUrl:"https://rpc.gnosischain.com/",
         nativeCurrency:"xDai",
-        factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        factoryAddress:"",
         givePointAddress:"",
         blockScanUrl:"https://blockscout.com/xdai/mainnet/"
     },
     [GNOSIS_NETWORK_ID]:{
         rpcUrl:"https://rpc.gnosischain.com/",
         nativeCurrency:"xDai",
-        factoryAddress:"0xFf28D45CcEbC110A24340d9de14D29d3A08AbDb8",
+        factoryAddress:"",
         givePointAddress:"",
         blockScanUrl:"https://blockscout.com/xdai/mainnet/"
     },

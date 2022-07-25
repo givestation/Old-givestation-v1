@@ -33,15 +33,15 @@ export const chains = {
     [POLYGON_CHAIN_ID]:{
         rpcUrl:"https://rinkeby.infura.io/v3/08ac79d88b5d4aea961ca36af7ea6ee7",
         nativeCurrency:"MATIC",
-        factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
-        givePointAddress:"",
+        factoryAddress:"0x9d4EB3F30854cA4B46554313611F110E57104e9C",
+        givePointAddress:"0x7F449ED088D620D77f66d4a17DFc3117B000BBf7",
         blockScanUrl:"https://polygonscan.com/"
     },
     [POLYGON_NETWORK_ID]:{
         rpcUrl:"https://rinkeby.infura.io/v3/08ac79d88b5d4aea961ca36af7ea6ee7",
         nativeCurrency:"MATIC",
-        factoryAddress:"0x4b5626425A62458aa1A5256c75bF678B5e90C2bA",
-        givePointAddress:"",
+        factoryAddress:"0x9d4EB3F30854cA4B46554313611F110E57104e9C",
+        givePointAddress:"0x7F449ED088D620D77f66d4a17DFc3117B000BBf7",
         blockScanUrl:"https://polygonscan.com/"
     },
     [OPTIMISTIC_CHAIN_ID]:{

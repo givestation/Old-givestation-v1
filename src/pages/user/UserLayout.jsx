@@ -49,11 +49,14 @@ export default function UserLayout() {
         <header className='hidden md:block'>
             <HeaderUser/>   
         </header>
-        {/* <!-- sidebar menu --> */}
-        <Sidebar />
-        {/* <!-- main content --> */}
-        <div className="main-content relative md:ml-80 transition-all duration-300">
-         
+        <div style={{
+          display:"flex",
+          flexDirection:"row",
+          justifyContent:"space-between"
+        }}>
+          {/* <!-- sidebar menu --> */}
+          <Sidebar />
+          {/* <!-- main content --> */}
           <div className="relative px-10">
             <Outlet />
           </div>

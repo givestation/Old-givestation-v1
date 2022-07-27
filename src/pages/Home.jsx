@@ -153,7 +153,6 @@ export default function Home() {
             new globalWeb3.eth.Contract(Campaign, campais[i]).methods.getSummary().call()
           )
         );
-
       }
       if (campais.length > 0) {
         await axios({
@@ -305,8 +304,7 @@ export default function Home() {
     }, 1000);
   }
   
-  const onClickFavorites = async (idonDB, val) => {
-    if (globalWeb3 && account && chainId) {
+  const onClickFavorites = async (idonDB, val) => {   
       await axios({
         method: "post",
         url: `${backendURL}/api/likes/set`,
@@ -323,10 +321,7 @@ export default function Home() {
       }).catch((err) => {
         console.error(err);
         if (err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
-      });
-    } else {
-      NotificationManager.warning("Please connect your wallet.");
-    }
+      });   
   }
 
   const onClickDonate = (id) =>{    

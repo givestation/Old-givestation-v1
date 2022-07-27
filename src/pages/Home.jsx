@@ -346,7 +346,7 @@ export default function Home() {
   }
 
   return (
-    <div className=' dark:bg-slate-900 '>
+    <div className=' dark:bg-slate-900 ' style={{height:"100vh"}}>
       <HeaderHome />
       <section className="banner  dark:bg-slate-900 py-0 md:py-4">
         <div className="container">

@@ -236,7 +236,7 @@ export default function CreateCampaign() {
 					</div>
 				</div>
 				<div className="form-group mb-6 my-3">
-					<label className="block mb-2 dark:text-gray-100">Upload file</label>
+					{/* <label className="block mb-2 dark:text-gray-100">Upload file</label> */}
 					<div className="uploadingnote dark:text-gray-100">
             Drag or choose your file to upload
 					</div>
@@ -247,7 +247,7 @@ export default function CreateCampaign() {
 						<div className="uploadingFileFormats dark:text-gray-100">
 							{
 								!selectedFile ?
-									"PNG, GIF, JPEG, WEBP. Max 4MB."
+									"Suggested image size is 348*200. Image size up to 4MB."
 									:
 									selectedFile.name
 							}

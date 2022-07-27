@@ -36,7 +36,18 @@ export default function Home() {
   const [copied, setCopied] = useState({});
   const [searchingCategory, setSearchingCategory] = useState(undefined);
   const [searchingName, setSearchingName] = useState(undefined);
-  const campaignsFromStore = useSelector(state => state.auth.campaigns);
+  const campaignsFromStore = useSelector(state => state.auth.campaigns); 
+  const [ip, setIP] = useState('');
+
+  //creating function to load ip address from the API
+  const getLocationData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/');
+    setIP(res.data.IPv4)
+  }
+
+  useEffect(() => {
+    getLocationData();
+  }, []);
 
   useEffect(() => {
     if(searchingName)
@@ -193,7 +204,7 @@ export default function Home() {
           method: "post",
           url: `${backendURL}/api/likes/getAllLikedCampaigns`,
           data: {
-            user: account || "",
+            user: ip || "",
             chainId: chainId || ""
           }
         }).then((res) => {
@@ -261,7 +272,7 @@ export default function Home() {
       method: "post",
       url: `${backendURL}/api/likes/getAllLikedCampaigns`,
       data: {
-        user: account || "",
+        user: ip || "",
         chainId: chainId || ""
       }
     }).then((res) => {
@@ -310,7 +321,7 @@ export default function Home() {
         url: `${backendURL}/api/likes/set`,
         data: {
           campaign: idonDB,
-          user: account || "",
+          user: ip || "",
           value: val,
           chainId: chainId || ""
         }
@@ -337,7 +348,7 @@ export default function Home() {
   return (
     <div>
       <HeaderHome />
-      <section className="banner  dark:bg-slate-900' py-0 md:py-4">
+      <section className="banner  dark:bg-slate-900 py-0 md:py-4">
         <div className="container">
           <div className="left md:w-7/12 sm:w-9/12 w-full sm:pl-12 pl-6 pr-3">
             <h1 className="text-white mb-3 md:mb-5 text-lg sm:text-xl md:text-xl lg:text-4xl xl:text-4.5xl font-semibold">
@@ -354,7 +365,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="main-home  dark:bg-slate-900' py-5 pb-12">
+      <section className="main-home  dark:bg-slate-900 py-5 pb-12">
         <div className="container">
           <div className="flex justify-between items-center mb-6">
             <h2 className='text-xl font-bold dark:text-gray-100'>Explore Grants</h2>
@@ -471,9 +482,9 @@ export default function Home() {
                     <div className='flex flex-row justify-between gap-3 align-items-center' style={{ marginRight:"3px" }}>
                       <div className='relative handcursor' style={{textAlign:"center"}} onClick={() => { onClickFavorites(data[14], !data[13]) }} >
                         <img src={data[13] === false ? HeartBlankIcon : HeartIcon} alt="" className='handcursor'                      
-                          style={{ width: "28px", height: "28px", cursor: "pointer" }}
+                          style={{ width: "28px", height: "28px",  }}
                         />
-                        <span className={` absolute value text-md ${data[13] === false ? "handcursor text-slate-800":"handcursor text-gray-100"}`} style={{ top:"0rem", left:"0.5rem" }}>{data[12]}</span>
+                        <span className={` absolute value text-md ${data[13] === false ? "handcursor text-slate-800":"handcursor text-gray-100"}`} style={{ top:"0rem", left:"0.5rem", cursor: "pointer" }}>{data[12]}</span>
                       </div>
                       <CopyToClipboard text={`${window.location.origin}/campaign/${campaigns[index]}`} onCopy={() => {onCopyAddress(index)}}>
                         <div style={{

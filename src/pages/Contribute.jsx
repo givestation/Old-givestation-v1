@@ -133,43 +133,50 @@ export default function Contribute() {
     }
 
     const onClickContribute = async () => {
-        if(donationAmount>0  && globalWeb3 && account)
+        if(donationAmount>0)
         {
-            try{
-                await new globalWeb3.eth.Contract(Campaign, id).methods.contribute(refAddr).send({
-                    from: account,
-                    gas: 3000000,
-                    value: globalWeb3.utils.toWei(donationAmount.toString(), "ether"),
-                })
-                await axios({
-                    method: "post",
-                    url: `${backendURL}/api/donation/create`,
-                    data: {
-                        campaign: campaignIdOnDB || "",
-                        amount:Number(donationAmount)*0.98,
-                        donor:account || "",
-                        chainId:chainId || ""
-                    }
-                }).then((res)=>{
-                    if(res.data && res.data.code === 0)
-                    {
-                        setLoading(true);    
-                        setTimeout(()=>
-                        {          
-                            showLoader();
-                        }, 2000);          
-                    }
-                }).catch((err)=> {
-                    console.error(err);    
-                });
-            }catch(err)
+            if(globalWeb3 && account)
             {
-                console.error(err);
-                if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
+                try{
+                    await new globalWeb3.eth.Contract(Campaign, id).methods.contribute(refAddr).send({
+                        from: account,
+                        gas: 3000000,
+                        value: globalWeb3.utils.toWei(donationAmount.toString(), "ether"),
+                    })
+                    await axios({
+                        method: "post",
+                        url: `${backendURL}/api/donation/create`,
+                        data: {
+                            campaign: campaignIdOnDB || "",
+                            amount:Number(donationAmount)*0.98,
+                            donor:account || "",
+                            chainId:chainId || ""
+                        }
+                    }).then((res)=>{
+                        if(res.data && res.data.code === 0)
+                        {
+                            setLoading(true);    
+                            setTimeout(()=>
+                            {          
+                                showLoader();
+                            }, 2000);          
+                        }
+                    }).catch((err)=> {
+                        console.error(err);    
+                    });
+                }catch(err)
+                {
+                    console.error(err);
+                    if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again.");
+                }
+
+            }
+            else{
+                NotificationManager.warning("Connect your wallet!");
             }
         }
         else{
-            NotificationManager.warning("Connect your wallet!");
+            NotificationManager.warning("Please input donation amount!");
         }
     }
 
@@ -198,7 +205,7 @@ export default function Contribute() {
           ></div> 
           </div>
           : 
-        <div>
+        <div className=' dark:bg-slate-900 '>
             <Header />
 
             <section className="pt-24 pb-16">

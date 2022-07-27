@@ -39,7 +39,7 @@ export default function UserLayout() {
     ></div> 
     </div>
     : 
-    <div>
+    <div className=' dark:bg-slate-900 '>
       <section className="admin-layout bg-blur dark:bg-blur overflow-hidden min-h-screen" id="admin">
         {/* blur gridient blue */}
         <div className="radial-gradient fixed -right-3 top-0"></div>

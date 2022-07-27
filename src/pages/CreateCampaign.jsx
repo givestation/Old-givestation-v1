@@ -144,12 +144,12 @@ export default function CreateCampaign() {
       }
 
     return (
-        <div>
+        <div className=' dark:bg-slate-900 '>
             <Header />
-            <section className="heading pt-16 pb-4">
-                <h1 className="text-center text-2xl font-bolder dark:text-gray-100">Create a new grant</h1>
+            <section className="heading pt-16 pb-4  dark:bg-slate-900 ">
+                <h1 className="text-center text-2xl font-bolder  dark:bg-slate-900 dark:text-white ">Create a new grant</h1>
             </section>
-            <section className="form w-10/12 md:w-6/12 mx-auto py-6">  
+            <section className="form w-10/12 md:w-6/12 mx-auto py-6 ">  
             
                     <div className="form-group mb-6 my-3" style={{ display:"flex", flexDirection:"row" }}>
                         <div className="block mb-2 dark:text-gray-100">Category</div>              

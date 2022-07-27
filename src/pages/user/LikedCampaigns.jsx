@@ -18,15 +18,23 @@ const LikedCampaigns = () => {
   const globalWeb3 = useSelector(state => state.auth.globalWeb3);
   const [likesInfo, setLikesInfo] = useState([]);
   const navigate = useNavigate();
+  const [ip, setIP] = useState('');
+
+  const getLocationData = async () => {
+    const res = await axios.get('https://geolocation-db.com/json/');
+    setIP(res.data.IPv4)
+  }
+
+  useEffect(() => {
+    getLocationData();
+  }, [])
 
   const getLikesInfo = async () => {
-    if(globalWeb3 && account && chainId)
-    {        
       await axios({
         method: "post",
         url: `${backendURL}/api/likes/getAllLikedCampaigns`,
         data: {
-            user: account || "",
+            user: ip || "",
             chainId:chainId || ""
         }
       }).then((res)=>{
@@ -37,9 +45,6 @@ const LikedCampaigns = () => {
       }).catch((err)=> {
           console.error(err);    
       });
-    }else{
-      
-    }
   }
 
   useEffect(()=>{

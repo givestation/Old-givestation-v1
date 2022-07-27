@@ -47,9 +47,9 @@ export default function CreateRequest() {
                 if(campaign)
                 {
                     await campaign.methods.createRequest(
-                        description,
+                        description || "",
                         globalWeb3.utils.toWei(amount.toString(), "ether"),
-                        recipient
+                        recipient || ""
                     ).send({
                         from: account, 
                         gas: 3000000
@@ -60,7 +60,7 @@ export default function CreateRequest() {
                     console.log("Finalysing requests: invalid campaign instance");
                 }
             } catch (err) {
-            console.error(err);
+                console.error(err);
             } finally {
             }
         }else{
@@ -69,7 +69,7 @@ export default function CreateRequest() {
     }
 
     return (
-    <div>
+    <div className=' bg-slate-900 '>
         <Header />
 
         <section className="head pt-8 pb-4">

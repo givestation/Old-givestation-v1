@@ -43,7 +43,7 @@ export default function CreateCampaign() {
 			console.log(selectedFile);	
 			axios({
 				method: "post",
-				url: `${backendURL}/utils/upload_file`,
+				url: `${backendURL}/api/utils/upload_file`,
 				data: formData,
 				headers: { "Content-Type": "multipart/form-data" },
 			})

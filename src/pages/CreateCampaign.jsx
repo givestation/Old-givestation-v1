@@ -18,7 +18,6 @@ export default function CreateCampaign() {
 	const [name, setName] = useState("");
 	const [category, setCategory] = useState("Defi");
 	const [description, setDescription] = useState("");
-	const [imageURL, setImageURL] = useState("");
 	const [target, setTarget] = useState(10);
 	const [dropdown, setDropdown] = useState(false);
 	const [popup, showPopup] = useState(false);
@@ -39,9 +38,7 @@ export default function CreateCampaign() {
 			const formData = new FormData();
 			formData.append("itemFile", selectedFile);
 			formData.append("authorId", "hch");
-			formData.append("collectionName", name);
-			console.log(selectedFile);	
-			axios({
+			await axios({
 				method: "post",
 				url: `${backendURL}/api/utils/upload_file`,
 				data: formData,
@@ -52,9 +49,10 @@ export default function CreateCampaign() {
 				})
 				.catch((err) => {		
 					console.error(err);
-					return;
+					// return;
 				})
 			let idOnDb = null;
+			console.log(imagePath);
 			if(imagePath !== null)
 			{
 				await axios({
@@ -63,7 +61,7 @@ export default function CreateCampaign() {
 					data: {
 						name,
 						description,
-						imagePath,
+						imageURL: `${backendURL}/public/uploads/${imagePath}`,
 						minimum,
 						target,
 						creator: account || "",

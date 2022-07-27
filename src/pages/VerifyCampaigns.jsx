@@ -102,7 +102,7 @@ export default function VerifyCampaigns() {
   };
 
     return (
-    <div>
+    <div className=' dark:bg-slate-900 '>
         <Header />
 
         <section className="head pt-8 pb-4">

@@ -33,7 +33,7 @@ export default function Home() {
   const [dropdown, setDropdown] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
   const [SummariesOfCampaigns, setSummariesOfCampaigns] = useState([]);
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState({});
   const [searchingCategory, setSearchingCategory] = useState(undefined);
   const [searchingName, setSearchingName] = useState(undefined);
   const campaignsFromStore = useSelector(state => state.auth.campaigns);
@@ -294,10 +294,14 @@ export default function Home() {
     }
   }, [account, chainId, globalWeb3])
 
-  const onCopyAddress = () => {
-    setCopied(true);
+  const onCopyAddress = (campaignAddr) => {
+    let temp = copied;
+    temp = {...temp, [campaignAddr]: true};
+    setCopied(temp);
     setTimeout(() => {
-      setCopied(false)
+      let temp = copied;
+      temp = {...temp, [campaignAddr]: false};
+      setCopied(temp);
     }, 1000);
   }
   
@@ -475,7 +479,7 @@ export default function Home() {
                         />
                         <span className={` absolute value text-md ${data[13] === false ? "handcursor text-slate-800":"handcursor text-gray-100"}`} style={{ top:"0rem", left:"0.5rem" }}>{data[12]}</span>
                       </div>
-                      <CopyToClipboard text={`${window.location.origin}/campaign/${campaigns[index]}`} onCopy={onCopyAddress}>
+                      <CopyToClipboard text={`${window.location.origin}/campaign/${campaigns[index]}`} onCopy={() => {onCopyAddress(index)}}>
                         <div style={{
                           display: "flex", flexWrap: "wrap", flexDirection: "row",
                           cursor: "pointer",
@@ -489,7 +493,7 @@ export default function Home() {
                             }} alt="tick"
                           />
                           {
-                            copied ? <span className='text-blue' >Copied</span> : <span className='text-blue' >{" "}</span>
+                            copied[index] ? <span className='text-blue' >Copied</span> : <span className='text-blue' >{" "}</span>
                           }
                         </div>
                       </CopyToClipboard>

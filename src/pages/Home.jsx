@@ -337,7 +337,7 @@ export default function Home() {
   return (
     <div>
       <HeaderHome />
-      <section className="banner py-0 md:py-4">
+      <section className="banner  dark:bg-slate-900' py-0 md:py-4">
         <div className="container">
           <div className="left md:w-7/12 sm:w-9/12 w-full sm:pl-12 pl-6 pr-3">
             <h1 className="text-white mb-3 md:mb-5 text-lg sm:text-xl md:text-xl lg:text-4xl xl:text-4.5xl font-semibold">
@@ -354,7 +354,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="main-home py-5 pb-12">
+      <section className="main-home  dark:bg-slate-900' py-5 pb-12">
         <div className="container">
           <div className="flex justify-between items-center mb-6">
             <h2 className='text-xl font-bold dark:text-gray-100'>Explore Grants</h2>

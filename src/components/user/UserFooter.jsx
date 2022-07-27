@@ -9,7 +9,7 @@ const UserFooter = () =>
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     
     return (
-        <div className="footer flex justify-center items-center" style={{ marginTop:"100px" }}>
+        <div className="footer flex justify-center  dark:bg-slate-900' items-center" style={{ marginTop:"100px" }}>
             <NavLink className="handcursor" to="/">
                 <img width={92} height={76} className="handCursor" src="/images/logo.png" alt="logo" />
             </NavLink>

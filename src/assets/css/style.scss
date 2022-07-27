@@ -560,3 +560,31 @@ a {
     flex-direction: column;
   }
 }
+
+.uploadingnote {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.uploadingFileDiv {  
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 182px;
+  margin-top: 16px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border-color: #0595c2;
+  border-width: thin;
+}
+
+.uploadingTempLoaded {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 400px;
+  z-index: 500;
+  opacity: 0;
+}

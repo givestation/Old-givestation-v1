@@ -50,10 +50,10 @@ export default function UserLayout() {
             <HeaderUser/>   
         </header>
         <div style={{
-          display:"flex",
-          flexDirection:"row",
-          justifyContent:"space-between"
-        }}>
+          display:"flex"
+        }} 
+        className="sidebar_parent"
+        >
           {/* <!-- sidebar menu --> */}
           <Sidebar />
           {/* <!-- main content --> */}

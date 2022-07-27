@@ -554,3 +554,9 @@ a {
 .align-items-center {
   align-items: center;
 }
+
+.sidebar_parent {  
+  @media (max-width: 600px) {
+    flex-direction: column;
+  }
+}

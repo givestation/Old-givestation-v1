@@ -240,7 +240,7 @@ export default function CreateCampaign() {
 					<div className="uploadingnote dark:text-gray-100">
             Drag or choose your file to upload
 					</div>
-					<div className="uploadingFileDiv">
+					<div className="uploadingFileDiv px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary">
 						<div className="uploadingSymbolImage bg-white text-slate-800">
 							<Icon name="upload-file" size="24" />
 						</div>

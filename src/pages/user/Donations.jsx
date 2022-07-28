@@ -62,7 +62,7 @@ export default function Donations() {
           donations.map((item, index) => (
             <div className="flex likeCard" key={index} >
               <div className="flex w-3/4 likeDesc">
-                <img src={item.campaign?.imageURL } 
+                <img src={`${backendURL}/${item.campaign?.imageURL}` } 
                     style={{ width:"348px", height:"200px"}}
                     alt="" 
                 />

@@ -23,8 +23,7 @@ export default function CreateCampaign() {
 	const [popup, showPopup] = useState(false);
 	const [copied, setCopied] = useState(false);
 	const [createdAddress, setCreatedAddress] = useState(undefined);
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [logoImg, setLogoImg] = useState("");
+  	const [selectedFile, setSelectedFile] = useState(null);
 
 	const chainId = useSelector(state => state.auth.currentChainId);
 	const account = useSelector(state => state.auth.currentWallet);
@@ -61,7 +60,7 @@ export default function CreateCampaign() {
 					data: {
 						name,
 						description,
-						imageURL: `${backendURL}/public/uploads/${imagePath}`,
+						imageURL: imagePath,
 						minimum,
 						target,
 						creator: account || "",
@@ -148,7 +147,6 @@ export default function CreateCampaign() {
 		let reader = new FileReader()
 		reader.readAsDataURL(file)
 		reader.onload = () => {
-			setLogoImg(reader.result);
 		};
 		reader.onerror = function (error) {
 		}

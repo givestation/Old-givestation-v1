@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { NotificationManager } from "react-notifications";
 import axios from "axios";
+import Icon from "../../components/Icon";
 import UserFooter from "../../components/user/UserFooter";
 import { chains } from '../../smart-contract/chains_constants';
 import { backendURL } from '../../config';
@@ -18,6 +19,7 @@ export default function UpdateCampaign() {
 	const [dropdown, setDropdown] = useState(false);
 	const [idOnDB, setIdOnDB] = useState(null);
 	const [summary, setSummary] = useState({});
+	const [selectedFile, setSelectedFile] = useState(null);
 
 	const chainId = useSelector(state => state.auth.currentChainId);
 	const account = useSelector(state => state.auth.currentWallet);
@@ -118,26 +120,60 @@ export default function UpdateCampaign() {
         }
     }, [account, chainId, globalWeb3, id]);
 
-	const onClickUpdateCampaign = async () => {
-		await axios({
-			method: "post",
-			url: `${backendURL}/api/campaign/update`,
-			data: {
-				_id: idOnDB,
-				description:description,
-				imageURL:imageURL,
-				category: category,
-			}
-		}).then((res) => {
-			if (res.data && res.data.code === 0) {
-				NotificationManager.success("Camapaign is updated!");
-				navigate(`/user/my-projects`);
-			}
-		}).catch((err) => {
-			console.error(err);
-		});		
+	const onClickUpdateCampaign = async () => 
+	{
+		let imagePath = null;
+			const formData = new FormData();
+			formData.append("itemFile", selectedFile);
+			formData.append("authorId", "hch");
+			await axios({
+				method: "post",
+				url: `${backendURL}/api/utils/upload_file`,
+				data: formData,
+				headers: { "Content-Type": "multipart/form-data" },
+			})
+				.then(function (response) {
+					imagePath = response.data.path;
+				})
+				.catch((err) => {		
+					console.error(err);
+					// return;
+				})
+			console.log(imagePath);
+			if(imagePath !== null)
+			{
+			await axios({
+				method: "post",
+				url: `${backendURL}/api/campaign/update`,
+				data: {
+					_id: idOnDB,
+					description:description,
+					imageURL:imageURL,
+					category: category,
+				}
+			}).then((res) => {
+				if (res.data && res.data.code === 0) {
+					NotificationManager.success("Camapaign is updated!");
+					navigate(`/user/my-projects`);
+				}
+			}).catch((err) => {
+				console.error(err);
+			});		
+		}
 	}
 
+	const changeFile = (event) => {
+		var file = event.target.files[0];
+		if (file == null) return;
+		console.log(file);
+		setSelectedFile(file);
+		let reader = new FileReader()
+		reader.readAsDataURL(file)
+		reader.onload = () => {
+		};
+		reader.onerror = function (error) {
+		}
+	}
 
 	return (
 		<div className="py-20 px-10 wholeWrapper">
@@ -157,30 +193,6 @@ export default function UpdateCampaign() {
 							onChange={(e) => { setCategory(e.target.value) }} value={category || ""}
 						/>
 					</div>
-					{/* 
-						<div className="block mb-2 dark:text-gray-100">Category</div>
-						<div className="relative">
-						<button className="sm:ml-3 ml-0 py-2 px-6 text-md leading-5 text-slate-800 bg-gradient-secondary font-bold rounded-full dark:text-gray-100 flex items-center justify-between" type="button"
-							onClick={() => { setDropdown(!dropdown) }}
-							style={{ minWidth: "200px", textAlign: "center" }}
-						> {category || "Select a category"}
-							<svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg></button>
-						{
-							dropdown ?
-								<div id="dropdown" className="absolute  top-12 z-10 bg-white divide-y divide-gray-100 rounded shadow w-60 dark:bg-gray-700">
-									<ul className="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefault"
-										style={{ overflowY: "scroll", maxHeight: "300px" }}
-									>
-										{Category.map((i, index) => (
-											<li key={index} onClick={(e) => { setCategory(i || "Defi"); setDropdown(!dropdown) }} value={category || ""}>
-												<span className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{i}</span>
-											</li>
-										))}
-									</ul>
-								</div>
-								: ''
-						}
-					</div> */}
 				</div>
 				<div className="form-group mb-6 my-3">
 					<label className="block mb-2 dark:text-gray-100">Grant Description</label>
@@ -191,10 +203,25 @@ export default function UpdateCampaign() {
 					</div>
 				</div>
 				<div className="form-group mb-6 my-3">
-					<label className="block mb-2 dark:text-gray-100">Image URL</label>
-					<div className="flex flex-wrap">
-						<input type="text" className='bg-white px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary'
-							onChange={(e) => { setImageURL(e.target.value) }} value={imageURL || ""}
+				
+					{/* <label className="block mb-2 dark:text-gray-100">Upload file</label> */}
+					<div className="uploadingnote dark:text-gray-100">
+            Drag or choose your file to upload
+					</div>
+					<div className="uploadingFileDiv px-6 py-3 rounded-lg focus:outline-none focus:ring-0 text-slate-800 sm:w-11/12 w-full border-0 shadow-secondary">
+						<div className="uploadingSymbolImage bg-white text-slate-800">
+							<Icon name="upload-file" size="24" />
+						</div>
+						<div className="uploadingFileFormats dark:text-gray-100">
+							{
+								!selectedFile ?
+									"Suggested image size is 348*200. Image size up to 4MB."
+									:
+									selectedFile.name
+							}
+						</div>
+						<input className="uploadingTempLoaded" type="file" id="fileInput1" onChange={changeFile}
+							accept="image/*"
 						/>
 					</div>
 				</div>

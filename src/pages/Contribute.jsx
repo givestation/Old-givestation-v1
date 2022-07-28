@@ -217,7 +217,7 @@ export default function Contribute() {
                                     href={`${chains[chainId?.toString()]?.blockScanUrl}address/${id}`}>View on block scan website</a>
                                 <span className='ml-2'><img className='w-2/3' src="/images/blue-arrow.png" alt="blue arrow" /></span>
                             </p>
-                            <img className='my-3 rounded-3xl w-full' src={summary[7] || "/images/avengers.png"} alt="avengers" />
+                            <img className='my-3 rounded-3xl w-full' src={`${backendURL}/${summary[7]}` || "/images/avengers.png"} alt="avengers" />
                             <h4 className='font-bold mt-12 text-lg dark:text-gray-100'>{summary[5] || ""}</h4>
                             <h6 className='my-2.5 text-md dark:text-gray-100'>Description</h6>
                             <p className='mb-3 text-justify dark:text-gray-100'>{summary[6] || ""}</p>

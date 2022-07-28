@@ -507,7 +507,7 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="image relative my-4 flex justify-center">
-                    <img src={data[7]} alt="item" className="rounded-lg my-3 w-full" 
+                    <img src={`${backendURL}/${data[7]}`} alt="item" className="rounded-lg my-3 w-full" 
                       style={{ width:"348px", height:"200px"}}
                     />
                     {

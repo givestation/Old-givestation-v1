@@ -64,7 +64,7 @@ const MyProjects = () => {
             campaigns.length>0 && 
             campaigns.map((item, index) => (
               <div className="flex projectCard" key={index} >
-                <img src={item?.imageURL || SampleProject} alt="" 
+                <img src={`${backendURL}/${item?.imageURL}` || SampleProject} alt="" 
                     style={{ width:"348px", height:"200px", alignSelf:"center"}} className="projectImg" />
                 <div className="flex justify-center items-start flex-col">
                   <div className="flex items-center">

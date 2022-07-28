@@ -92,7 +92,7 @@ const LikedCampaigns = () => {
           likesInfo.map((item, index) => (
             <div className="flex likeCard" key={index} >
               <div className="flex w-3/4 likeDesc">
-                <img src={item?.campaign? item.campaign?.imageURL : LikeCampImg} 
+                <img src={item?.campaign? `${backendURL}/${item.campaign?.imageURL}` : LikeCampImg} 
                   alt=""                   
                   style={{ width:"348px", height:"200px"}}
                 />

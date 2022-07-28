@@ -219,7 +219,7 @@ export default function Header() {
 									<li className="mr-3"><div className={'handCursor text-gray-700  font-bold dark:text-gray-100'} onClick={() => { navigate("/create-campaign") }}>Create a grant</div></li>
 									<li className="mr-3">
 										<a className="handCursor text-gray-700  font-bold dark:text-gray-100" href="ipfs://bafybeigoqsn4s5hnr32olfj7tqrqwz2lejmby4y5to75gnzpvdlm23g76a/#/givestation.eth" target="_blank"	>
-											Givestation DAO
+											GiveStation DAO
 										</a>
 									</li>
 								</ul>
@@ -309,7 +309,7 @@ export default function Header() {
 												<li className="items-center hover:bg-primary">
 													<NavLink to="ipfs://bafybeigoqsn4s5hnr32olfj7tqrqwz2lejmby4y5to75gnzpvdlm23g76a/#/givestation.eth" 
 														className={(props) => { return props.isActive ? 'capitalize py-2.5 px-6 block text-slate-800 whitespace-nowrap text-md border-b border-gray-700 bg-primary' : 'capitalize py-2.5 px-6 block text-white  hover:text-slate-800 whitespace-nowrap text-md border-b border-gray-700' }}>
-														<h5 className='text-white'>Givestaion DAO</h5>
+														<h5 className='text-white'>GiveStation DAO</h5>
 													</NavLink>
 												</li>
 											</ul>

@@ -113,12 +113,12 @@ const GiveFrens = () => {
             <div className="flex">
               <div className="referalCount bg-[#0F1B2E]">
                 <h2>{refCounts}</h2>
-                <p>Active Referrals</p>
+                <p className="text-black dark:text-white">Active Referrals</p>
               </div>
 
               <div className="referalCount bg-[#0F1B2E]">
                 <h3 className="uppercase">{gpAmount} POINTS</h3>
-                <p className="uppercase">GIVEPOINTS EARNED</p>
+                <p className="uppercase text-black dark:text-white">GIVEPOINTS EARNED</p>
               </div>
             </div>
 

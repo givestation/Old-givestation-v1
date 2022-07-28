@@ -140,15 +140,13 @@ export default function UpdateCampaign() {
 					// return;
 				})
 			console.log(imagePath);
-			if(imagePath !== null)
-			{
 			await axios({
 				method: "post",
 				url: `${backendURL}/api/campaign/update`,
 				data: {
 					_id: idOnDB,
 					description:description,
-					imageURL:imageURL,
+					imageURL:imagePath !== null? imagePath:imageURL,
 					category: category,
 				}
 			}).then((res) => {
@@ -159,7 +157,6 @@ export default function UpdateCampaign() {
 			}).catch((err) => {
 				console.error(err);
 			});		
-		}
 	}
 
 	const changeFile = (event) => {

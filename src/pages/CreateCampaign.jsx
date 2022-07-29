@@ -11,6 +11,7 @@ import { backendURL } from '../config';
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Confetti from "react-confetti";
 const CampaignFactory = require("../smart-contract/build/CampaignFactory.json");
+const Campaign = require("../smart-contract/build/Campaign.json");
 const Category = require("../config").Category;
 
 export default function CreateCampaign() {
@@ -94,8 +95,23 @@ export default function CreateCampaign() {
 								from: account,
 								gas: 3000000
 							});
-						let campaigns = await factory.methods.getDeployedCampaigns().call();
-						createdCampaignAddress = campaigns[campaigns.length - 1];
+						
+						let summary = [], campais = [];
+						if (factory) {
+							campais = await factory.methods.getDeployedCampaigns().call();
+							summary = await Promise.all(
+							campais.map((campaign, i) =>
+								new globalWeb3.eth.Contract(Campaign, campais[i]).methods.getSummary().call()
+							)
+							);
+						}
+						for (let idx = 0; idx < summary.length; idx++) 
+						{
+						  if (summary[idx][10] == idOnDb) 
+						  {
+							createdCampaignAddress = campais[idx];
+						  }
+						}
 					} else {
 						console.log("creating new campaign : Invalid factoy instance.");
 					}

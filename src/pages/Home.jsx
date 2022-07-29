@@ -190,6 +190,7 @@ export default function Home() {
                   summary[idx][6] = found.description;
                   summary[idx][7] = found.imageURL;
                   summary[idx][9] = found.verified;
+                  summary[idx][10] = campais[idx];
                   summary[idx][11] = found.category;
                   summary[idx][12] = found.likes;
                   summary[idx][13] = false;

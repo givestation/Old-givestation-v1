@@ -29,6 +29,7 @@ export default function Home() {
   const account = useSelector(state => state.auth.currentWallet);
   const globalWeb3 = useSelector(state => state.auth.globalWeb3);
   const nativePrices = useSelector(state => state.auth.nativePrice);
+  const campaignsFromStore = useSelector(state => state.auth.campaigns); 
 
   const [dropdown, setDropdown] = useState(false);
   const [campaigns, setCampaigns] = useState([]);
@@ -36,8 +37,10 @@ export default function Home() {
   const [copied, setCopied] = useState({});
   const [searchingCategory, setSearchingCategory] = useState(undefined);
   const [searchingName, setSearchingName] = useState(undefined);
-  const campaignsFromStore = useSelector(state => state.auth.campaigns); 
   const [ip, setIP] = useState('');
+  const [loading, setLoading] = useState(true);
+  var colorMode = null;  
+  colorMode = localStorage.getItem('color-theme');
 
   //creating function to load ip address from the API
   const getLocationData = async () => {
@@ -142,10 +145,8 @@ export default function Home() {
         }
       }
       if (!correct) {
-        // dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
       }
     } else {
-      // dispatch(updateReferalAddress("0x8E4BCCA94eE9ED539D9f1e033d9c949B8D7de6C6"));
     }
   }, [ref])
 
@@ -302,6 +303,7 @@ export default function Home() {
     else {
       getAllFromDB();
     }
+    setLoading(false);
   }, [account, chainId, globalWeb3])
 
   const onCopyAddress = (campaignAddr) => {
@@ -345,7 +347,23 @@ export default function Home() {
     }
   }
 
-  return (
+  return (    
+    loading ? 
+    <div style={{display:"flex", justifyContent:"center", alignItems:"center", height: "100vh", 
+      background:
+        (colorMode == null || colorMode == "light")? 
+        "white" : "black"
+    }}>
+    <div className="loader"
+      style={{ backgroundImage:
+        (colorMode == null || colorMode == "light")? 
+          `url('/images/loader-light.gif')`
+          :
+          `url('/images/loader-dark.gif')`
+      }}
+    ></div> 
+    </div>
+    :
     <div className=' dark:bg-slate-900 ' style={{height:"100vh"}}>
       <HeaderHome />
       <section className="banner  dark:bg-slate-900 py-0 md:py-4">

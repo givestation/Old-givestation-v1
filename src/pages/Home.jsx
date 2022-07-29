@@ -564,7 +564,7 @@ export default function Home() {
         </div>
       </section>
 
-      <UserFooter />
+      <UserFooter style={{ backgroundColor: "#0f172a" }} />
 
     </div>
   )

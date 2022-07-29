@@ -3,13 +3,13 @@ import { useNavigate } from "react-router";
 import { useMediaQuery } from 'react-responsive';
 import { NavLink } from "react-router-dom";
 
-const UserFooter = () =>
+const UserFooter = (style) =>
 {
     const navigate = useNavigate();
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     
     return (
-        <div className="footer flex justify-center  dark:bg-slate-900 items-center" >
+        <div className="footer flex justify-center items-center" style={{ ...style }}>
             <NavLink className="handcursor  dark:bg-slate-900' " to="/">
                 <img width={92} height={76} className="handCursor" src="/images/logo.png" alt="logo" />
             </NavLink>

@@ -227,6 +227,7 @@ export default function Home() {
           console.error(err);
         });
       }
+      setLoading(false);
     }
     catch (e) {
       console.error(e);
@@ -294,6 +295,7 @@ export default function Home() {
     }).catch((err) => {
       console.error(err);
     });
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -304,7 +306,6 @@ export default function Home() {
     else {
       getAllFromDB();
     }
-    setLoading(false);
   }, [account, chainId, globalWeb3])
 
   const onCopyAddress = (campaignAddr) => {

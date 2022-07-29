@@ -176,12 +176,13 @@ export default function Home() {
         }).then((res) => {
           if (res.data && res.data.code === 0) 
           {
-            let summaryFromDB = res.data.data || [];
-            if (summaryFromDB.length > 0) 
+            let summaryFromDB = res.data.data || [];            
+            let filtered = summaryFromDB.filter( item => item.chainId == chainId);
+            if (filtered.length > 0) 
             {
               for (let idx = 0; idx < summary.length; idx++) 
               {
-                let found = summaryFromDB.find((item) => item.address == campais[idx]) || undefined;
+                let found = filtered.find((item) => item._id == summary[idx][10]) || undefined;
                 if (found) 
                 {
                   summary[idx][1] = globalWeb3.utils.fromWei(summary[idx][1].toString(), "ether");

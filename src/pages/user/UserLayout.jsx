@@ -57,7 +57,11 @@ export default function UserLayout() {
           {/* <!-- sidebar menu --> */}
           <Sidebar />
           {/* <!-- main content --> */}
-          <div className="relative px-10">
+          <div className="relative px-10" style={{
+            display: "flex",
+            justifyContent: "center",
+            width: "100%"
+          }}>
             <Outlet />
           </div>
         </div>

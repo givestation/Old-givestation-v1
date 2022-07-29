@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive';
+import { useEffect } from "react";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -9,6 +11,7 @@ export default function Sidebar() {
   const [donorOrCreator, setDonorOrCreator] = useState(false);   //true:donor, false:creator
 
   const checkboxRef = useRef();
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1500px)' });
 
   const Logout = () => {
     localStorage.removeItem("token");
@@ -17,11 +20,16 @@ export default function Sidebar() {
 
   const save = () =>
   { 
-    setDonorOrCreator(checkboxRef.current.checked);
+    setDonorOrCreator(checkboxRef.current?.checked);
   }
+
+  useEffect(() => {
+    // setMobileMenu(isTabletOrMobile);
+  }, [isTabletOrMobile]);
 
   return (
       <nav className="sidebar bg-sidebar md:left-0 md:block md:top-2 md:bottom-0 md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-gray-900 flex flex-wrap items-center justify-between relative md:w-80 z-10 transition-all duration-300">
+        
         <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           <button
             className="cursor-pointer md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
@@ -89,7 +97,6 @@ export default function Sidebar() {
                 </div>
               </div>
             </div>
-            {/* <!-- Navigation --> */}
 
             <ul className="md:flex-col main-menu bg-sidebar min-h-screen md:min-w-full flex flex-col list-none pt-12">
               <li className="items-center">

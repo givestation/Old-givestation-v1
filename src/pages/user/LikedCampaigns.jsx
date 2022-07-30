@@ -51,17 +51,14 @@ const LikedCampaigns = () => {
     getLikesInfo();
   }, [globalWeb3, account])
 
-  const onClickFavorites = async (address, val) => {
-    if(globalWeb3 && account)
-    {        
+  const onClickFavorites = async (idOnDB, val) => {
       await axios({
         method: "post",
         url: `${backendURL}/api/likes/set`,
         data: {
-            campaign:address,
-            user: account || "",
-            value: val,
-            chainId:chainId || ""
+            campaign: idOnDB,
+            user: ip || "",
+            value: val
         }
       }).then((res)=>{
           if(res.data && res.data.code === 0)
@@ -70,11 +67,7 @@ const LikedCampaigns = () => {
           }
       }).catch((err)=> {
           console.error(err);    
-          if(err.code && err.code === 4100) NotificationManager.warning("Please unlock your wallet and try again."); 
       });
-    }else{
-      NotificationManager.warning("Please connect your wallet."); 
-    }
   }
 
   return (

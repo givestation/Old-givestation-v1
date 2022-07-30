@@ -491,74 +491,76 @@ export default function Home() {
             ))}
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 " style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}} >
-            {SummariesOfCampaigns && SummariesOfCampaigns.length > 0 && SummariesOfCampaigns.map((data, index) => 
-            (
-                <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' style={{maxWidth:"400px"}} key={index} >
-                  <div className="flex flex-wrap md:justify-between lg:justify-between align-items-center"
-                    style={{ userSelect: "none", display:"flex", justifyContent:"space-between" }}
-                  >
-                    <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8) + "..."}</h5>
-                    <div className='flex flex-row justify-between gap-3 align-items-center' style={{ marginRight:"3px" }}>
-                      <div className='relative handcursor' style={{textAlign:"center"}} onClick={() => { onClickFavorites(data[14], !data[13]) }} >
-                        <img src={data[13] === false ? HeartBlankIcon : HeartIcon} alt="" className='handcursor'                      
-                          style={{ width: "28px", height: "28px",  }}
-                        />
-                        <span className={` absolute value text-md ${data[13] === false ? "handcursor text-slate-800":"handcursor text-gray-100"}`} style={{ top:"0rem", left:"0.5rem", cursor: "pointer" }}>{data[12]}</span>
-                      </div>
-                      <CopyToClipboard text={`${window.location.origin}/campaign/${campaigns[index]}`} onCopy={() => {onCopyAddress(index)}}>
-                        <div style={{
-                          display: "flex", flexWrap: "wrap", flexDirection: "row",
-                          cursor: "pointer",
-                          userSelect: "none"
-                        }} >
-                          <img src="/images/share-button-svgrepo-com.svg"
-                            style={{
-                              width: "16px",
-                              height: "16px",
-                              marginTop: "2px"
-                            }} alt="tick"
+          <div style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}} >
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 " >
+              {SummariesOfCampaigns && SummariesOfCampaigns.length > 0 && SummariesOfCampaigns.map((data, index) => 
+              (
+                  <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' style={{maxWidth:"400px"}} key={index} >
+                    <div className="flex flex-wrap md:justify-between lg:justify-between align-items-center"
+                      style={{ userSelect: "none", display:"flex", justifyContent:"space-between" }}
+                    >
+                      <h5 className='value text-lg'>{campaigns[index]?.toString()?.substring(0, 8) + "..."}</h5>
+                      <div className='flex flex-row justify-between gap-3 align-items-center' style={{ marginRight:"3px" }}>
+                        <div className='relative handcursor' style={{textAlign:"center"}} onClick={() => { onClickFavorites(data[14], !data[13]) }} >
+                          <img src={data[13] === false ? HeartBlankIcon : HeartIcon} alt="" className='handcursor'                      
+                            style={{ width: "28px", height: "28px",  }}
                           />
-                          {
-                            copied[index] ? <span className='text-blue' >Copied</span> : <span className='text-blue' >{" "}</span>
-                          }
+                          <span className={` absolute value text-md ${data[13] === false ? "handcursor text-slate-800":"handcursor text-gray-100"}`} style={{ top:"0rem", left:"0.5rem", cursor: "pointer" }}>{data[12]}</span>
                         </div>
-                      </CopyToClipboard>
+                        <CopyToClipboard text={`${window.location.origin}/campaign/${campaigns[index]}`} onCopy={() => {onCopyAddress(index)}}>
+                          <div style={{
+                            display: "flex", flexWrap: "wrap", flexDirection: "row",
+                            cursor: "pointer",
+                            userSelect: "none"
+                          }} >
+                            <img src="/images/share-button-svgrepo-com.svg"
+                              style={{
+                                width: "16px",
+                                height: "16px",
+                                marginTop: "2px"
+                              }} alt="tick"
+                            />
+                            {
+                              copied[index] ? <span className='text-blue' >Copied</span> : <span className='text-blue' >{" "}</span>
+                            }
+                          </div>
+                        </CopyToClipboard>
+                      </div>
                     </div>
-                  </div>
-                  <div className="image relative my-4 flex justify-center">
-                    <img src={`${backendURL}/${data[7]}`} alt="item" className="rounded-lg my-3 w-full" 
-                      style={{ width:"348px", height:"200px"}}
-                    />
-                    {
-                      data[9] === true ?
-                        <img src="/images/tick.png" alt="tick" className='absolute right-5 top-5' />
-                        : <></>
-                    }
-                  </div>
-                  <div className="body">
-                    <div className="flex flex-wrap justify-between">
-                      <h4 className='text-blue text-sm title mb-3 '>{data[5]}</h4>
-                      <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-1'>{data[11]}</button>
-                    </div>
-                    <p className='text-blue description mb-3'>{data[6]}</p>
-                    <p className='para'>{"Raised"}</p>
-                    <h6 className='content mb-5 mt-1 text-sm'>
-                      {Number(data[1]?.toString() || "0").toFixed(3)}{" "}{chains[data[15]]?.nativeCurrency}
+                    <div className="image relative my-4 flex justify-center">
+                      <img src={`${backendURL}/${data[7]}`} alt="item" className="rounded-lg my-3 w-full" 
+                        style={{ width:"348px", height:"200px"}}
+                      />
                       {
-                        Number(nativePrices[data[15]])>0?
-                        " ($"+(Number(nativePrices[data[15]]) * Number(data[1])).toFixed(3)+")"
-                        :
-                        ""
+                        data[9] === true ?
+                          <img src="/images/tick.png" alt="tick" className='absolute right-5 top-5' />
+                          : <></>
                       }
-                    </h6>
-                    <div onClick={() => {onClickDonate(campaigns[index])}} className="handCursor py-2 donatebtn px-4 md:px-12 text-md leading-5 text-black bg-gradient-secondary font-bold">
-                      Donate
+                    </div>
+                    <div className="body">
+                      <div className="flex flex-wrap justify-between">
+                        <h4 className='text-blue text-sm title mb-3 '>{data[5]}</h4>
+                        <button className='bg-blue-light small-text font-normal px-2 text-xs py-1 mr-1'>{data[11]}</button>
+                      </div>
+                      <p className='text-blue description mb-3'>{data[6]}</p>
+                      <p className='para'>{"Raised"}</p>
+                      <h6 className='content mb-5 mt-1 text-sm'>
+                        {Number(data[1]?.toString() || "0").toFixed(3)}{" "}{chains[data[15]]?.nativeCurrency}
+                        {
+                          Number(nativePrices[data[15]])>0?
+                          " ($"+(Number(nativePrices[data[15]]) * Number(data[1])).toFixed(3)+")"
+                          :
+                          ""
+                        }
+                      </h6>
+                      <div onClick={() => {onClickDonate(campaigns[index])}} className="handCursor py-2 donatebtn px-4 md:px-12 text-md leading-5 text-black bg-gradient-secondary font-bold">
+                        Donate
+                      </div>
                     </div>
                   </div>
-                </div>
-              
-            ))}
+                
+              ))}
+            </div>
           </div>
         </div>
       </section>

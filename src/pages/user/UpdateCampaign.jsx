@@ -243,7 +243,7 @@ export default function UpdateCampaign() {
 					</button>
 				</div>
 			</section>
-			<UserFooter />
+			<UserFooter  style={{ backgroundColor:"transparent" }} />
 
 		</div>
 	)

@@ -129,7 +129,7 @@ const GiveFrens = () => {
         </div>
       </div>
 
-      <UserFooter/>
+      <UserFooter   style={{ backgroundColor:"transparent" }} />
     </div>
   );
 };

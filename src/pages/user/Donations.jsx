@@ -92,7 +92,7 @@ export default function Donations() {
           ))
         }        
       </div>
-      <UserFooter/>
+      <UserFooter style={{ backgroundColor:"transparent" }} />
     </div>
     )
 }

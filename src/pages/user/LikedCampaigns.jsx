@@ -123,7 +123,7 @@ const LikedCampaigns = () => {
           ))
         }
       </div>
-      <UserFooter/>
+      <UserFooter  style={{ backgroundColor:"transparent" }} />
     </div>
   );
 };

@@ -100,7 +100,7 @@ const GivePoints = () => {
         </div>
       </div>
 
-      <UserFooter/>
+      <UserFooter  style={{ backgroundColor:"transparent" }} />
     </div>
   );
 };

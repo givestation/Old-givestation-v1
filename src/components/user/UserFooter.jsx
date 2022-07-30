@@ -8,8 +8,10 @@ const UserFooter = ({ style }) =>
     const navigate = useNavigate();
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     
+    var colorMode = localStorage.getItem('color-theme');
+
     return (
-        <div className="footer flex justify-center items-center" style={{ ...style }}>
+        <div className={"footer flex justify-center items-center dark:bg-slate-900" } style={{...style}}>
             <NavLink className="handcursor  dark:bg-slate-900' " to="/">
                 <img width={92} height={76} className="handCursor" src="/images/logo.png" alt="logo" />
             </NavLink>

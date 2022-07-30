@@ -217,7 +217,7 @@ export default function Overview() {
           </div>
       </div>      
 
-      <UserFooter/>
+      <UserFooter  style={{ backgroundColor:"transparent" }} />
     </div>
   );
 }

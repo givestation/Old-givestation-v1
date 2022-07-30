@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { useMediaQuery } from 'react-responsive';
 import { NavLink } from "react-router-dom";
 
-const UserFooter = (style) =>
+const UserFooter = ({ style }) =>
 {
     const navigate = useNavigate();
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });

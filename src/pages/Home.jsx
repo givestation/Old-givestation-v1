@@ -328,7 +328,6 @@ export default function Home() {
           campaign: idonDB,
           user: ip || "",
           value: val,
-          chainId: chainId || ""
         }
       }).then((res) => {
         if (res.data && res.data.code === 0) {

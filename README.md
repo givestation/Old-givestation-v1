@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# What is Givestation ?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A multi-chain Give-To-Earn grant protocol where contributors get rewarded for funding ideas, startups, and projects in web3.
 
-## Available Scripts
+# Why WEB3?
 
-In the project directory, you can run:
+Web3 is the internet owned by the everyone including builders, creators, founders, and users.  
 
-### `npm start`
+## What are we trying to solve?
+The traditional fundraising community is too centralized and while the donors are being screwed for donating and trusting a project/idea, they end up not seeing the impact of their contributions. 
+There is almost no room for transparency by default. This is a huge challenge for every of traditional crowdfunding ecosystem, and that is what we are here to fix.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### How does it work
+To facilitate token donations and contributions from donors of the Ethereum, Polygon, Arbitrum, Optimism, Binance smart chain and Gnosis, and other blockchain community towards builders and project owners, the GiveStation ecosystem rely upon the straightforwardness blockchain has provided.
+GiveStation’s rationale is encoded into smart contracts and other web3 innovations and that is why it requires next to no confide in any individual or communites to function.  
+The platform is not limited to developers and web programmers alone as we have made the platform available for everybody as long as they need grants to bring their ideas into reality. 
+Any user can visit the platform, pick any idea or project they believe in, contribute directly to this life changing projects and in doing so, they get rewarded in GP.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### `Our Mission`
 
-### `npm test`
+Our mission is torevolutionize incentives, instill transparency, reward and protect the donors while making sure that the funds allocated to this founders and teams are used in the right way without relying on the same old centralized entities.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

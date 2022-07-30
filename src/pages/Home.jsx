@@ -491,7 +491,7 @@ export default function Home() {
             ))}
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 ">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8 " style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}} >
             {SummariesOfCampaigns && SummariesOfCampaigns.length > 0 && SummariesOfCampaigns.map((data, index) => 
             (
                 <div className='bg-white px-2 md:px-6 pt-4 md:pt-12 pb-8 campaignCard' style={{maxWidth:"400px"}} key={index} >
